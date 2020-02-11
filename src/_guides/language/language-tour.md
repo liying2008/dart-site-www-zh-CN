@@ -1,143 +1,132 @@
 ---
-title: A tour of the Dart language
+title: Dart 语言概览
 description: A tour of all of the major Dart language features.
 short-title: Language tour
 ---
 <?code-excerpt replace="/ *\/\/\s+ignore_for_file:[^\n]+\n//g; / *\/\/\s+ignore:[^\n]+//g; /([A-Z]\w*)\d\b/$1/g"?>
 
-This page shows you how to use each major Dart feature, from
-variables and operators to classes and libraries, with the assumption
-that you already know how to program in another language.
-For a briefer, less complete introduction to the language, see the
-[language samples page](/samples).
+在假定您已经知道如何使用另一种语言进行编程的情况下，
+此页面将向您展示如何使用 Dart 的各个主要功能，从变量、运算符到类、库。 有关该语言的简要介绍，请参见
+[语言示例页面](/samples)。
 
-To learn more about Dart's core libraries, see the
-[library tour](/guides/libraries/library-tour).
-Whenever you want more details about a language feature,
-consult the [Dart language specification][].
+要了解更多关于 Dart 核心库的信息，请参阅
+[库概览](/guides/libraries/library-tour)。
+如果您需要获取关于语言特性更详细的内容，请查阅 
+[Dart 语言规范][]。
 
 {{site.alert.note}}
-  You can play with most of Dart's language features using DartPad
-  ([learn more](/tools/dartpad)).
+  您可以使用 DartPad 来体验大部分 Dart 语言的特性
+  ([learn more](/tools/dartpad))。
   **<a href="{{ site.dartpad }}" target="_blank">Open DartPad</a>**
 
-  This page uses embedded DartPads to display some of the examples.
+  此页面使用嵌入式 DartPads 显示一些示例。
   {% include dartpads-embedded-troubleshooting.md %}
 {{site.alert.end}}
 
 
-## A basic Dart program
+## 一个基础的 Dart 程序
 
-The following code uses many of Dart’s most basic features:
+下面的代码用到了很多 Dart 语言的基础特性:
 
 <?code-excerpt "misc/test/language_tour/basic_test.dart"?>
 ```dart
-// Define a function.
+// 定义一个函数.
 printInteger(int aNumber) {
-  print('The number is $aNumber.'); // Print to console.
+  print('The number is $aNumber.'); // 打印到控制台.
 }
 
-// This is where the app starts executing.
+// 应用执行入口.
 main() {
-  var number = 42; // Declare and initialize a variable.
-  printInteger(number); // Call a function.
+  var number = 42; // 声明并初始化一个变量.
+  printInteger(number); // 调用函数.
 }
 ```
+此程序使用到的语言特性也适用于所有（或大多数）Dart 应用程序：
 
-Here’s what this program uses that applies to all (or almost all) Dart
-apps:
-
-<code>// <em>This is a comment.</em> </code>
-:   A single-line comment.
-    Dart also supports multi-line and document comments.
-    For details, see [Comments](#comments).
+<code>// <em>这是一个注释。</em> </code>
+:   单行注释。
+    Dart 也支持多行注释和文档注释。
+    详细内容请参考 [Comments](#comments)。
 
 `int`
-:   A type. Some of the other [built-in types](#built-in-types)
-    are `String`, `List`, and `bool`.
+:   类型. 一些其他的 [内置类型](#built-in-types)
+    如 `String`, `List`, and `bool`。
 
 `42`
-:   A number literal. Number literals are a kind of compile-time constant.
+:   数字字面量。 数字字面量是一种编译期常量。
 
 `print()`
-:   A handy way to display output.
+:   显示输出的一种便捷方法。
 
-`'...'` (or `"..."`)
-:   A string literal.
+`'...'` (或者 `"..."`)
+:   字符串字面量。
 
-<code>$<em>variableName</em></code> (or <code>${<em>expression</em>}</code>)
-:   String interpolation: including a variable or expression’s string
-    equivalent inside of a string literal. For more information, see
-    [Strings](#strings).
+<code>$<em>变量名</em></code> (or <code>${<em>表达式</em>}</code>)
+:   字符串插值：即在字符串字面量中包含变量或表达式。更多信息，请参考
+    [Strings](#strings)。
 
 `main()`
-:   The special, *required*, top-level function where app execution
-    starts. For more information, see
+:   一个特殊的、 *必需的*、 顶层函数。它是应用程序执行的入口。
+    更多信息，请参考
     [The main() function](#the-main-function).
 
 `var`
-:   A way to declare a variable without specifying its type.
+:   一种用于声明变量且无需指定变量类型的方法。
 
 {{site.alert.note}}
-  This site's code follows the conventions in the
-  [Dart style guide](/guides/language/effective-dart/style).
+  该网站的代码遵循
+  [Dart 风格指南](/guides/language/effective-dart/style)
+  中的约定。
 {{site.alert.end}}
 
 
-## Important concepts
+## 重要概念
 
-As you learn about the Dart language, keep these facts and concepts in
-mind:
+在学习 Dart 语言时，请牢记以下事实和概念：
 
--   Everything you can place in a variable is an *object*, and every
-    object is an instance of a *class*. Even numbers, functions, and
-    `null` are objects. All objects inherit from the [Object][] class.
+-   所有变量引用的都是 *对象* ，每个对象都是一个 *类* 的实例。 
+    数字，函数和 null 都是对象。
+    所有类都从 [Object][] 类继承。
 
--   Although Dart is strongly typed, type annotations are optional
-    because Dart can infer types. In the code above, `number`
-    is inferred to be of type `int`. When you want to explicitly say
-    that no type is expected,
-    [use the special type `dynamic`][ObjectVsDynamic].
+-   尽管 Dart 是强类型语言，但是声明变量时可以不指定类型，因为 Dart 可以推断类型。 
+    在上面的代码中，变量 `number` 的类型被推断为 `int`。
+    如果想显式地声明一个不确定的类型，请
+    [使用特殊类型 `dynamic`][ObjectVsDynamic]。
 
--   Dart supports generic types, like `List<int>` (a list of integers)
-    or `List<dynamic>` (a list of objects of any type).
+-   Dart 支持泛型， 例如 `List<int>` （由 int 类型对象组成的 list）
+    或者 `List<dynamic>` （由任何类型的对象组成的 list）。
 
--   Dart supports top-level functions (such as `main()`), as well as
-    functions tied to a class or object (*static* and *instance
-    methods*, respectively). You can also create functions within
-    functions (*nested* or *local functions*).
+-   Dart 支持顶层函数 （例如 `main()`），也支持定义依附于类或对象的函数
+    （*静态方法* 和 *实例方法*）。你也可以在一个函数中定义一个函数
+    （*嵌套函数* 或 *局部函数*）。
 
--   Similarly, Dart supports top-level *variables*, as well as variables
-    tied to a class or object (static and instance variables). Instance
-    variables are sometimes known as fields or properties.
+-   类似地，Dart 支持顶层 *变量*， 也支持依附于类或对象的变量
+    （静态变量 和 实例变量）。
+    实例变量有时也被称为字段或属性。
 
--   Unlike Java, Dart doesn’t have the keywords `public`, `protected`,
-    and `private`. If an identifier starts with an underscore (\_), it’s
-    private to its library. For details, see
+-   与 Java 不同， Dart 没有 `public`、`protected` 和 `private` 这些关键字。
+    如果一个标识符以下划线 (\_) 开头，那它在库内就是私有的。
+    更多信息，请参考
     [Libraries and visibility](#libraries-and-visibility).
 
--   *Identifiers* can start with a letter or underscore (\_), followed by any
-    combination of those characters plus digits.
+-   *标识符* 可以以字母或下划线 (\_) 开头，后跟字母、下划线和数字的任意组合。
 
--   Dart has both *expressions* (which have runtime values) and
-    *statements* (which don't).
-    For example, the [conditional expression](#conditional-expressions)
-    `condition ? expr1 : expr2` has a value of `expr1` or `expr2`.
-    Compare that to an [if-else statement](#if-and-else), which has no value.
-    A statement often contains one or more expressions,
-    but an expression can't directly contain a statement.
+-   Dart 既有 *表达式* （具有运行时值） 也有 *语句* （没有运行时值）。
+    例如，一个 [条件表达式](#conditional-expressions)
+    `condition ? expr1 : expr2` 具有值 `expr1` 或 `expr2`。
+    相比之下 [if-else 语句](#if-and-else) 没有值。
+    一个语句通常包含一个或多个表达式，
+    但是一个表达式不能直接包含一个语句。
 
--   Dart tools can report two kinds of problems: _warnings_ and _errors_.
-    Warnings are just indications that your code might not work, but
-    they don’t prevent your program from executing. Errors can be either
-    compile-time or run-time. A compile-time error prevents the code
-    from executing at all; a run-time error results in an
-    [exception](#exceptions) being raised while the code executes.
+-   Dart 工具可以报告两种类型的问题： _警告_ 和 _错误_ 。
+    警告仅表示您的代码可能无法工作，但并不会阻止程序运行。
+    错误分为 编译期错误 和 运行期错误。编译器错误会直接导致程序无法执行，
+    运行期错误会在代码执行时抛出[异常](#exceptions)。
 
 
-## Keywords
+## 关键字
 
-The following table lists the words that the Dart language treats specially.
+下面表格列出了 Dart 语言中的关键字。
 
 {% assign ckw = '&nbsp;<sup title="contextual keyword" alt="contextual keyword">1</sup>' %}
 {% assign bii = '&nbsp;<sup title="built-in-identifier" alt="built-in-identifier">2</sup>' %}
@@ -227,26 +216,23 @@ The following table lists the words that the Dart language treats specially.
 [while]: #while-and-do-while
 [yield]: #generators
 
-Avoid using these words as identifiers.
-However, if necessary, the keywords marked with superscripts can be identifiers:
+应避免将这些关键字用作标识符。
+但是，如有必要，标有上标的关键字可以用作标识符：
 
-* Words with the superscript **1** are **contextual keywords**,
-  which have meaning only in specific places.
-  They're valid identifiers everywhere.
+* 标有上标 **1** 的关键字是 **上下文关键字**，
+  只有在特定的地方才有意义。
+  它们在任何地方都是有效的标识符。
 
-* Words with the superscript **2** are **built-in identifiers**.
-  To simplify the task of porting JavaScript code to Dart,
-  these keywords are valid identifiers in most places,
-  but they can't be used as class or type names, or as import prefixes.
+* 带有上标 **2** 的单词是 **内置标识符**。 
+  为了简化将 JavaScript 代码移植到 Dart 中的工作，
+  这些关键字在大多数地方都是有效的标识符，
+  但它们不能用作类或类型名，也不能用作导入前缀。
 
-* Words with the superscript **3** are newer, limited reserved words related to
-  the [asynchrony support](#asynchrony-support) that was added
-  after Dart's 1.0 release.
-  You can't use `await` or `yield` as an identifier
-  in any function body marked with `async`, `async*`, or `sync*`.
+* 带有上标 **3** 的单词是较新的，有限的保留单词，
+  它们与 Dart 1.0 版本之后添加的 [异步支持](#asynchrony-support)有关。
+  您不能在任何标有 `async`、 `async*` 或 `sync*` 的函数体中使用 `await` 或 `yield` 作为标识符。
 
-All other words in the table are **reserved words**,
-which can't be identifiers.
+表格中的所有其他单词均为 **保留字**，不能用作标识符。
 
 
 ## Variables
