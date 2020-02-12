@@ -115,8 +115,8 @@ main() {
     例如，一个 [条件表达式](#conditional-expressions)
     `condition ? expr1 : expr2` 具有值 `expr1` 或 `expr2`。
     相比之下 [if-else 语句](#if-and-else) 没有值。
-    一个语句通常包含一个或多个表达式，
-    但是一个表达式不能直接包含一个语句。
+    一条语句通常包含一个或多个表达式，
+    但是一个表达式不能直接包含一条语句。
 
 -   Dart 工具可以报告两种类型的问题： _警告_ 和 _错误_ 。
     警告仅表示您的代码可能无法工作，但并不会阻止程序运行。
@@ -1026,15 +1026,15 @@ int handleError(String source) {
 symbol 字面量是编译期常量。
 
 
-## Functions
+## 函数
 
-Dart is a true object-oriented language, so even functions are objects
-and have a type, [Function.][Function API reference]
-This means that functions can be assigned to variables or passed as arguments
-to other functions. You can also call an instance of a Dart class as if
-it were a function. For details, see [Callable classes](#callable-classes).
+Dart 是真正的面向对象的语言，因此函数也是对象，
+并且具有类型 [Function.][Function API reference]
+这意味着函数可以赋值给变量，或者作为参数传递给其他函数。
+你也可以像调用函数一样调用 Dart 类的实例。
+详情请参阅 [可调用的类](#callable-classes)。
 
-Here’s an example of implementing a function:
+下面是一个实现函数的例子：
 
 <?code-excerpt "misc/lib/language_tour/functions.dart (function)"?>
 ```dart
@@ -1043,9 +1043,9 @@ bool isNoble(int atomicNumber) {
 }
 ```
 
-Although Effective Dart recommends
-[type annotations for public APIs](/guides/language/effective-dart/design#prefer-type-annotating-public-fields-and-top-level-variables-if-the-type-isnt-obvious),
-the function still works if you omit the types:
+虽然 高效Dart指南 建议
+[公开API上标明返回类型](/guides/language/effective-dart/design#prefer-type-annotating-public-fields-and-top-level-variables-if-the-type-isnt-obvious)，
+不过即便不写返回类型，该函数依然可以工作：
 
 <?code-excerpt "misc/lib/language_tour/functions.dart (function-omitting-types)"?>
 ```dart
@@ -1054,32 +1054,30 @@ isNoble(atomicNumber) {
 }
 ```
 
-For functions that contain just one expression, you can use a shorthand
-syntax:
+如果函数体只包含一个表达式，您可以使用一个简写的语法：
 
 <?code-excerpt "misc/lib/language_tour/functions.dart (function-shorthand)"?>
 ```dart
 bool isNoble(int atomicNumber) => _nobleGases[atomicNumber] != null;
 ```
 
-The <code>=> <em>expr</em></code> syntax is a shorthand for
-<code>{ return <em>expr</em>; }</code>. The `=>` notation
-is sometimes referred to as _arrow_ syntax.
+<code>=> <em>表达式</em></code> 语法是
+<code>{ return <em>表达式</em>; }</code> 的简写。
+`=>` 语法有时也被称为 _箭头_ 语法。
 
 {{site.alert.note}}
-  Only an *expression*—not a *statement*—can appear between the arrow (=\>) and
-  the semicolon (;). For example, you can’t put an [if statement](#if-and-else)
-  there, but you can use a [conditional expression](#conditional-expressions).
+  箭头 (=\>) 和分号 (;) 之间只能出现一个 *表达式*，而不是一条 *语句*。
+  例如，您不能在其中放置 [if 语句](#if-and-else)，
+  但是可以使用 [条件表达式](#conditional-expressions)。
 {{site.alert.end}}
 
-A function can have two types of parameters: _required_ and _optional_.
-The required parameters are listed first, followed by any optional parameters.
-Optional parameters can be _named_ or _positional_.
+函数可以有两种类型的参数： _必要参数_ and _可选参数_。
+必要参数定义在参数列表前面，可选参数则定义在必要参数后面。
+可选参数可以是 _命名参数_ 或 _位置参数_。
 
 {{site.alert.note}}
-  Some APIs — notably [Flutter][] widget constructors — use only named
-  parameters, even for parameters that are mandatory. See the next section for
-  details.
+  一些API（尤其是 [Flutter][] widget 构造函数）仅使用命名参数，
+  即使对于强制性参数也是如此。有关详细信息，请参见下一部分。
 {{site.alert.end}}
 
 ### Optional parameters
