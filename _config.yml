@@ -1,10 +1,10 @@
 # Site settings
 title: Dart
 description: Dart is a platform for building structured apps. It includes a language, a VM, libraries, tools, and compilers to many targets, including JavaScript.
-url: https://dart.dev
+url: https://dart-cn.netlify.com
 dev-url: https://dartlang-org-dev.firebaseapp.com
 repo:
-  this: https://github.com/dart-lang/site-www
+  this: https://github.com/liying2008/dart-site-www-zh-CN
   shared: &repo-shared https://github.com/dart-lang/site-shared
 branch: master
 port: 4000
@@ -13,7 +13,7 @@ port: 4000
 # use case:
 #   {{site.flutter}}/docs
 
-www: https://dart.dev
+www: https://dart-cn.netlify.com
 prev-url: https://v1-dartlang-org.firebaseapp.com
 angulardart: https://angulardart.dev
 dart_vm:  /server
@@ -110,25 +110,25 @@ os-list: [Windows, macOS, Linux]
 alert:
   important: >-
     <aside class="alert alert-warning" role="alert" markdown="1">
-    <i class="fas fa-exclamation-circle"></i> **Important:**
+    <i class="fas fa-exclamation-circle"></i> **重要：**
   info: >-
     <aside class="alert alert-info" role="alert" markdown="1">
     <i class="fas fa-info-circle"></i>
   note: >-
     <aside class="alert alert-info" role="alert" markdown="1">
-    <i class="fas fa-info-circle"></i> **Note:**
+    <i class="fas fa-info-circle"></i> **注意：**
   version-note: >-
     <aside class="alert alert-info" role="alert" markdown="1">
-    <i class="fas fa-code-branch"></i> **Version note:**
+    <i class="fas fa-code-branch"></i> **版本提示：**
   secondary: >-
     <aside class="alert alert-secondary" role="alert" markdown="1">
   tip: >-
     <aside class="alert alert-success" role="alert" markdown="1">
-    <i class="far fa-lightbulb"></i> **Tip:**
+    <i class="far fa-lightbulb"></i> **小提示：**
   warn: >-
     <aside class="alert alert-warning" role="alert" markdown="1">
     <i class="fas fa-exclamation-triangle"></i>
   warning: >-
     <aside class="alert alert-warning" role="alert" markdown="1">
-    <i class="fas fa-exclamation-triangle"></i> **Warning:**
+    <i class="fas fa-exclamation-triangle"></i> **警告：**
   end: </aside>
