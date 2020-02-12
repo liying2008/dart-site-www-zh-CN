@@ -831,12 +831,12 @@ final constantSet = const {
 
 ### Maps
 
-In general, a map is an object that associates keys and values. Both
-keys and values can be any type of object. Each *key* occurs only once,
-but you can use the same *value* multiple times. Dart support for maps
-is provided by map literals and the [Map][] type.
+通常，map 是一个用来关联 key 和 value 的对象。
+key 和 value 可以是任何对象类型。
+在一个 map 中，*key* 不允许重复，*value* 可以重复。
+Dart 支持 map 字面量和 [Map][] 类型。
 
-Here are a couple of simple Dart maps, created using map literals:
+下面是两个使用 map 字面量创建 map 的例子：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (map-literal)"?>
 ```dart
@@ -855,13 +855,13 @@ var nobleGases = {
 ```
 
 {{site.alert.note}}
-  Dart infers that `gifts` has the type `Map<String, String>` and `nobleGases`
-  has the type `Map<int, String>`. If you try to add the wrong type of value to
-  either map, the analyzer or runtime raises an error. For more information,
-  read about [type inference.](/guides/language/sound-dart#type-inference)
+  Dart 推断 `gifts` 变量的类型是 `Map<String, String>`，`nobleGases` 变量的类型是 `Map<int, String>`。
+  如果您向这两个 map 中添加一个错误类型的值，Dart 分析器或 Dart 运行时将会报错。
+  更多信息，请参考
+  [类型推断](/guides/language/sound-dart#type-inference) 。
 {{site.alert.end}}
 
-You can create the same objects using a Map constructor:
+您也可以使用 map 的构造器创建 map 对象：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (map-constructor)"?>
 ```dart
@@ -877,13 +877,12 @@ nobleGases[18] = 'argon';
 ```
 
 {{site.alert.note}}
-  You might expect to see `new Map()` instead of just `Map()`.
-  As of Dart 2, the `new` keyword is optional.
-  For details, see [Using constructors](#using-constructors).
+  这里之所以使用 `Map()` 而不是 `new Map()` 来构造 map 对象，
+  是因为从 Dart 2 开始，`new` 关键字是可选的。
+  详细信息，请参考 [构造器的使用](#using-constructors) 。
 {{site.alert.end}}
 
-Add a new key-value pair to an existing map just as you would in
-JavaScript:
+向已有的 map 中添加键值对的操作和 JavaScript 的类似：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (map-add-item)"?>
 ```dart
@@ -891,7 +890,7 @@ var gifts = {'first': 'partridge'};
 gifts['fourth'] = 'calling birds'; // Add a key-value pair
 ```
 
-Retrieve a value from a map the same way you would in JavaScript:
+从一个 map 中获取某值的操作也与 JavaScript 的类似：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (map-retrieve-item)"?>
 ```dart
@@ -899,7 +898,7 @@ var gifts = {'first': 'partridge'};
 assert(gifts['first'] == 'partridge');
 ```
 
-If you look for a key that isn’t in a map, you get a null in return:
+如果检索的 key 不存在于 map 中则会返回一个 null：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (map-missing-key)"?>
 ```dart
@@ -907,7 +906,7 @@ var gifts = {'first': 'partridge'};
 assert(gifts['fifth'] == null);
 ```
 
-Use `.length` to get the number of key-value pairs in the map:
+使用 `.length` 可以获取 map 中键值对的数量：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (map-length)"?>
 ```dart
@@ -916,8 +915,8 @@ gifts['fourth'] = 'calling birds';
 assert(gifts.length == 2);
 ```
 
-To create a map that's a compile-time constant,
-add `const` before the map literal:
+如果想创建一个编译期常量的 map，
+只需要在 map 字面量前添加 `const` 关键字：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (const-map)"?>
 ```dart
@@ -930,15 +929,15 @@ final constantMap = const {
 // constantMap[2] = 'Helium'; // Uncommenting this causes an error.
 ```
 
-As of Dart 2.3, maps support spread operators (`...` and `...?`)
-and collection if and for, just like lists do.
-For details and examples, see the
-[spread operator proposal][spread proposal] and the
-[control flow collections proposal.][collections proposal]
+从 Dart 2.3 开始，map 也同 list 一样支持 展开操作符 (`...` and `...?`)、
+`collection if` 和 `collection for`。
+更多详细信息和示例，请参考
+[spread operator proposal][spread proposal] 和
+[control flow collections proposal][collections proposal] 。
 
-For more information about maps, see
-[Generics](#generics) and
-[Maps](/guides/libraries/library-tour#maps).
+查阅
+[Generics](#generics) 和
+[Maps](/guides/libraries/library-tour#maps) 获取有关 map 的更多信息。
 
 <a id="characters"></a>
 ### Runes and grapheme clusters
