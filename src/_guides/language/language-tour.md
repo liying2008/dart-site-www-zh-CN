@@ -940,32 +940,27 @@ final constantMap = const {
 [Maps](/guides/libraries/library-tour#maps) 获取有关 map 的更多信息。
 
 <a id="characters"></a>
-### Runes and grapheme clusters
+### Runes 和 grapheme clusters
 
-In Dart, [runes][] expose the Unicode code points of a string.
-As of Dart 2.6, use the [characters package][]
-to view or manipulate user-perceived characters,
-also known as
-[Unicode (extended) grapheme clusters.][grapheme clusters]
+在 Dart 中，[runes][] 公开了字符串的 Unicode 码位。
+从 Dart 2.6 开始，使用 [characters 包][]
+来访问或者操作用户感知的字符，
+也被称为
+[Unicode (extended) grapheme clusters][grapheme clusters]。
 
-Unicode defines a unique numeric value for each letter, digit,
-and symbol used in all of the world's writing systems.
-Because a Dart string is a sequence of UTF-16 code units,
-expressing Unicode code points within a string requires
-special syntax.
-The usual way to express a Unicode code point is
-`\uXXXX`, where XXXX is a 4-digit hexadecimal value.
-For example, the heart character (♥) is `\u2665`.
-To specify more or less than 4 hex digits,
-place the value in curly brackets.
-For example, the laughing emoji (😆) is `\u{1f600}`.
+Unicode 编码为每一个字母、数字和符号都定义了一个唯一的数值。
+因为 Dart 中的字符串是一个 UTF-16 的字符序列，
+所以如果想要表示 32 位的 Unicode 数值则需要一种特殊的语法。
+通常使用 `\uXXXX` 来表示 Unicode 字符，
+XXXX 是一个 4 位的 16 进制数字。
+例如，心形字符 (♥) 是 `\u2665`。
+对于不是4位数的 16 进制数字，则需要使用大括号将其括起来。
+例如，大笑的 emoji (😆) 是 `\u{1f600}`。
 
-If you need to read or write individual Unicode characters,
-use the `characters` getter defined on String
-by the characters package.
-The returned [`Characters`][] object is the string as
-a sequence of grapheme clusters.
-Here's an example of using the characters API:
+如果您需要读写单个 Unicode 字符，
+可以使用 characters 包中定义的 `characters` getter。
+它返回的 [`Characters`][] 对象是 grapheme clusters 的一系列的字符串。
+下面是一个使用 characters API 的例子：
 
 {% comment %}
 TODO: add test code
@@ -980,7 +975,7 @@ print('The end of the string: ${hi.substring(hi.length - 1)}');
 print('The last character: ${hi.characters.last}\n');
 ```
 
-The output, depending on your environment, looks something like this:
+输出的内容取决于你的环境，看上去会像这样：
 
 ```terminal
 $ dart bin/main.dart
@@ -989,21 +984,18 @@ The end of the string: ???
 The last character: 🇩🇰
 ```
 
-For details on using the characters package to manipulate strings,
-see the [example][characters example] and [API reference][characters API]
-for the characters package.
+有关使用 characters 包操作字符串的详细示例，请参考
+[example][characters example] 和 [API reference][characters API]。
 
 
 ### Symbols
 
-A [Symbol][] object
-represents an operator or identifier declared in a Dart program. You
-might never need to use symbols, but they're invaluable for APIs that
-refer to identifiers by name, because minification changes identifier
-names but not identifier symbols.
+[Symbol][] 表示在 Dart 中声明的操作符或标识符。
+您可能永远也不会使用到 symbol，
+但是如果需要按名称引用它们的 API 时就非常有用，
+因为代码压缩后会改变这些标识符名称但不会改变标识符 symbol。
 
-To get the symbol for an identifier, use a symbol literal, which is just
-`#` followed by the identifier:
+获取一个标识符的 symbol，可以在标识符前面加上一个 `#`：
 
 ```nocode
 #radix
@@ -1031,7 +1023,7 @@ int handleError(String source) {
 ```
 {% endcomment %}
 
-Symbol literals are compile-time constants.
+symbol 字面量是编译期常量。
 
 
 ## Functions
