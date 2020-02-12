@@ -325,7 +325,7 @@ name = 'Alice'; // 错误：final 变量只能被赋值一次
 
 使用 `const` 修饰的变量为 **编译期常量**。
 如果使用 const 修饰类中的变量，则必须加上 `static` 关键字，即 `static const`。
-声明 const 变量，须将其值设置为编译期常数，例如数字或字符串字面量，const 变量或对常数进行算术运算的结果：
+声明 const 变量，须将其值设置为编译期常数，例如数字或字符串字面量、const 变量或对常数进行算术运算的结果：
 
 <?code-excerpt "misc/lib/language_tour/variables.dart (const)"?>
 ```dart
@@ -381,47 +381,46 @@ const set = {if (list is List<int>) ...list}; // ...and a spread.
 [Lists](#lists)、[Maps](#maps) 和 [Classes](#classes)。
 
 
-## Built-in types
+## 内置类型
 
-The Dart language has special support for the following types:
+Dart 语言对以下类型提供特殊支持：
 
 - numbers
 - strings
 - booleans
-- lists (also known as *arrays*)
+- lists (也称为 *arrays*)
 - sets
 - maps
-- runes (for expressing Unicode characters in a string)
+- runes (用于在字符串中表示 Unicode 字符)
 - symbols
 
-You can initialize an object of any of these special types using a
-literal. For example, `'this is a string'` is a string literal,
-and `true` is a boolean literal.
+您可以直接使用字面量来初始化上述类型。
+例如，`'this is a string'` 是一个 string 字面量，
+`true` 是一个 boolean 字面量。
 
 {% comment %}
 PENDING: add info about support for Iterable, Future, Stream?
 Those can't be initialized using literals, but they do have special support.
 {% endcomment %}
 
-Because every variable in Dart refers to an object—an instance of a
-*class*—you can usually use *constructors* to initialize variables. Some
-of the built-in types have their own constructors. For example, you can
-use the `Map()` constructor to create a map.
+由于 Dart 中每个变量都引用一个对象（一个 *类* 的实例），
+您通常也可以使用 *构造器* 来初始化变量。
+一些内置的类型有它们自己的构造器。
+例如你可以使用 `Map()` 来创建一个 map 对象。
 
 
 ### Numbers
 
-Dart numbers come in two flavors:
+Dart 支持两种 Number 类型：
 
 [int][]
 
-:   Integer values no larger than 64 bits,
-    depending on the platform.
-    On the Dart VM, values can be from
-    -2<sup>63</sup> to 2<sup>63</sup> - 1.
-    Dart that's compiled to JavaScript uses
+:   整数值，长度不超过64位，取决于平台（即：取值范围与平台有关）。
+    在 Dart VM 中，其取值范围为
+    -2<sup>63</sup> 到 2<sup>63</sup> - 1 。
+    编译成 Javascript 将会使用
     [JavaScript numbers,][js numbers]
-    allowing values from -2<sup>53</sup> to 2<sup>53</sup> - 1.
+    允许的取值范围为：-2<sup>53</sup> to 2<sup>53</sup> - 1 。
 
 {% comment %}
 [PENDING: What about values on Android & iOS?
@@ -431,19 +430,17 @@ https://github.com/dart-lang/sdk/blob/master/docs/language/informal/int64.md.
 
 [double][]
 
-:   64-bit (double-precision) floating-point numbers, as specified by
-    the IEEE 754 standard.
+:   64位（双精度）浮点数，由 IEEE 754 标准指定。
 
-Both `int` and `double` are subtypes of [`num`.][num]
-The num type includes basic operators such as +, -, /, and \*,
-and is also where you’ll find `abs()`,` ceil()`,
-and `floor()`, among other methods.
-(Bitwise operators, such as \>\>, are defined in the `int` class.)
-If num and its subtypes don’t have what you’re looking for, the
-[dart:math][] library might.
+`int` 和 `double` 都是 [`num`][num] 的子类。
+num 类中定义了一些基本的操作符，如 +、 -、 / 、 \* 等，
+以及一些诸如 `abs()`、` ceil()`、
+、 `floor()` 的方法.
+（位运算符，如 \>\>，在 `int` 类中定义。）
+如果 num 和其子类 不能满足您的要求，您还可以查看
+[dart:math][] 库中的API。
 
-Integers are numbers without a decimal point. Here are some examples of
-defining integer literals:
+整数是不含小数点的数字，下面是一些定义整数字面量的例子：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (integer-literals)"?>
 ```dart
@@ -451,8 +448,8 @@ var x = 1;
 var hex = 0xDEADBEEF;
 ```
 
-If a number includes a decimal, it is a double. Here are some examples
-of defining double literals:
+如果一个数字包含小数，那它就是 double 类型的。
+下面是一些定义 double 字面量的例子：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (double-literals)"?>
 ```dart
@@ -460,20 +457,18 @@ var y = 1.1;
 var exponents = 1.42e5;
 ```
 
-As of Dart 2.1, integer literals are automatically converted to doubles
-when necessary:
+从 Dart 2.1 开始，int 字面量将会在必要的时候自动转换成 double 字面量：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (int-to-double)"?>
 ```dart
-double z = 1; // Equivalent to double z = 1.0.
+double z = 1; // 等效于 double z = 1.0.
 ```
 
 {{site.alert.version-note}}
-  Before Dart 2.1, it was an error to use an integer literal in a double
-  context.
+  在 Dart 2.1 之前，在 double 上下文中使用 int 字面量是错误的。
 {{site.alert.end}}
 
-Here’s how you turn a string into a number, or vice versa:
+下面是字符串和数字之间转换的方式：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (number-conversion)"?>
 ```dart
@@ -494,8 +489,7 @@ String piAsString = 3.14159.toStringAsFixed(2);
 assert(piAsString == '3.14');
 ```
 
-The int type specifies the traditional bitwise shift (\<\<, \>\>), AND
-(&), and OR (|) operators. For example:
+int 类型支持传统的位移操作：(\<\<, \>\>)、 AND(&)、 OR (|)。例如:
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (bit-shifting)"?>
 ```dart
@@ -504,10 +498,8 @@ assert((3 >> 1) == 1); // 0011 >> 1 == 0001
 assert((3 | 4) == 7); // 0011 | 0100 == 0111
 ```
 
-Literal numbers are compile-time constants.
-Many arithmetic expressions are also compile-time constants,
-as long as their operands are
-compile-time constants that evaluate to numbers.
+数字字面量是编译期常量。
+很多算术表达式只要其操作数是常量，则表达式结果也是编译期常量。
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (const-num)"?>
 ```dart
@@ -519,8 +511,8 @@ const msUntilRetry = secondsUntilRetry * msPerSecond;
 
 ### Strings
 
-A Dart string is a sequence of UTF-16 code units. You can use either
-single or double quotes to create a string:
+Dart 字符串是 UTF-16 编码的字符序列。
+可以使用单引号或双引号来创建字符串：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (quoting)"?>
 ```dart
@@ -530,10 +522,9 @@ var s3 = 'It\'s easy to escape the string delimiter.';
 var s4 = "It's even easier to use the other delimiter.";
 ```
 
-You can put the value of an expression inside a string by using
-`${`*`expression`*`}`. If the expression is an identifier, you can skip
-the {}. To get the string corresponding to an object, Dart calls the
-object’s `toString()` method.
+可以在字符串中以 `${`*`表达式`*`}` 的形式使用表达式。
+如果表达式是一个标识符，可以省略掉 {}。
+如果表达式的结果是一个对象，则 Dart 会调用该对象的 `toString()` 方法来获取一个字符串。
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (string-interpolation)"?>
 ```dart
@@ -549,13 +540,10 @@ assert('That deserves all caps. ' +
 ```
 
 {{site.alert.note}}
-  The `==` operator tests whether two objects are equivalent. Two
-  strings are equivalent if they contain the same sequence of code
-  units.
+  `==` 运算符判断两个对象的内容是否相等，如果两个字符串包含一样的字符编码序列，则表示相等。
 {{site.alert.end}}
 
-You can concatenate strings using adjacent string literals or the `+`
-operator:
+可以使用 `+` 运算符将两个字符串连接为一个，也可以将多个字符串挨着放一起变为一个：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (adjacent-string-literals)"?>
 ```dart
@@ -570,8 +558,7 @@ var s2 = 'The + operator ' + 'works, as well.';
 assert(s2 == 'The + operator works, as well.');
 ```
 
-Another way to create a multi-line string: use a triple quote with
-either single or double quotation marks:
+可以使用三个单引号或者三个双引号创建多行字符串：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (triple-quotes)"?>
 ```dart
@@ -584,19 +571,17 @@ var s2 = """This is also a
 multi-line string.""";
 ```
 
-You can create a “raw” string by prefixing it with `r`:
+在字符串前加上 `r` 作为前缀创建 “raw” 字符串（即不会被做任何处理（比如转义）的字符串）：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (raw-strings)"?>
 ```dart
 var s = r'In a raw string, not even \n gets special treatment.';
 ```
 
-See [Runes and grapheme clusters](#characters) for details on how
-to express Unicode characters in a string.
+查看 [Runes and grapheme clusters](#characters) 可以获取更多有关如何在字符串中表示 Unicode 字符的信息。
 
-Literal strings are compile-time constants,
-as long as any interpolated expression is a compile-time constant
-that evaluates to null or a numeric, string, or boolean value.
+字符串字面量是一个编译期常量，
+只要是编译期常量都可以作为字符串字面量的插值表达式。
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (string-literals)"?>
 ```dart
@@ -615,20 +600,19 @@ const validConstString = '$aConstNum $aConstBool $aConstString';
 // const invalidConstString = '$aNum $aBool $aString $aConstList';
 ```
 
-For more information on using strings, see
-[Strings and regular expressions](/guides/libraries/library-tour#strings-and-regular-expressions).
+关于使用字符串的更多信息，请查阅
+[字符串和正则表达式](/guides/libraries/library-tour#strings-and-regular-expressions)。
 
 
 ### Booleans
 
-To represent boolean values, Dart has a type named `bool`. Only two
-objects have type bool: the boolean literals `true` and `false`,
-which are both compile-time constants.
+Dart 使用 `bool` 关键字表示布尔类型，
+布尔类型只有两个对象 `true` 和 `false`，两者都是编译期常量。
 
-Dart's type safety means that you can't use code like
-<code>if (<em>nonbooleanValue</em>)</code> or
-<code>assert (<em>nonbooleanValue</em>)</code>.
-Instead, explicitly check for values, like this:
+Dart 的类型安全性意味着您不可以使用类似
+<code>if (<em>nonbooleanValue</em>)</code> 或
+<code>assert (<em>nonbooleanValue</em>)</code> 这样的代码检查布尔值。
+您应该总是显式地检查布尔值，就像下面的代码：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (no-truthy)"?>
 ```dart
