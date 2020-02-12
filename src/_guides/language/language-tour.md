@@ -367,7 +367,7 @@ baz = [42]; // 错误: 常量不能被赋值
 从 Dart 2.5 开始，您可以在常量中使用
 [类型检查和强制类型转换](#type-test-operators) (`is` and `as`)，
 [collection if](#collection-operators)
-以及 [spread operators](#spread-operator) (`...` and `...?`)：
+以及 [展开操作符](#spread-operator) (`...` and `...?`)：
 
 <?code-excerpt "misc/lib/language_tour/variables.dart (const-dart-25)"?>
 ```dart
@@ -636,12 +636,11 @@ assert(iMeantToDoThis.isNaN);
 
 ### Lists
 
-Perhaps the most common collection in nearly every programming language
-is the *array*, or ordered group of objects. In Dart, arrays are
-[List][] objects, so most people just call them *lists*.
+数组 *Array* 是几乎所有编程语言中最常见的集合类型，
+在 Dart 中数组由 [List][] 对象表示。通常称之为 *List*。
 
-Dart list literals look like JavaScript array literals. Here’s a simple
-Dart list:
+Dart List 字面量看起来就像是 JavaScript 数组字面量。
+下面是一个简单的 Dart List ：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (list-literal)"?>
 ```dart
@@ -649,16 +648,14 @@ var list = [1, 2, 3];
 ```
 
 {{site.alert.note}}
-  Dart infers that `list` has type `List<int>`. If you try to add non-integer
-  objects to this list, the analyzer or runtime raises an error. For more
-  information, read about
-  [type inference.](/guides/language/sound-dart#type-inference)
+  这里 Dart 推断出 `list` 的类型为 `List<int>`。如果您往该 list 中添加一个非int对象，
+  则 Dart 分析器或 Dart 运行时将会报错。更多信息，请参考
+  [类型推断](/guides/language/sound-dart#type-inference)。
 {{site.alert.end}}
 
-Lists use zero-based indexing, where 0 is the index of the first element
-and `list.length - 1` is the index of the last element. You can get a
-list’s length and refer to list elements just as you would in
-JavaScript:
+List 的索引从 0 开始，0 是第一个元素的索引，
+`list.length - 1` 是最后一个元素的索引。
+您可以像 JavaScript 中的用法那样获取 Dart 中 List 的长度以及元素：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (list-indexing)"?>
 ```dart
@@ -670,8 +667,7 @@ list[1] = 1;
 assert(list[1] == 1);
 ```
 
-To create a list that's a compile-time constant,
-add `const` before the list literal:
+如果要创建一个编译期常量的 list，只需要在 list 字面量前加上 `const` 关键字：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (const-list)"?>
 ```dart
@@ -680,12 +676,11 @@ var constantList = const [1, 2, 3];
 ```
 
 <a id="spread-operator"> </a>
-Dart 2.3 introduced the **spread operator** (`...`) and the
-**null-aware spread operator** (`...?`),
-which provide a concise way to insert multiple elements into a collection.
+Dart 2.3 引入了 **展开操作符** (`...`) 和 the
+**null-aware 展开操作符** (`...?`)，
+它们提供了一种将多个元素插入集合的简洁方法。
 
-For example, you can use the spread operator (`...`) to insert
-all the elements of a list into another list:
+例如，您可以使用 展开操作符 (`...`) 将一个 list 中的元素插入到另一个 list 中：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (list-spread)"?>
 ```dart
@@ -694,8 +689,8 @@ var list2 = [0, ...list];
 assert(list2.length == 4);
 ```
 
-If the expression to the right of the spread operator might be null,
-you can avoid exceptions by using a null-aware spread operator (`...?`):
+如果展开操作符右边的表达式可能为 null，
+您可以使用 null-aware 展开操作符(`...?`) 来避免产生异常：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (list-null-spread)"?>
 ```dart
@@ -704,16 +699,15 @@ var list2 = [0, ...?list];
 assert(list2.length == 1);
 ```
 
-For more details and examples of using the spread operator, see the
+关于使用展开操作符的更新信息和例子，请参考
 [spread operator proposal.][spread proposal]
 
 <a id="collection-operators"> </a>
-Dart 2.3 also introduced **collection if** and **collection for**,
-which you can use to build collections using conditionals (`if`)
-and repetition (`for`).
+Dart 2.3 还引入了 **collection if** 和 **collection for**，
+在构建集合时可以使用条件判断 (`if`) 和循环 (`for`)。
 
-Here's an example of using **collection if**
-to create a list with three or four items in it:
+下面是一个使用 **collection if** 来创建 list 的例子，
+它可能包含 3 或 4 个元素：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (list-if)"?>
 ```dart
@@ -725,9 +719,8 @@ var nav = [
 ];
 ```
 
-Here's an example of using **collection for**
-to manipulate the items of a list before
-adding them to another list:
+下面是一个使用 **collection for**
+将一个 list 中的元素修改后添加到另一个 list 中的示例：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (list-for)"?>
 ```dart
@@ -739,29 +732,29 @@ var listOfStrings = [
 assert(listOfStrings[1] == '#1');
 ```
 
-For more details and examples of using collection if and for, see the
-[control flow collections proposal.][collections proposal]
+获取更多关于使用 `collection if` 和 `collection for` 的信息和例子，请查看
+[集合中使用控制流的建议][collections proposal] 。
 
 [collections proposal]: https://github.com/dart-lang/language/blob/master/accepted/2.3/control-flow-collections/feature-specification.md
 
 [spread proposal]: https://github.com/dart-lang/language/blob/master/accepted/2.3/spread-collections/feature-specification.md
 
-The List type has many handy methods for manipulating lists. For more
-information about lists, see [Generics](#generics) and
-[Collections](/guides/libraries/library-tour#collections).
+List 类中有许多用于操作 List 的便捷方法，请查阅
+[Generics](#generics) 和
+[Collections](/guides/libraries/library-tour#collections) 获取更多信息。
 
 
 ### Sets
 
-A set in Dart is an unordered collection of unique items.
-Dart support for sets is provided by set literals and the [Set][] type.
+Dart 中的 Set 是唯一元素（即集合中的元素不可重复）的无序集合。
+Dart 支持 set 字面量和 [Set][] 类型。
 
 {{site.alert.version-note}}
-  Although the Set _type_ has always been a core part of Dart, set _literals_
-  were introduced in Dart 2.2.
+  尽管 Set _类型_ 一直是 Dart 中的核心部分，
+  但 set _字面量_ 直到 Dart 2.2 开始才被引入。
 {{site.alert.end}}
 
-Here is a simple Dart set, created using a set literal:
+下面是一个使用 set 字面量创建 set 的例子：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (set-literal)"?>
 ```dart
@@ -769,30 +762,30 @@ var halogens = {'fluorine', 'chlorine', 'bromine', 'iodine', 'astatine'};
 ```
 
 {{site.alert.note}}
-  Dart infers that `halogens` has the type `Set<String>`. If you try to add the
-  wrong type of value to the set, the analyzer or runtime raises an error. For
-  more information, read about
-  [type inference.](/guides/language/sound-dart#type-inference)
+  Dart 推断 `halogens` 变量的类型是 `Set<String>`。
+  如果您向该集合中添加一个错误类型的值，Dart 分析器或 Dart 运行时将会报错。
+  更多信息，请参考
+  [类型推断](/guides/language/sound-dart#type-inference) 。
 {{site.alert.end}}
 
-To create an empty set, use `{}` preceded by a type argument,
-or assign `{}` to a variable of type `Set`:
+如果想创建一个空 set，请在类型参数之前使用 `{}`，
+或将 `{}` 赋值给一个 `Set` 类型的变量：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (set-vs-map)"?>
 ```dart
 var names = <String>{};
 // Set<String> names = {}; // This works, too.
-// var names = {}; // Creates a map, not a set.
+// var names = {}; // Creates a map, not a set. 此处 names 是一个 map，而不是 set
 ```
 
 {{site.alert.info}}
-  **Set or map?** The syntax for map literals is similar to that for set
-  literals. Because map literals came first, `{}` defaults to the `Map` type. If
-  you forget the type annotation on `{}` or the variable it's assigned to, then
-  Dart creates an object of type `Map<dynamic, dynamic>`.
+  **Set 还是 map?** map 字面量的语法和 set 字面量的语法很相似。
+  由于 map 字面量先出现，所以 `{}` 默认是 `Map` 类型。
+  如果您忘记给 `{}` 指定类型或者将 `{}` 赋值给一个未指定类型的变量上，
+  那么 Dart 将会创建一个类型为 `Map<dynamic, dynamic>` 的对象。
 {{site.alert.end}}
 
-Add items to an existing set using the `add()` or `addAll()` methods:
+使用 `add()` 或 `addAll()` 方法可以向已有 set 中添加元素：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (set-add-items)"?>
 ```dart
@@ -801,7 +794,7 @@ elements.add('fluorine');
 elements.addAll(halogens);
 ```
 
-Use `.length` to get the number of items in the set:
+使用 `.length` 可以获取 set 中元素的数量：
 
 <?code-excerpt "misc/test/language_tour/built_in_types_test.dart (set-length)"?>
 ```dart
@@ -811,8 +804,8 @@ elements.addAll(halogens);
 assert(elements.length == 5);
 ```
 
-To create a set that's a compile-time constant,
-add `const` before the set literal:
+如果想创建一个编译期常量的 set，
+可以在 set 字面量前添加 `const` 关键字：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (const-set)"?>
 ```dart
@@ -826,16 +819,15 @@ final constantSet = const {
 // constantSet.add('helium'); // Uncommenting this causes an error.
 ```
 
-As of Dart 2.3, sets support spread operators (`...` and `...?`)
-and collection ifs and fors,
-just like lists do.
-For more information, see the
-[list spread operator](#spread-operator) and
-[list collection operator](#collection-operators) discussions.
+从 Dart 2.3 开始，set 可以像 list 一样支持 展开操作符 (`...` and `...?`)
+和 `collection if` & `collection for`。
+更多信息，请参考
+[list 展开操作符](#spread-operator) 和
+[list 集合操作符](#collection-operators) 。
 
-For more information about sets, see
-[Generics](#generics) and
-[Sets](/guides/libraries/library-tour#sets).
+查看
+[Generics](#generics) 和
+[Sets](/guides/libraries/library-tour#sets) 获取更多关于 set 的信息。
 
 ### Maps
 
