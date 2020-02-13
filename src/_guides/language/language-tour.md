@@ -49,7 +49,7 @@ main() {
     详细内容请参考 [Comments](#comments)。
 
 `int`
-:   类型. 一些其他的 [内置类型](#built-in-types)
+:   类型。一些其他的 [内置类型](#built-in-types)
     如 `String`, `List`, and `bool`。
 
 `42`
@@ -68,7 +68,7 @@ main() {
 `main()`
 :   一个特殊的、 *必需的*、 顶层函数。它是应用程序执行的入口。
     更多信息，请参考
-    [The main() function](#the-main-function).
+    [The main() function](#the-main-function)。
 
 `var`
 :   一种用于声明变量且无需指定变量类型的方法。
@@ -85,7 +85,7 @@ main() {
 在学习 Dart 语言时，请牢记以下事实和概念：
 
 -   所有变量引用的都是 *对象* ，每个对象都是一个 *类* 的实例。 
-    数字，函数和 null 都是对象。
+    数字、函数和 null 都是对象。
     所有类都从 [Object][] 类继承。
 
 -   尽管 Dart 是强类型语言，但是声明变量时可以不指定类型，因为 Dart 可以推断类型。 
@@ -104,10 +104,10 @@ main() {
     （静态变量 和 实例变量）。
     实例变量有时也被称为字段或属性。
 
--   与 Java 不同， Dart 没有 `public`、`protected` 和 `private` 这些关键字。
+-   与 Java 不同， Dart 没有 `public`、`protected` 和 `private` 这些访问修饰符。
     如果一个标识符以下划线 (\_) 开头，那它在库内就是私有的。
     更多信息，请参考
-    [库和可见性](#libraries-and-visibility).
+    [库和可见性](#libraries-and-visibility)。
 
 -   *标识符* 可以以字母或下划线 (\_) 开头，后跟字母、下划线和数字的任意组合。
 
@@ -116,11 +116,11 @@ main() {
     `condition ? expr1 : expr2` 具有值 `expr1` 或 `expr2`。
     相比之下 [if-else 语句](#if-and-else) 没有值。
     一条语句通常包含一个或多个表达式，
-    但是一个表达式不能直接包含一条语句。
+    但是一个表达式不能只包含一条语句。
 
 -   Dart 工具可以报告两种类型的问题： _警告_ 和 _错误_ 。
     警告仅表示您的代码可能无法工作，但并不会阻止程序运行。
-    错误分为 编译期错误 和 运行期错误。编译器错误会直接导致程序无法执行，
+    错误分为 编译期错误 和 运行期错误。编译期错误会直接导致程序无法执行，
     运行期错误会在代码执行时抛出[异常](#exceptions)。
 
 
@@ -228,7 +228,7 @@ main() {
   这些关键字在大多数地方都是有效的标识符，
   但它们不能用作类或类型名，也不能用作导入前缀。
 
-* 带有上标 **3** 的单词是较新的，有限的保留单词，
+* 带有上标 **3** 的单词是较新的、有限的保留单词，
   它们与 Dart 1.0 版本之后添加的 [异步支持](#asynchrony-support)有关。
   您不能在任何标有 `async`、 `async*` 或 `sync*` 的函数体中使用 `await` 或 `yield` 作为标识符。
 
@@ -943,7 +943,7 @@ final constantMap = const {
 ### Runes 和 grapheme clusters
 
 在 Dart 中，[runes][] 公开了字符串的 Unicode 码位。
-从 Dart 2.6 开始，使用 [characters 包][]
+从 Dart 2.6 开始，使用 [characters 包][characters package]
 来访问或者操作用户感知的字符，
 也被称为
 [Unicode (extended) grapheme clusters][grapheme clusters]。
@@ -1080,23 +1080,23 @@ bool isNoble(int atomicNumber) => _nobleGases[atomicNumber] != null;
   即使对于强制性参数也是如此。有关详细信息，请参见下一部分。
 {{site.alert.end}}
 
-### Optional parameters
+### 可选参数
 
-Optional parameters can be either named or positional, but not both.
+可选参数分为命名参数和位置参数，可在参数列表中任选其一使用，但两者不能同时出现在参数列表中。
 
-#### Named parameters
+#### 命名参数
 
-When calling a function, you can specify named parameters using
-<code><em>paramName</em>: <em>value</em></code>. For example:
+当您调用函数时，您可以通过
+<code><em>参数名</em>: <em>参数值</em></code> 的形式指定命名参数。例如：
 
 <?code-excerpt "misc/lib/language_tour/functions.dart (use-named-parameters)"?>
 ```dart
 enableFlags(bold: true, hidden: false);
 ```
 
-When defining a function, use
-<code>{<em>param1</em>, <em>param2</em>, …}</code>
-to specify named parameters:
+定义函数时。可以使用
+<code>{<em>参数1</em>, <em>参数2</em>, …}</code>
+的形式指定命名参数：
 
 <?code-excerpt "misc/lib/language_tour/functions.dart (specify-named-parameters)"?>
 ```dart
@@ -1104,28 +1104,24 @@ to specify named parameters:
 void enableFlags({bool bold, bool hidden}) {...}
 ```
 
-Although named parameters are a kind of optional parameter,
-you can annotate them with [@required][] to indicate
-that the parameter is mandatory —
-that users must provide a value for the parameter.
-For example:
+虽然命名参数是可选参数的一种，
+但是您可以使用 [@required][] 注解来标注一个参数是必须的，
+调用者必须为该参数提供一个值。例如：
 
 <?code-excerpt "misc/lib/language_tour/functions.dart (required-named-parameters)" replace="/@required/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
 const Scrollbar({Key key, [!@required!] Widget child})
 {% endprettify %}
 
-If someone tries to create a `Scrollbar`
-without specifying the `child` argument,
-then the analyzer reports an issue.
+如果调用者想创建一个 `Scrollbar` 对象而不提供 `child` 参数，
+Dart 分析器将会报告一个问题。
 
-To use the [@required][] annotation,
-depend on the [meta][] package and import `package:meta/meta.dart`.
+[@required][] 注解依赖 [meta][] 包，
+要使用的话，需要导入 `package:meta/meta.dart`。
 
-#### Positional parameters
+#### 位置参数
 
-Wrapping a set of function parameters in `[]` marks them as optional
-positional parameters:
+使用 `[]` 将一系列函数参数包裹起来作为位置参数：
 
 <?code-excerpt "misc/test/language_tour/functions_test.dart (optional-positional-parameters)"?>
 ```dart
@@ -1138,15 +1134,14 @@ String say(String from, String msg, [String device]) {
 }
 ```
 
-Here’s an example of calling this function without the optional
-parameter:
+下面是一个不传可选参数调用上述函数的示例：
 
 <?code-excerpt "misc/test/language_tour/functions_test.dart (call-without-optional-param)"?>
 ```dart
 assert(say('Bob', 'Howdy') == 'Bob says Howdy');
 ```
 
-And here’s an example of calling this function with the third parameter:
+下面是传入可选参数（第三个参数）调用上述函数的示例：
 
 <?code-excerpt "misc/test/language_tour/functions_test.dart (call-with-optional-param)"?>
 ```dart
@@ -1155,13 +1150,13 @@ assert(say('Bob', 'Howdy', 'smoke signal') ==
 ```
 
 <a id="default-parameters"></a>
-#### Default parameter values
+#### 默认参数值
 
-Your function can use `=` to define default values for both named and positional
-parameters. The default values must be compile-time constants.
-If no default value is provided, the default value is `null`.
+可以使用 `=` 为函数的可选参数（命名参数、位置参数）设置默认值。
+默认值必须是编译期常量。
+如果不设置默认值，那么默认值就是 `null` 。
 
-Here's an example of setting default values for named parameters:
+下面是一个为命名参数设置默认值的例子：
 
 <?code-excerpt "misc/lib/language_tour/functions.dart (named-parameter-default-values)"?>
 ```dart
@@ -1173,10 +1168,10 @@ enableFlags(bold: true);
 ```
 
 {{site.alert.info}}
-  **Deprecation note:** Old code might use a colon (`:`) instead of `=` to set
-  default values of named parameters. The reason is that originally, only `:`
-  was supported for named parameters. That support might be deprecated, so we
-  recommend that you **[use `=` to specify default values.][use =]**
+  **弃用提醒：** 一些老的代码里可能会使用冒号 (`:`) 而不是 `=` 设置命名参数的默认值。
+  原因是，命名参数最初只支持 `:`。
+  但该支持可能会被弃用，因此我们建议您
+  **[使用 `=` 设置默认值][use =]** 。
 
   [use =]: /guides/language/effective-dart/usage#do-use--to-separate-a-named-parameter-from-its-default-value
 {{site.alert.end}}
@@ -1187,7 +1182,7 @@ Update if/when we do. Issue #?
 See `defaultNamedParameter` in the language spec.
 {% endcomment %}
 
-The next example shows how to set default values for positional parameters:
+下面的示例展示了如何设置位置参数的默认值：
 
 <?code-excerpt "misc/test/language_tour/functions_test.dart (optional-positional-param-default)"?>
 ```dart
@@ -1207,10 +1202,10 @@ assert(say('Bob', 'Howdy') ==
     'Bob says Howdy with a carrier pigeon');
 ```
 
-You can also pass lists or maps as default values.
-The following example defines a function, `doStuff()`,
-that specifies a default list for the `list`
-parameter and a default map for the `gifts` parameter.
+您也可以传入 list 或 map 作为默认值。
+下面的示例定义了一个 `doStuff()` 函数，
+然后给 `list` 参数指定了一个 list 默认值，
+给 `gifts` 参数指定了一个 map 默认值。
 {% comment %}
 The function is called three times with different values. Click **Run** to see
 list and map default values in action.
