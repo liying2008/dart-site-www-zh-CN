@@ -1359,15 +1359,13 @@ list.forEach(
 ```
 
 
-### Lexical scope
+### 词法作用域
 
-Dart is a lexically scoped language, which means that the scope of
-variables is determined statically, simply by the layout of the code.
-You can “follow the curly braces outwards” to see if a variable is in
-scope.
+Dart是一种按词法确定作用域的语言，
+这意味着变量的作用域是由代码的布局静态地确定的。
+您可以 “跟随花括号向外” 查看变量是否在作用域内。
 
-Here is an example of nested functions with variables at each scope
-level:
+下面是一个嵌套函数的例子，在每个作用域级别上都有变量：
 
 <?code-excerpt "misc/test/language_tour/functions_test.dart (nested-functions)"?>
 ```dart
@@ -1391,19 +1389,17 @@ void main() {
 }
 ```
 
-Notice how `nestedFunction()` can use variables from every level, all
-the way up to the top level.
+注意 `nestedFunction()` 函数可以访问包括顶层变量在内的所有级别的变量。
 
 
-### Lexical closures
+### 词法闭包
 
-A *closure* is a function object that has access to variables in its
-lexical scope, even when the function is used outside of its original
-scope.
+*闭包* 是一个函数对象，它可以访问词法作用域内的变量，
+即使该函数在其原始作用域之外使用时也是如此。
 
-Functions can close over variables defined in surrounding scopes. In the
-following example, `makeAdder()` captures the variable `addBy`. Wherever the
-returned function goes, it remembers `addBy`.
+函数可以封闭定义到它作用域内的变量。
+在下面的示例中，函数 `makeAdder()` 捕获了变量 `addBy` 。
+无论函数在什么时候返回，它都可以使用捕获的 `addBy` 变量。
 
 <?code-excerpt "misc/test/language_tour/functions_test.dart (function-closure)"?>
 ```dart
@@ -1426,52 +1422,51 @@ void main() {
 ```
 
 
-### Testing functions for equality
+### 测试函数是否相等
 
-Here's an example of testing top-level functions, static methods, and
-instance methods for equality:
+下面是测试顶层函数、静态方法和实例方法是否相等的示例：
 
 <?code-excerpt "misc/lib/language_tour/function_equality.dart"?>
 ```dart
-void foo() {} // A top-level function
+void foo() {} // 顶层函数
 
 class A {
-  static void bar() {} // A static method
-  void baz() {} // An instance method
+  static void bar() {} // 静态方法
+  void baz() {} // 实例方法
 }
 
 void main() {
   var x;
 
-  // Comparing top-level functions.
+  // 比较顶层函数是否相等
   x = foo;
   assert(foo == x);
 
-  // Comparing static methods.
+  // 比较静态方法是否相等
   x = A.bar;
   assert(A.bar == x);
 
-  // Comparing instance methods.
+  // 比较实例方法是否相等
   var v = A(); // Instance #1 of A
   var w = A(); // Instance #2 of A
   var y = w;
   x = w.baz;
 
-  // These closures refer to the same instance (#2),
-  // so they're equal.
+  // 这两个闭包引用了相同的实例 (#2)，
+  // 因此它们相等
   assert(y.baz == x);
 
-  // These closures refer to different instances,
-  // so they're unequal.
+  // 这两个闭包引用了不同的实例，
+  // 因此它们不相等
   assert(v.baz != w.baz);
 }
 ```
 
 
-### Return values
+### 返回值
 
-All functions return a value. If no return value is specified, the
-statement `return null;` is implicitly appended to the function body.
+所有函数都有返回值。
+如果函数没有指定返回值，那么 `return null;` 语句会隐式默认加到函数体中。
 
 <?code-excerpt "misc/test/language_tour/functions_test.dart (implicit-return-null)"?>
 ```dart
