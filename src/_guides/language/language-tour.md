@@ -1276,9 +1276,9 @@ void main(List<String> arguments) {
 您可以使用 [args 库]({{site.pub}}/packages/args)
 去定义或解析命令行参数。
 
-### Functions as first-class objects
+### 函数作为一等对象
 
-You can pass a function as a parameter to another function. For example:
+您可以将函数作为参数传递给另一个函数，例如：
 
 <?code-excerpt "misc/lib/language_tour/functions.dart (function-as-param)"?>
 ```dart
@@ -1292,7 +1292,7 @@ var list = [1, 2, 3];
 list.forEach(printElement);
 ```
 
-You can also assign a function to a variable, such as:
+您也可以将一个函数赋值给一个变量，例如：
 
 <?code-excerpt "misc/test/language_tour/functions_test.dart (function-as-var)"?>
 ```dart
@@ -1300,32 +1300,32 @@ var loudify = (msg) => '!!! ${msg.toUpperCase()} !!!';
 assert(loudify('hello') == '!!! HELLO !!!');
 ```
 
-This example uses an anonymous function.
-More about those in the next section.
+该示例中使用了匿名函数。
+下一节会有更多与其相关的介绍。
 
-### Anonymous functions
+### 匿名函数
 
-Most functions are named, such as `main()` or `printElement()`.
-You can also create a nameless function
-called an _anonymous function_, or sometimes a _lambda_ or _closure_.
-You might assign an anonymous function to a variable so that,
-for example, you can add or remove it from a collection.
+大多数函数都是有名字的，比如 `main()` 或者 `printElement()` 。
+您也可以创建一个没有名字的函数，称为 _匿名函数_ ，
+有时候也叫 _lambda表达式_ 或 _闭包_ 。
+您可以将一个匿名函数赋值给一个变量然后使用它，
+比如将该变量添加到集合中或从集合中删除。
 
-An anonymous function looks similar to a named function&mdash;
-zero or more parameters, separated by commas
-and optional type annotations, between parentheses.
+匿名函数看起来和命名函数很相似&mdash;
+在括号之间可以有0个或多个参数，
+参数之间用逗号分隔，参数的类型可写可不写。
 
-The code block that follows contains the function's body:
+然后后面紧接着的代码块就是函数体：
 
 <code>
-([[<em>Type</em>] <em>param1</em>[, …]]) { <br>
-&nbsp;&nbsp;<em>codeBlock</em>; <br>
+([[<em>类型</em>] <em>参数1</em>[, …]]) { <br>
+&nbsp;&nbsp;<em>代码块</em>; <br>
 }; <br>
 </code>
 
-The following example defines an anonymous function with an untyped parameter, `item`.
-The function, invoked for each item in the list,
-prints a string that includes the value at the specified index.
+下面的例子定义了一个匿名函数，其只有一个没有类型的参数 `item` 。
+list 中的每个元素都会调用这个函数（作为参数），
+打印一个包含元素索引和其值的字符串。
 
 <?code-excerpt "misc/test/language_tour/functions_test.dart (anonymous-function)"?>
 ```dart
@@ -1335,7 +1335,7 @@ list.forEach((item) {
 });
 ```
 
-Click **Run** to execute the code.
+点击 **Run** 执行代码。
 
 {% comment %}
 https://gist.github.com/chalin/5d70bc1889d055c7a18d35d77874af88
@@ -1349,9 +1349,8 @@ src="{{site.dartpad-embed-inline}}?id=5d70bc1889d055c7a18d35d77874af88&split=60"
     style="border: 1px solid #ccc;">
 </iframe>
 
-If the function contains only one statement, you can shorten it using arrow
-notation. Paste the following line into DartPad and click **Run** to verify that
-it is functionally equivalent.
+如果函数只包含一条语句，您可以使用箭头语法简写。
+将下面的代码粘贴到 DartPad 然后点击 **Run** 验证函数的功能是否相同。
 
 <?code-excerpt "misc/test/language_tour/functions_test.dart (anon-func)"?>
 ```dart
