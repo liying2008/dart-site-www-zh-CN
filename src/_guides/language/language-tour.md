@@ -1238,13 +1238,12 @@ src="{{site.dartpad-embed-inline}}?id=d988cfce0a54c6853799"
 {% endcomment %}
 
 
-### The main() function
+### main() 函数
 
-Every app must have a top-level `main()` function, which serves as the
-entrypoint to the app. The `main()` function returns `void` and has an
-optional `List<String>` parameter for arguments.
+每个 Dart 应用程序都必须有一个顶层的 `main()` 函数，它是程序的入口。
+`main()` 函数的返回值为 `void` 并且有一个类型为 `List<String>` 的可选参数。
 
-Here's an example of the `main()` function for a web app:
+下面是一个 web 应用的 `main()` 函数的示例：
 
 <?code-excerpt "misc/test/language_tour/browser_test.dart (simple-web-main-function)"?>
 ```dart
@@ -1256,13 +1255,11 @@ void main() {
 ```
 
 {{site.alert.note}}
-  The `..` syntax in the preceding code is called a
-  [cascade](#cascade-notation-). With cascades, you can perform multiple
-  operations on the members of a single object.
+  上面代码中的 `..` 语法称为 [级联调用](#cascade-notation-) 。
+  使用级联访问可以在一个对象上执行多个操作。
 {{site.alert.end}}
 
-Here's an example of the `main()` function for a command-line app that
-takes arguments:
+下面是一个命令行程序，具有带参数的 `main()` 函数：
 
 <?code-excerpt "misc/test/language_tour/functions_test.dart (main-args)"?>
 ```dart
@@ -1276,8 +1273,8 @@ void main(List<String> arguments) {
 }
 ```
 
-You can use the [args library]({{site.pub}}/packages/args) to
-define and parse command-line arguments.
+您可以使用 [args 库]({{site.pub}}/packages/args)
+去定义或解析命令行参数。
 
 ### Functions as first-class objects
 
