@@ -1493,7 +1493,7 @@ assert(foo() == null);
 | 按位与             | `&`                                            |
 | 按位异或              | `^`                                            |
 | 按位或               | `|`                                            |
-| 关系&nbsp;和&nbsp;类型&nbsp;测试 | `>=`    `>`    `<=`    `<`    `as`    `is`    `is!` |
+| 关系&nbsp;和&nbsp;类型&nbsp;判断 | `>=`    `>`    `<=`    `<`    `as`    `is`    `is!` |
 | 相等判断                 | `==`    `!=`                                   |
 | 逻辑与              | `&&`                                           |
 | 逻辑或               | `||`                                           |
@@ -1608,38 +1608,33 @@ assert(a != b); // -1 != 0
 ```
 
 
-### Equality and relational operators
+### 关系运算符
 
-The following table lists the meanings of equality and relational operators.
+下面表格列出了关系运算符及含义。
 
 |-----------+-------------------------------------------|
-| Operator  | Meaning                                   |
+| 运算符  | 含义                                   |
 |-----------+-------------------------------------------|
-| `==`      |       Equal; see discussion below
-| `!=`      |       Not equal
-| `>`       |       Greater than
-| `<`       |       Less than
-| `>=`      |       Greater than or equal to
-| `<=`      |       Less than or equal to
+| `==`      |       相等
+| `!=`      |       不等
+| `>`       |       大于
+| `<`       |       小于
+| `>=`      |       大于等于
+| `<=`      |       小于等于
 {:.table .table-striped}
 
-To test whether two objects x and y represent the same thing, use the
-`==` operator. (In the rare case where you need to know whether two
-objects are the exact same object, use the [identical()][]
-function instead.) Here’s how the `==` operator works:
+要判断两个对象 x 和 y 是否相等（即 x 和 y 表示同一事物），使用 `==` 运算符即可。
+（在极少数情况下，需要使用 [identical()][] 函数来判断两个对象是否是同一个对象（即完全相同）。）
+`==` 运算符的工作方式如下：
 
-1.  If *x* or *y* is null, return true if both are null, and false if only
-    one is null.
+1.  如果 *x* 或 *y* 为 null，如果两者都为 null 则返回 true ，否则返回 false 。
 
-2.  Return the result of the method invocation
-    <code><em>x</em>.==(<em>y</em>)</code>. (That’s right,
-    operators such as `==` are methods that are invoked on their first
-    operand. You can even override many operators, including `==`, as
-    you’ll see in
-    [Overridable operators](#overridable-operators).)
+2.  调用
+    <code><em>x</em>.==(<em>y</em>)</code> 将会返回一个值。
+    （运算符，比如 `==` 其实是第一个操作数的一个方法，您可以重写很多运算符，包括 `==`，
+    详情请参考 [重写运算符](#overridable-operators)。）
 
-Here’s an example of using each of the equality and relational
-operators:
+下面是使用关系运算符的例子：
 
 <?code-excerpt "misc/test/language_tour/operators_test.dart (relational)"?>
 ```dart
@@ -1652,32 +1647,30 @@ assert(2 <= 3);
 ```
 
 
-### Type test operators
+### 类型判断运算符
 
-The `as`, `is`, and `is!` operators are handy for checking types at
-runtime.
+`as`、 `is` 和 `is!` 是在运行时判断对象类型的运算符。
 
 |-----------+-------------------------------------------|
-| Operator  | Meaning                                   |
+| 运算符  | 含义                                   |
 |-----------+-------------------------------------------|
-| `as`      | Typecast (also used to specify [library prefixes](#specifying-a-library-prefix))
-| `is`      | True if the object has the specified type
-| `is!`     | False if the object has the specified type
+| `as`      | 类型强制转换 （也用于指定 [库前缀](#specifying-a-library-prefix)）
+| `is`      | 如果对象是指定类型则返回 true
+| `is!`     | 如果对象是指定类型则返回 false
 {:.table .table-striped}
 
-The result of `obj is T` is true if `obj` implements the interface
-specified by `T`. For example, `obj is Object` is always true.
+如果 `obj` 实现了 `T` 的接口，则 `obj is T` 返回 true。
+例如，`obj is Object` 总是返回 true（因为任何类都是 Object 的子类）。
 
-Use the `as` operator to cast an object to a particular type if and only if
-you are sure that the object is of that type. Example:
+仅当您确定一个对象是某一类型时您才可以使用 `as` 去强转该对象为这一类型。例如：
 
 <?code-excerpt "misc/lib/language_tour/classes/employee.dart (emp as Person)"?>
 ```dart
 (emp as Person).firstName = 'Bob';
 ```
 
-If you aren't sure that the object is of type `T`, then use `is T` to check the 
-type before using the object.
+如果您不确定这个对象是不是 `T` 类型，请在使用前先用 `is T` 检查一下。
+
 <?code-excerpt "misc/lib/language_tour/classes/employee.dart (emp is Person)"?>
 ```dart
 if (emp is Person) {
@@ -1687,8 +1680,8 @@ if (emp is Person) {
 ```
 
 {{site.alert.note}}
-  The code isn’t equivalent. If `emp` is null or not a `Person`, the
-  first example throws an exception; the second does nothing.
+  上面两种方式是有区别的。如果 `emp` 是 null 或者不是 `Person` 类型，
+  第一个例子将会抛出一个异常；而第二个例子将什么都不会做。
 {{site.alert.end}}
 
 ### Assignment operators
