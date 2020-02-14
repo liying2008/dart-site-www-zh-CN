@@ -1684,17 +1684,16 @@ if (emp is Person) {
   第一个例子将会抛出一个异常；而第二个例子将什么都不会做。
 {{site.alert.end}}
 
-### Assignment operators
+### 赋值运算符
 
-As you’ve already seen, you can assign values using the `=` operator.
-To assign only if the assigned-to variable is null,
-use the `??=` operator.
+您可以使用 `=` 来赋值。
+同时您也可以使用 `??=` 来为值为 null 的变量赋值。
 
 <?code-excerpt "misc/test/language_tour/operators_test.dart (assignment)"?>
 ```dart
-// Assign value to a
+// 给 a 赋值
 a = value;
-// Assign value to b if b is null; otherwise, b stays the same
+// 只有当 b 为 null 时，才会被赋值
 b ??= value;
 ```
 
@@ -1721,24 +1720,23 @@ main() {
 ```
 {% endcomment %}
 
-Compound assignment operators such as `+=` combine
-an operation with an assignment.
+复合赋值运算符，例如 `+=`，
+将算数运算符和赋值运算符结合了起来。
 
 | `=`  | `–=` | `/=`  | `%=`  | `>>=` | `^=`
 | `+=` | `*=` | `~/=` | `<<=` | `&=`  | `|=`
 {:.table}
 
-Here’s how compound assignment operators work:
+复合赋值运算符的工作原理如下：
 
 |-----------+----------------------+-----------------------|
-|           | Compound assignment  | Equivalent expression |
+|           | 复合赋值  | 等效表达式 |
 |-----------+----------------------+-----------------------|
-|**For an operator <em>op</em>:** | <code>a <em>op</em>= b</code> | <code>a = a <em>op</em> b</code>
-|**Example:**                     |`a += b`                       | `a = a + b`
+|**对于一个运算符 <em>op</em>:** | <code>a <em>op</em>= b</code> | <code>a = a <em>op</em> b</code>
+|**例子：**                     |`a += b`                       | `a = a + b`
 {:.table}
 
-The following example uses assignment and compound assignment
-operators:
+下面的例子使用了赋值和复合赋值运算符：
 
 <?code-excerpt "misc/test/language_tour/operators_test.dart (op-assign)"?>
 ```dart
@@ -1748,20 +1746,19 @@ assert(a == 6);
 ```
 
 
-### Logical operators
+### 逻辑运算符
 
-You can invert or combine boolean expressions using the logical
-operators.
+您可以使用逻辑运算符取反或组合布尔表达式。
 
 |-----------------------------+-------------------------------------------|
-| Operator                    | Meaning                                   |
+| 运算符                    | 含义                                   |
 |-----------------------------+-------------------------------------------|
-| <code>!<em>expr</em></code> | inverts the following expression (changes false to true, and vice versa)
-| `||`                        | logical OR
-| `&&`                        | logical AND
+| <code>!<em>表达式</em></code> | 对表达式结果取反（即将 true 变为 false，false 变为 true）
+| `||`                        | 逻辑或
+| `&&`                        | 逻辑与
 {:.table .table-striped}
 
-Here’s an example of using the logical operators:
+下面是一个使用逻辑运算符的例子：
 
 <?code-excerpt "misc/lib/language_tour/operators.dart (op-logical)"?>
 ```dart
@@ -1771,23 +1768,23 @@ if (!done && (col == 0 || col == 3)) {
 ```
 
 
-### Bitwise and shift operators
+### 按位和移位运算符
 
-You can manipulate the individual bits of numbers in Dart. Usually,
-you’d use these bitwise and shift operators with integers.
+您可以在 Dart 中操纵数字的各个位。
+通常，您需要将这些按位和移位运算符与整数一起使用。
 
 |-----------------------------+-------------------------------------------|
-| Operator                    | Meaning                                   |
+| 运算符                    | 含义                                   |
 |-----------------------------+-------------------------------------------|
-| `&`                         | AND
-| `|`                         | OR
-| `^`                         | XOR
-| <code>~<em>expr</em></code> | Unary bitwise complement (0s become 1s; 1s become 0s)
-| `<<`                        | Shift left
-| `>>`                        | Shift right
+| `&`                         | 按位与
+| `|`                         | 按位或
+| `^`                         | 按位异或
+| <code>~<em>表达式</em></code> | 按位取反（即将 0 变为 1，1 变为 0）
+| `<<`                        | 左移
+| `>>`                        | 右移
 {:.table .table-striped}
 
-Here’s an example of using bitwise and shift operators:
+下面是一个使用按位和移位运算符的例子：
 
 <?code-excerpt "misc/test/language_tour/operators_test.dart (op-bitwise)"?>
 ```dart
