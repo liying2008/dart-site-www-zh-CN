@@ -1476,41 +1476,41 @@ assert(foo() == null);
 ```
 
 
-## Operators
+## 运算符
 
-Dart defines the operators shown in the following table.
-You can override many of these operators, as described in
-[Overridable operators](#overridable-operators).
+下面表格中是 Dart 中定义的运算符。
+您可以重写表格中大多数运算符，如
+[重写运算符](#overridable-operators) 所述。
 
 |--------------------------+------------------------------------------------|
-|Description               | Operator                                       |
+|描述               | 运算符                                       |
 |--------------------------|------------------------------------------------|
-| unary postfix            | <code><em>expr</em>++</code>    <code><em>expr</em>--</code>    `()`    `[]`    `.`    `?.` |
-| unary prefix             | <code>-<em>expr</em></code>    <code>!<em>expr</em></code>    <code>~<em>expr</em></code>    <code>++<em>expr</em></code>    <code>--<em>expr</em></code>      <code>await <em>expr</em></code>    |
-| multiplicative           | `*`    `/`    `%`    `~/`                      |
-| additive                 | `+`    `-`                                     |
-| shift                    | `<<`    `>>`    `>>>`                          |
-| bitwise AND              | `&`                                            |
-| bitwise XOR              | `^`                                            |
-| bitwise OR               | `|`                                            |
-| relational&nbsp;and&nbsp;type&nbsp;test | `>=`    `>`    `<=`    `<`    `as`    `is`    `is!` |
-| equality                 | `==`    `!=`                                   |
-| logical AND              | `&&`                                           |
-| logical OR               | `||`                                           |
-| if null                  | `??`                                           |
-| conditional              | <code><em>expr1</em> ? <em>expr2</em> : <em>expr3</em></code> |
-| cascade                  | `..`                                           |
-| assignment               | `=`    `*=`    `/=`    `+=`    `-=`    `&=`    `^=`    <em>etc.</em> |
+| 一元后缀            | <code><em>expr</em>++</code>    <code><em>expr</em>--</code>    `()`    `[]`    `.`    `?.` |
+| 一元前缀           | <code>-<em>expr</em></code>    <code>!<em>expr</em></code>    <code>~<em>expr</em></code>    <code>++<em>expr</em></code>    <code>--<em>expr</em></code>      <code>await <em>expr</em></code>    |
+| 乘除           | `*`    `/`    `%`    `~/`                      |
+| 加减                 | `+`    `-`                                     |
+| 移位                    | `<<`    `>>`    `>>>`                          |
+| 按位与             | `&`                                            |
+| 按位异或              | `^`                                            |
+| 按位或               | `|`                                            |
+| 关系&nbsp;和&nbsp;类型&nbsp;测试 | `>=`    `>`    `<=`    `<`    `as`    `is`    `is!` |
+| 相等判断                 | `==`    `!=`                                   |
+| 逻辑与              | `&&`                                           |
+| 逻辑或               | `||`                                           |
+| 空判断 (if null)                  | `??`                                           |
+| 条件表达式              | <code><em>expr1</em> ? <em>expr2</em> : <em>expr3</em></code> |
+| 级联                  | `..`                                           |
+| 赋值               | `=`    `*=`    `/=`    `+=`    `-=`    `&=`    `^=`    <em>etc.</em> |
 {:.table .table-striped}
 
 {{site.alert.warning}}
-  Operator precedence is an approximation of the behavior of a Dart parser.
-  For definitive answers, consult the grammar in the
-  [Dart language specification][].
+  运算符优先级是对 Dart 解析器行为的近似。
+  更准确的描述，请查阅
+  [Dart 语言规范][Dart language specification] 中的语法。
 {{site.alert.end}}
 
-When you use operators, you create expressions. Here are some examples
-of operator expressions:
+一旦您使用了运算符，就创建了表达式。
+下面是一些运算符表达式的示例：
 
 <?code-excerpt "misc/test/language_tour/operators_test.dart (expressions)" replace="/,//g"?>
 ```dart
@@ -1522,13 +1522,10 @@ c ? a : b
 a is T
 ```
 
-In the [operator table](#operators),
-each operator has higher precedence than the operators in the rows
-that follow it. For example, the multiplicative operator `%` has higher
-precedence than (and thus executes before) the equality operator `==`,
-which has higher precedence than the logical AND operator `&&`. That
-precedence means that the following two lines of code execute the same
-way:
+在 [运算符表](#operators) 中，
+运算符的优先级按先后排列，即第一行优先级最高，最后一行优先级最低。
+例如，`%` 运算符的优先级高于 `==` ，而 `==` 优先级高于 `&&` 。
+这就意味着下面两行代码以相同的方式执行：
 
 <?code-excerpt "misc/test/language_tour/operators_test.dart (precedence)"?>
 ```dart
@@ -1540,74 +1537,73 @@ if (n % i == 0 && d % i == 0) ...
 ```
 
 {{site.alert.warning}}
-  For operators that work on two operands, the leftmost operand determines which
-  version of the operator is used. For example, if you have a Vector object and
-  a Point object, `aVector + aPoint` uses the Vector version of +.
+  对于有两个操作数的运算符来讲，是左边的操作数决定了运算符的功能。
+  例如，有一个 Vector 对象和一个 Point 对象，
+  `aVector + aPoint` 使用的是 Vector 中定义的 + 。
 {{site.alert.end}}
 
 
-### Arithmetic operators
+### 算术运算符
 
-Dart supports the usual arithmetic operators, as shown in the following table.
+Dart 支持常用的算数运算符，如下表所示：
 
 |-----------------------------+-------------------------------------------|
-| Operator                    | Meaning                                   |
+| 运算符                    | 含义                                   |
 |-----------------------------+-------------------------------------------|
-| `+`                         | Add
-| `–`                         | Subtract
-| <code>-<em>expr</em></code> | Unary minus, also known as negation (reverse the sign of the expression)
-| `*`                         | Multiply
-| `/`                         | Divide
-| `~/`                        | Divide, returning an integer result
-| `%`                         | Get the remainder of an integer division (modulo)
+| `+`                         | 加
+| `–`                         | 减
+| <code>-<em>表达式</em></code> | 取反
+| `*`                         | 乘
+| `/`                         | 除
+| `~/`                        | 除，返回整数结果
+| `%`                         | 取余（模）
 {:.table .table-striped}
 
-Example:
+例子：
 
 <?code-excerpt "misc/test/language_tour/operators_test.dart (arithmetic)"?>
 ```dart
 assert(2 + 3 == 5);
 assert(2 - 3 == -1);
 assert(2 * 3 == 6);
-assert(5 / 2 == 2.5); // Result is a double
-assert(5 ~/ 2 == 2); // Result is an int
-assert(5 % 2 == 1); // Remainder
+assert(5 / 2 == 2.5); // 结果是 double
+assert(5 ~/ 2 == 2); // 结果是 int
+assert(5 % 2 == 1); // 取余
 
 assert('5/2 = ${5 ~/ 2} r ${5 % 2}' == '5/2 = 2 r 1');
 ```
 
-Dart also supports both prefix and postfix increment and decrement
-operators.
+Dart 还支持前缀和后缀自增自减运算符。
 
 |-----------------------------+-------------------------------------------|
-| Operator                    | Meaning                                   |
+| 运算符                    | 含义                                   |
 |-----------------------------+-------------------------------------------|
-| <code>++<em>var</em></code> | <code><em>var</em> = <em>var</em> + 1</code> (expression value is <code><em>var</em> + 1</code>)
-| <code><em>var</em>++</code> | <code><em>var</em> = <em>var</em> + 1</code> (expression value is <code><em>var</em></code>)
-| <code>--<em>var</em></code> | <code><em>var</em> = <em>var</em> – 1</code> (expression value is <code><em>var</em> – 1</code>)
-| <code><em>var</em>--</code> | <code><em>var</em> = <em>var</em> – 1</code> (expression value is <code><em>var</em></code>)
+| <code>++<em>var</em></code> | <code><em>var</em> = <em>var</em> + 1</code> (表达式值为 <code><em>var</em> + 1</code>)
+| <code><em>var</em>++</code> | <code><em>var</em> = <em>var</em> + 1</code> (表达式值为 <code><em>var</em></code>)
+| <code>--<em>var</em></code> | <code><em>var</em> = <em>var</em> – 1</code> (表达式值为 <code><em>var</em> – 1</code>)
+| <code><em>var</em>--</code> | <code><em>var</em> = <em>var</em> – 1</code> (表达式值为 <code><em>var</em></code>)
 {:.table .table-striped}
 
-Example:
+例子：
 
 <?code-excerpt "misc/test/language_tour/operators_test.dart (increment-decrement)"?>
 ```dart
 var a, b;
 
 a = 0;
-b = ++a; // Increment a before b gets its value.
+b = ++a; // 给 b 赋值前将 a 加 1 。
 assert(a == b); // 1 == 1
 
 a = 0;
-b = a++; // Increment a AFTER b gets its value.
+b = a++; // 给 b 赋值后将 a 加 1 。
 assert(a != b); // 1 != 0
 
 a = 0;
-b = --a; // Decrement a before b gets its value.
+b = --a; // 给 b 赋值前将 a 减 1 。
 assert(a == b); // -1 == -1
 
 a = 0;
-b = a--; // Decrement a AFTER b gets its value.
+b = a--; // 给 b 赋值后将 a 减 1 。
 assert(a != b); // -1 != 0
 ```
 
