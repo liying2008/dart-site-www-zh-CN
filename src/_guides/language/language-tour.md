@@ -1791,47 +1791,40 @@ if (!done && (col == 0 || col == 3)) {
 final value = 0x22;
 final bitmask = 0x0f;
 
-assert((value & bitmask) == 0x02); // AND
-assert((value & ~bitmask) == 0x20); // AND NOT
-assert((value | bitmask) == 0x2f); // OR
-assert((value ^ bitmask) == 0x2d); // XOR
-assert((value << 4) == 0x220); // Shift left
-assert((value >> 4) == 0x02); // Shift right
+assert((value & bitmask) == 0x02); // 按位与（AND）
+assert((value & ~bitmask) == 0x20); // 按位取反后按位与（AND NOT）
+assert((value | bitmask) == 0x2f); // 按位或（OR）
+assert((value ^ bitmask) == 0x2d); // 按位异或（XOR）
+assert((value << 4) == 0x220); // 左移（Shift left）
+assert((value >> 4) == 0x02); // 右移（Shift right）
 ```
 
 
-### Conditional expressions
+### 条件表达式
 
-Dart has two operators that let you concisely evaluate expressions
-that might otherwise require [if-else](#if-and-else) statements:
+Dart 有两个特殊的运算符可以用来替代 [if-else](#if-and-else) 语句：
 
-<code><em>condition</em> ? <em>expr1</em> : <em>expr2</em></code>
-: If _condition_ is true, evaluates _expr1_ (and returns its value);
-  otherwise, evaluates and returns the value of _expr2_.
+<code><em>条件</em> ? <em>表达式1</em> : <em>表达式2</em></code>
+: 如果 _条件_ 为 true，执行 _表达式1_ 并返回其结果，否则，执行 _表达式2_ 并返回其结果。
 
-<code><em>expr1</em> ?? <em>expr2</em></code>
-: If _expr1_ is non-null, returns its value;
-  otherwise, evaluates and returns the value of _expr2_.
+<code><em>表达式1</em> ?? <em>表达式2</em></code>
+: 如果 _表达式1_ 非 null，则返回其值；否则，执行并返回 _表达式2_ 的值。
 
-When you need to assign a value
-based on a boolean expression,
-consider using `?:`.
+当您需要根据布尔表达式的结果赋值时，可以考虑使用 `?:` 。
 
 <?code-excerpt "misc/lib/language_tour/operators.dart (if-then-else-operator)"?>
 ```dart
 var visibility = isPublic ? 'public' : 'private';
 ```
 
-If the boolean expression tests for null,
-consider using `??`.
+如果赋值是根据表达式是否为 null 则考虑使用 `??` 。
 
 <?code-excerpt "misc/test/language_tour/operators_test.dart (if-null)"?>
 ```dart
 String playerName(String name) => name ?? 'Guest';
 ```
 
-The previous example could have been written at least two other ways,
-but not as succinctly:
+上述示例还可以写成至少下面两种不同的形式，只是不够简洁：
 
 <?code-excerpt "misc/test/language_tour/operators_test.dart (if-null-alt)"?>
 ```dart
@@ -1849,15 +1842,13 @@ String playerName(String name) {
 ```
 
 <a id="cascade"></a>
-### Cascade notation (..)
+### 级联符号 (..)
 
-Cascades (`..`) allow you to make a sequence of operations
-on the same object. In addition to function calls,
-you can also access fields on that same object.
-This often saves you the step of creating a temporary variable and
-allows you to write more fluid code.
+级联 (`..`) 允许您对同一对象执行一系列操作。
+除了函数调用，您还可以访问同一对象上的字段。
+这通常可以节省创建临时变量的步骤，并有助于您编写更多流畅的代码。
 
-Consider the following code:
+例如下面的代码：
 
 <?code-excerpt "misc/test/language_tour/browser_test.dart (cascade-operator)"?>
 ```dart
@@ -1867,12 +1858,11 @@ querySelector('#confirm') // Get an object.
   ..onClick.listen((e) => window.alert('Confirmed!'));
 ```
 
-The first method call, `querySelector()`, returns a selector object.
-The code that follows the cascade notation operates
-on this selector object, ignoring any subsequent values that
-might be returned.
+第一个方法 `querySelector()` 返回了一个 selector 对象。
+后面的级联符号都是调用这个 selector 对象的成员
+并忽略每个操作的返回值。
 
-The previous example is equivalent to:
+上面的代码等效于：
 
 <?code-excerpt "misc/test/language_tour/browser_test.dart (cascade-operator-example-expanded)"?>
 ```dart
@@ -1882,7 +1872,7 @@ button.classes.add('important');
 button.onClick.listen((e) => window.alert('Confirmed!'));
 ```
 
-You can also nest your cascades. For example:
+您也可以嵌套级联，例如：
 
 <?code-excerpt "misc/lib/language_tour/operators.dart (nested-cascades)"?>
 ```dart
@@ -1896,8 +1886,8 @@ final addressBook = (AddressBookBuilder()
     .build();
 ```
 
-Be careful to construct your cascade on a function that returns
-an actual object. For example, the following code fails:
+在返回对象的函数中要谨慎使用级联。
+例如，下面的代码是错误的：
 
 <?code-excerpt "misc/lib/language_tour/operators.dart (cannot-cascade-on-void)" plaster="none"?>
 ```dart
@@ -1906,29 +1896,29 @@ sb.write('foo')
   ..write('bar'); // Error: method 'write' isn't defined for 'void'.
 ```
 
-The `sb.write()` call returns void,
-and you can't construct a cascade on `void`.
+上述代码中 `sb.write()` 返回 void ，
+您无法在 `void` 上构造一个级联。
 
 {{site.alert.note}}
-  Strictly speaking, the "double dot" notation for cascades is not an operator.
-  It's just part of the Dart syntax.
+  严格来说，`..` 级联符号并不是一个运算符。
+  它只是 Dart 语法的一部分。
 {{site.alert.end}}
 
-### Other operators
+### 其他运算符
 
-You've seen most of the remaining operators in other examples:
+您已经在其他示例中看到过下面大多数运算符了：
 
 |----------+-------------------------------------------|
-| Operator | Name                 |          Meaning   |
+| 运算符 | 名称                 |          含义   |
 |-----------+------------------------------------------|
-| `()`     | Function application | Represents a function call
-| `[]`     | List access          | Refers to the value at the specified index in the list
-| `.`      | Member access        | Refers to a property of an expression; example: `foo.bar` selects property `bar` from expression `foo`
-| `?.`     | Conditional member access | Like `.`, but the leftmost operand can be null; example: `foo?.bar` selects property `bar` from expression `foo` unless `foo` is null (in which case the value of `foo?.bar` is null)
+| `()`     | 函数应用 | 表示函数调用
+| `[]`     | List 访问         | 引用列表中指定索引处的值
+| `.`      | 成员访问       | 引用表达式的属性；示例：`foo.bar` 从表达式 `foo` 中选择属性 `bar`
+| `?.`     | 有条件的成员访问 | 类似于 `.` ，但是最左边的操作数可以为 null ；示例：`foo?.bar` 表示从表达式 `foo` 中选择属性 `bar`，除非 `foo` 为 null（在这种情况下 `foo?.bar` 的值为 null）
 {:.table .table-striped}
 
-For more information about the `.`, `?.`, and `..` operators, see
-[Classes](#classes).
+更多有关 `.`、 `?.` 和 `..` 运算符的信息，请参考
+[类](#classes)。
 
 
 ## Control flow statements
