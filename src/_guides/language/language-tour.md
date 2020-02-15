@@ -293,7 +293,7 @@ assert(lineCount == null);
   更多信息，请参考 [断言](#assert)。
 {{site.alert.end}}
 
-### Final 和 const
+### Final 和 Const
 
 如果您不打算更改一个变量，可以使用 `final` 或 `const` 来修饰它，
 这两个关键字可以代替 `var` 或者加在一个具体的类型前。
@@ -1921,25 +1921,25 @@ sb.write('foo')
 [类](#classes)。
 
 
-## Control flow statements
+## 流程控制语句
 
-You can control the flow of your Dart code using any of the following:
+你可以使用下面的语句来控制 Dart 代码的执行流程：
 
--   `if` and `else`
--   `for` loops
--   `while` and `do`-`while` loops
--   `break` and `continue`
--   `switch` and `case`
+-   `if` 和 `else`
+-   `for` 循环
+-   `while` 和 `do`-`while` 循环
+-   `break` 和 `continue`
+-   `switch` 和 `case`
 -   `assert`
 
-You can also affect the control flow using `try-catch` and `throw`, as
-explained in [Exceptions](#exceptions).
+使用 `try-catch` 和 `throw` 也能影响控制流，
+可以查看 [异常](#exceptions) 获取更多解释。
 
 
-### If and else
+### If 和 Else
 
-Dart supports `if` statements with optional `else` statements, as the
-next sample shows. Also see [conditional expressions](#conditional-expressions).
+Dart 支持 `if-else` 语句，其中 `else` 语句是可选的，例如下面的例子。
+您也可以参考 [条件表达式](#conditional-expressions) 。
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (if-else)"?>
 ```dart
@@ -1952,13 +1952,13 @@ if (isRaining()) {
 }
 ```
 
-Unlike JavaScript, conditions must use boolean values, nothing else. See
-[Booleans](#booleans) for more information.
+与 JavaScript 不同的是，Dart 中的条件必须是一个布尔值，不能是其它类型。
+详情请查阅 [Booleans](#booleans)。
 
 
-### For loops
+### For 循环
 
-You can iterate with the standard `for` loop. For example:
+您可以使用标准的 `for` 循环进行迭代。例如：
 
 <?code-excerpt "misc/test/language_tour/control_flow_test.dart (for)"?>
 ```dart
@@ -1968,8 +1968,8 @@ for (var i = 0; i < 5; i++) {
 }
 ```
 
-Closures inside of Dart’s `for` loops capture the _value_ of the index,
-avoiding a common pitfall found in JavaScript. For example, consider:
+在 Dart 语言中，`for` 循环中的闭包会自动捕获循环的 _索引值_ 
+以避免 JavaScript 中一些常见的陷阱。例如有如下代码：
 
 <?code-excerpt "misc/test/language_tour/control_flow_test.dart (for-and-closures)"?>
 ```dart
@@ -1980,20 +1980,20 @@ for (var i = 0; i < 2; i++) {
 callbacks.forEach((c) => c());
 ```
 
-The output is `0` and then `1`, as expected. In contrast, the example
-would print `2` and then `2` in JavaScript.
+正如所预期的一样，上述代码将会输出 `0` 和 `1` 。
+但是在 JavaScript 中，同样的代码则会输出 `2` 和 `2` 。
 
-If the object that you are iterating over is an Iterable, you can use the
-[forEach()][] method. Using `forEach()` is a good option if you don’t need to
-know the current iteration counter:
+如果要遍历的对象是一个 Iterable 对象，
+那么可以使用 [forEach()][] 方法。
+如果您不需要知道当前迭代计数器，那么使用 `forEach()` 是一个不错的选择：
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (forEach)"?>
 ```dart
 candidates.forEach((candidate) => candidate.interview());
 ```
 
-Iterable classes such as List and Set also support the `for-in` form of
-[iteration](/guides/libraries/library-tour#iteration):
+像 List 和 Set 等可迭代的类也支持 `for-in` 形式的
+[迭代](/guides/libraries/library-tour#iteration)：
 
 <?code-excerpt "misc/test/language_tour/control_flow_test.dart (collection)"?>
 ```dart
