@@ -58,7 +58,7 @@ var image = {
 };
 {% endprettify %}
 
-[Read more](/guides/language/language-tour#variables) about variables in Dart, including default values, the `final` and `const` keywords, and static types.
+[Read more](/guides/language/language-tour#变量) about variables in Dart, including default values, the `final` and `const` keywords, and static types.
 
 
 ## Control flow statements
@@ -86,7 +86,7 @@ while (year < 2016) {
 }
 {% endprettify %}
 
-[Read more](/guides/language/language-tour#control-flow-statements) about control flow statements in Dart,
+[Read more](/guides/language/language-tour#流程控制语句) about control flow statements in Dart,
 including `break` and `continue`, `switch` and `case`, and `assert`.
 
 
@@ -118,7 +118,7 @@ Besides showing an anonymous function (the argument to `where()`),
 this code shows that you can use a function as an argument:
 the top-level `print()` function is an argument to `forEach()`.
 
-[Read more](/guides/language/language-tour#functions) about functions in Dart,
+[Read more](/guides/language/language-tour#函数) about functions in Dart,
 including optional parameters, default parameter values, and lexical scope.
 
 

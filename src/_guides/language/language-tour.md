@@ -49,7 +49,7 @@ main() {
     详细内容请参考 [Comments](#comments)。
 
 `int`
-:   类型。一些其他的 [内置类型](#built-in-types)
+:   类型。一些其他的 [内置类型](#内置类型)
     如 `String`, `List`, and `bool`。
 
 `42`
@@ -68,7 +68,7 @@ main() {
 `main()`
 :   一个特殊的、 *必需的*、 顶层函数。它是应用程序执行的入口。
     更多信息，请参考
-    [The main() function](#the-main-function)。
+    [The main() function](#main-函数)。
 
 `var`
 :   一种用于声明变量且无需指定变量类型的方法。
@@ -112,9 +112,9 @@ main() {
 -   *标识符* 可以以字母或下划线 (\_) 开头，后跟字母、下划线和数字的任意组合。
 
 -   Dart 既有 *表达式* （具有运行时值） 也有 *语句* （没有运行时值）。
-    例如，一个 [条件表达式](#conditional-expressions)
+    例如，一个 [条件表达式](#条件表达式)
     `condition ? expr1 : expr2` 具有值 `expr1` 或 `expr2`。
-    相比之下 [if-else 语句](#if-and-else) 没有值。
+    相比之下 [if-else 语句](#if-和-else) 没有值。
     一条语句通常包含一个或多个表达式，
     但是一个表达式不能只包含一条语句。
 
@@ -149,7 +149,7 @@ main() {
 {:.table .table-striped .nowrap}
 
 [abstract]: #abstract-classes
-[as]: #type-test-operators
+[as]: #类型判断运算符
 [assert]: #assert
 [async]: #asynchrony-support
 [await]: #asynchrony-support
@@ -157,7 +157,7 @@ main() {
 [case]: #switch-and-case
 [catch]: #catch
 [class]: #instance-variables
-[const]: #final-and-const
+[const]: #final-和-const
 {% comment %}
   [TODO: Make sure that points to a place that talks about const constructors,
   as well as const literals and variables.]
@@ -167,35 +167,35 @@ main() {
 [default]: #switch-and-case
 [deferred]: #lazily-loading-a-library
 [do]: #while-and-do-while
-[dynamic]: #important-concepts
-[else]: #if-and-else
+[dynamic]: #重要概念
+[else]: #if-和-else
 [enum]: #enumerated-types
 [export]: /guides/libraries/create-library-packages
 [extends]: #extending-a-class
 [external]: https://stackoverflow.com/questions/24929659/what-does-external-mean-in-dart
 [factory]: #factory-constructors
 [false]: #booleans
-[final]: #final-and-const
+[final]: #final-和-const
 [finally]: #finally
-[for]: #for-loops
-[Function]: #functions
+[for]: #for-循环
+[Function]: #函数
 [get]: #getters-and-setters
 [hide]: #importing-only-part-of-a-library
-[if]: #if-and-else
+[if]: #if-和-else
 [implements]: #implicit-interfaces
 [import]: #using-libraries
-[in]: #for-loops
+[in]: #for-循环
 [interface]: https://stackoverflow.com/questions/28595501/was-the-interface-keyword-removed-from-dart
-[is]: #type-test-operators
+[is]: #类型判断运算符
 [library]: #libraries-and-visibility
 [mixin]: #adding-features-to-a-class-mixins
 [new]: #using-constructors
-[null]: #default-value
+[null]: #默认值
 [on]: #catch
 [operator]: #overridable-operators
 [part]: /guides/libraries/create-library-packages#organizing-a-library-package
 [rethrow]: #catch
-[return]: #functions
+[return]: #函数
 [set]: #getters-and-setters
 [show]: #importing-only-part-of-a-library
 [static]: #class-variables-and-methods
@@ -207,7 +207,7 @@ main() {
 [true]: #booleans
 [try]: #catch
 [typedef]: #typedefs
-[var]: #variables
+[var]: #变量
 [void]: https://medium.com/dartlang/dart-2-legacy-of-the-void-e7afb5f44df0
 {% comment %}
   TODO: Add coverage of void to the language tour.
@@ -365,7 +365,7 @@ baz = [42]; // 错误: 常量不能被赋值
 ```
 
 从 Dart 2.5 开始，您可以在常量中使用
-[类型检查和强制类型转换](#type-test-operators) (`is` and `as`)，
+[类型检查和强制类型转换](#类型判断运算符) (`is` and `as`)，
 [collection if](#collection-operators)
 以及 [展开操作符](#spread-operator) (`...` and `...?`)：
 
@@ -1067,8 +1067,8 @@ bool isNoble(int atomicNumber) => _nobleGases[atomicNumber] != null;
 
 {{site.alert.note}}
   箭头 (=\>) 和分号 (;) 之间只能出现一个 *表达式*，而不是一条 *语句*。
-  例如，您不能在其中放置 [if 语句](#if-and-else)，
-  但是可以使用 [条件表达式](#conditional-expressions)。
+  例如，您不能在其中放置 [if 语句](#if-和-else)，
+  但是可以使用 [条件表达式](#条件表达式)。
 {{site.alert.end}}
 
 函数可以有两种类型的参数： _必要参数_ and _可选参数_。
@@ -1255,7 +1255,7 @@ void main() {
 ```
 
 {{site.alert.note}}
-  上面代码中的 `..` 语法称为 [级联调用](#cascade-notation-) 。
+  上面代码中的 `..` 语法称为 [级联调用](#级联符号-) 。
   使用级联访问可以在一个对象上执行多个操作。
 {{site.alert.end}}
 
@@ -1522,7 +1522,7 @@ c ? a : b
 a is T
 ```
 
-在 [运算符表](#operators) 中，
+在 [运算符表](#运算符) 中，
 运算符的优先级按先后排列，即第一行优先级最高，最后一行优先级最低。
 例如，`%` 运算符的优先级高于 `==` ，而 `==` 优先级高于 `&&` 。
 这就意味着下面两行代码以相同的方式执行：
@@ -1802,7 +1802,7 @@ assert((value >> 4) == 0x02); // 右移（Shift right）
 
 ### 条件表达式
 
-Dart 有两个特殊的运算符可以用来替代 [if-else](#if-and-else) 语句：
+Dart 有两个特殊的运算符可以用来替代 [if-else](#if-和-else) 语句：
 
 <code><em>条件</em> ? <em>表达式1</em> : <em>表达式2</em></code>
 : 如果 _条件_ 为 true，执行 _表达式1_ 并返回其结果，否则，执行 _表达式2_ 并返回其结果。
@@ -1939,7 +1939,7 @@ sb.write('foo')
 ### If 和 Else
 
 Dart 支持 `if-else` 语句，其中 `else` 语句是可选的，例如下面的例子。
-您也可以参考 [条件表达式](#conditional-expressions) 。
+您也可以参考 [条件表达式](#条件表达式) 。
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (if-else)"?>
 ```dart

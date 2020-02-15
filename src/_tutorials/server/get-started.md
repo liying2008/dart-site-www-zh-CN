@@ -187,7 +187,7 @@ Check out these resources:
 
 If you get stuck, find help at [Community and support.](/community)
 
-[Arithmetic operators]: /guides/language/language-tour#arithmetic-operators
+[Arithmetic operators]: /guides/language/language-tour#算术运算符
 [stagehand]: {{site.pub-pkg}}/stagehand
 [DartPad documentation]: /tools/dartpad
 [Dart language tour]: /guides/language/language-tour
