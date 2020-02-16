@@ -156,7 +156,7 @@ main() {
 [break]: #break-和-continue
 [case]: #switch-和-case
 [catch]: #捕获异常
-[class]: #instance-variables
+[class]: #实例变量
 [const]: #final-和-const
 {% comment %}
   [TODO: Make sure that points to a place that talks about const constructors,
@@ -202,7 +202,7 @@ main() {
 [super]: #extending-a-class
 [switch]: #switch-和-case
 [sync]: #generators
-[this]: #constructors
+[this]: #构造器
 [throw]: #抛出异常
 [true]: #booleans
 [try]: #捕获异常
@@ -302,7 +302,7 @@ assert(lineCount == null);
 
 {{site.alert.note}}
   实例变量可以是 `final` 的但不能是 `const` 的。
-  final 实例变量必须在构造函数主体开始之前初始化，
+  final 实例变量必须在构造器主体开始之前初始化，
   比如在声明实例变量时初始化，或者作为构造器参数，或者将其置于构造器的 
   [初始化列表](#initializer-list) 中。
 {{site.alert.end}}
@@ -335,8 +335,8 @@ const double atm = 1.01325 * bar; // Standard atmosphere
 
 `const` 关键字不止可以用来声明常量，
 还可以用来创建常量 _值_ 。
-你也可以将构造函数声明为 const 的，
-这种类型的构造函数 _创建_ 的对象是不可改变的。
+你也可以将构造器声明为 const 的，
+这种类型的构造器 _创建_ 的对象是不可改变的。
 
 <?code-excerpt "misc/lib/language_tour/variables.dart (const-vs-final)"?>
 ```dart
@@ -1076,7 +1076,7 @@ bool isNoble(int atomicNumber) => _nobleGases[atomicNumber] != null;
 可选参数可以是 _命名参数_ 或 _位置参数_。
 
 {{site.alert.note}}
-  一些API（尤其是 [Flutter][] widget 构造函数）仅使用命名参数，
+  一些API（尤其是 [Flutter][] widget 构造器）仅使用命名参数，
   即使对于强制性参数也是如此。有关详细信息，请参见下一部分。
 {{site.alert.end}}
 
@@ -2485,39 +2485,39 @@ assert(!identical(a, b)); // 它们不是同一个实例
 {{site.alert.end}}
 
 
-### Getting an object's type
+### 获取对象的类型
 
-To get an object's type at runtime,
-you can use Object's `runtimeType` property,
-which returns a [Type][] object.
+要在运行时获取对象的类型，
+可以使用对象的 `runtimeType` 属性，
+该属性返回一个 [Type][] 对象。
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (runtimeType)"?>
 ```dart
 print('The type of a is ${a.runtimeType}');
 ```
 
-Up to here, you've seen how to _use_ classes.
-The rest of this section shows how to _implement_ classes.
+至此，您已经了解了如何 _使用_ 类。
+本节的剩余部分将展示如何 _实现_ 类。
 
 
-### Instance variables
+### 实例变量
 
-Here’s how you declare instance variables:
+声明实例变量的方法如下：
 
 <?code-excerpt "misc/lib/language_tour/classes/point_with_main.dart (class)"?>
 ```dart
 class Point {
-  num x; // Declare instance variable x, initially null.
-  num y; // Declare y, initially null.
-  num z = 0; // Declare z, initially 0.
+  num x; // 声明实例变量 x，初始值为 null
+  num y; // 声明实例变量 y，初始值为 null
+  num z = 0; // 声明实例变量 z，初始值为 0
 }
 ```
 
-All uninitialized instance variables have the value `null`.
+所有未初始化的实例变量的值都为 `null` 。
 
-All instance variables generate an implicit *getter* method. Non-final
-instance variables also generate an implicit *setter* method. For details,
-see [Getters and setters](#getters-and-setters).
+所有实例变量都会生成一个隐式的 *getter* 方法。
+非 final 实例变量还会生成一个隐式的 *setter* 方法。
+有关详细信息，请参见 [Getters 和 Setters](#getters-and-setters)。
 
 <?code-excerpt "misc/lib/language_tour/classes/point_with_main.dart (class+main)" replace="/(num .*?;).*/$1/g" plaster="none"?>
 ```dart
@@ -2528,25 +2528,22 @@ class Point {
 
 void main() {
   var point = Point();
-  point.x = 4; // Use the setter method for x.
-  assert(point.x == 4); // Use the getter method for x.
-  assert(point.y == null); // Values default to null.
+  point.x = 4; // 使用 x 的 setter 方法
+  assert(point.x == 4); // 使用 x 的 getter 方法
+  assert(point.y == null); // 默认值为 null
 }
 ```
 
-If you initialize an instance variable where it is declared (instead of
-in a constructor or method), the value is set when the instance is
-created, which is before the constructor and its initializer list
-execute.
+如果您在声明一个实例变量的时候就将其初始化（而不是在构造器或其它方法中），
+那么该实例变量的值就会在对象实例创建的时候被设置，
+该过程会在构造器以及它的初始化器列表执行前执行。
 
 
-### Constructors
+### 构造器
 
-Declare a constructor by creating a function with the same name as its
-class (plus, optionally, an additional identifier as described in
-[Named constructors](#named-constructors)).
-The most common form of constructor, the generative constructor, creates
-a new instance of a class:
+通过创建与其类同名的函数来声明构造器
+（对于 [命名构造器](#named-constructors) 还可以添加额外的标识符）。
+最常见的构造器形式是生成式构造器，它创建一个类的新实例：
 
 <?code-excerpt "misc/lib/language_tour/classes/point_alt.dart (constructor-long-way)" plaster="none"?>
 ```dart
@@ -2554,30 +2551,29 @@ class Point {
   num x, y;
 
   Point(num x, num y) {
-    // There's a better way to do this, stay tuned.
+    // 还会有更好的方式来实现此逻辑，敬请期待。
     this.x = x;
     this.y = y;
   }
 }
 ```
 
-The `this` keyword refers to the current instance.
+使用 `this` 关键字引用当前实例。
 
 {{site.alert.note}}
-  Use `this` only when there is a name conflict. Otherwise, Dart style
-  omits the `this`.
+  当且仅当命名冲突时使用 `this` 关键字才有意义。否则 Dart 会忽略 `this` 关键字。
 {{site.alert.end}}
 
-The pattern of assigning a constructor argument to an instance variable
-is so common, Dart has syntactic sugar to make it easy:
+将构造器参数分配给实例变量是一个非常常见的操作，
+所以 Dart 提供了一个语法糖来简化它：
 
 <?code-excerpt "misc/lib/language_tour/classes/point.dart (constructor-initializer)" plaster="none"?>
 ```dart
 class Point {
   num x, y;
 
-  // Syntactic sugar for setting x and y
-  // before the constructor body runs.
+  // 设置 x 和 y 的语法糖
+  // 在构造器函数体执行前执行
   Point(this.x, this.y);
 }
 ```
