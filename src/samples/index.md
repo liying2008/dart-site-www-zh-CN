@@ -393,7 +393,7 @@ try {
 Note that the code above is asynchronous;
 `try` works for both synchronous code and code in an `async` function.
 
-[Read more](/guides/language/language-tour#exceptions) about exceptions, including stack traces, `rethrow`, and the difference between
+[Read more](/guides/language/language-tour#异常) about exceptions, including stack traces, `rethrow`, and the difference between
 Error and Exception.
 
 

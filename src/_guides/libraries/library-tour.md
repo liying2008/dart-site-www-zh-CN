@@ -985,7 +985,7 @@ class FooException implements Exception {
 ```
 
 For more information, see
-[Exceptions](/guides/language/language-tour#exceptions)
+[Exceptions](/guides/language/language-tour#异常)
 (in the language tour) and the [Exception API reference.][Exception]
 
 

@@ -121,7 +121,7 @@ main() {
 -   Dart 工具可以报告两种类型的问题： _警告_ 和 _错误_ 。
     警告仅表示您的代码可能无法工作，但并不会阻止程序运行。
     错误分为 编译期错误 和 运行期错误。编译期错误会直接导致程序无法执行，
-    运行期错误会在代码执行时抛出[异常](#exceptions)。
+    运行期错误会在代码执行时抛出[异常](#异常)。
 
 
 ## 关键字
@@ -155,7 +155,7 @@ main() {
 [await]: #asynchrony-support
 [break]: #break-和-continue
 [case]: #switch-和-case
-[catch]: #catch
+[catch]: #捕获异常
 [class]: #instance-variables
 [const]: #final-和-const
 {% comment %}
@@ -191,10 +191,10 @@ main() {
 [mixin]: #adding-features-to-a-class-mixins
 [new]: #using-constructors
 [null]: #默认值
-[on]: #catch
+[on]: #捕获异常
 [operator]: #overridable-operators
 [part]: /guides/libraries/create-library-packages#organizing-a-library-package
-[rethrow]: #catch
+[rethrow]: #捕获异常
 [return]: #函数
 [set]: #getters-and-setters
 [show]: #importing-only-part-of-a-library
@@ -203,9 +203,9 @@ main() {
 [switch]: #switch-和-case
 [sync]: #generators
 [this]: #constructors
-[throw]: #throw
+[throw]: #抛出异常
 [true]: #booleans
-[try]: #catch
+[try]: #捕获异常
 [typedef]: #typedefs
 [var]: #变量
 [void]: https://medium.com/dartlang/dart-2-legacy-of-the-void-e7afb5f44df0
@@ -1933,7 +1933,7 @@ sb.write('foo')
 -   `assert`
 
 使用 `try-catch` 和 `throw` 也能影响控制流，
-可以查看 [异常](#exceptions) 获取更多解释。
+可以查看 [异常](#异常) 获取更多解释。
 
 
 ### If 和 Else
@@ -2200,32 +2200,31 @@ assert(urlString.startsWith('https'),
 传入 `assert` 中的条件表达式也不会执行。
 
 
-## Exceptions
+## 异常
 
-Your Dart code can throw and catch exceptions. Exceptions are errors
-indicating that something unexpected happened. If the exception isn’t
-caught, the [isolate](#isolates) that raised the exception is suspended, and
-typically the isolate and its program are terminated.
+Dart 代码可以抛出和捕获异常。
+异常是表示发生了意外的错误。
+如果异常没有被捕获，抛出异常的 [隔离区](#isolates) 将被挂起，
+隔离区及其程序将被终止。
 
-In contrast to Java, all of Dart’s exceptions are unchecked exceptions.
-Methods do not declare which exceptions they might throw, and you are
-not required to catch any exceptions.
+与 Java 不同的是，Dart 的所有异常都是非必检异常。
+方法不会声明它可能抛出哪些异常，
+您也不需要捕获所有异常。
 
-Dart provides [Exception][] and [Error][]
-types, as well as numerous predefined subtypes. You can, of course,
-define your own exceptions. However, Dart programs can throw any
-non-null object—not just Exception and Error objects—as an exception.
+Dart 提供了 [Exception][] 和 [Error][] 类型，以及许多预定义的子类型。
+当然，您也可以定义自己的异常。
+但是，Dart 程序可以将任何非 null 对象（不仅仅是 Exception 和 Error 对象）作为异常抛出。
 
-### Throw
+### 抛出异常
 
-Here’s an example of throwing, or *raising*, an exception:
+下面是一个抛出或者 *引发* 异常的例子：
 
 <?code-excerpt "misc/lib/language_tour/exceptions.dart (throw-FormatException)"?>
 ```dart
 throw FormatException('Expected at least 1 section');
 ```
 
-You can also throw arbitrary objects:
+您也可以抛出任意对象：
 
 <?code-excerpt "misc/lib/language_tour/exceptions.dart (out-of-llamas)"?>
 ```dart
@@ -2233,12 +2232,13 @@ throw 'Out of llamas!';
 ```
 
 {{site.alert.note}}
-  Production-quality code usually throws types that implement [Error][] or
-  [Exception][].
+  达到生产质量要求的代码（优秀的代码）通常会抛出 [Error][] 或
+  [Exception][] 类型的异常。
 {{site.alert.end}}
 
-Because throwing an exception is an expression, you can throw exceptions
-in =\> statements, as well as anywhere else that allows expressions:
+因为抛出异常是一个表达式，
+所以可以在 =\> 语句中抛出异常，
+也可以在其他使用表达式的地方抛出异常：
 
 <?code-excerpt "misc/lib/language_tour/exceptions.dart (throw-is-an-expression)"?>
 ```dart
@@ -2246,11 +2246,10 @@ void distanceTo(Point other) => throw UnimplementedError();
 ```
 
 
-### Catch
+### 捕获异常
 
-Catching, or capturing, an exception stops the exception from
-propagating (unless you rethrow the exception).
-Catching an exception gives you a chance to handle it:
+捕获异常可以避免异常继续传递（除非重新抛出异常）。
+捕获异常使您有机会处理它：
 
 <?code-excerpt "misc/lib/language_tour/exceptions.dart (try)"?>
 ```dart
@@ -2261,34 +2260,34 @@ try {
 }
 ```
 
-To handle code that can throw more than one type of exception, you can
-specify multiple catch clauses. The first catch clause that matches the
-thrown object’s type handles the exception. If the catch clause does not
-specify a type, that clause can handle any type of thrown object:
+要处理可以抛出多种异常类型的代码，
+可以指定多个 catch 子句。
+第一个匹配上抛出的异常的类型的 catch 子句负责处理这个类型的异常。
+如果 catch 子句没有指定异常类型，那么它可以处理任何类型的异常：
 
 <?code-excerpt "misc/lib/language_tour/exceptions.dart (try-catch)"?>
 ```dart
 try {
   breedMoreLlamas();
 } on OutOfLlamasException {
-  // A specific exception
+  // 捕获指定类型的异常
   buyMoreLlamas();
 } on Exception catch (e) {
-  // Anything else that is an exception
+  // 捕获 Exception 其他类型的异常
   print('Unknown exception: $e');
 } catch (e) {
-  // No specified type, handles all
+  // 不指定类型，任何类型的异常都可以捕获
   print('Something really unknown: $e');
 }
 ```
 
-As the preceding code shows, you can use either `on` or `catch` or both.
-Use `on` when you need to specify the exception type. Use `catch` when
-your exception handler needs the exception object.
+正如上述代码所示，您可以使用 `on` 或 `catch` 来捕获异常，
+使用 `on` 来指定异常类型，使用 `catch` 来获取异常对象，
+两者可同时使用。
 
-You can specify one or two parameters to `catch()`.
-The first is the exception that was thrown,
-and the second is the stack trace (a [StackTrace][] object).
+您可以为 `catch()` 方法指定一个或两个参数。
+第一个参数为抛出的异常对象，
+第二个参数为栈跟踪信息（一个 [StackTrace][] 对象）。
 
 <?code-excerpt "misc/lib/language_tour/exceptions.dart (try-catch-2)" replace="/\(e.*?\)/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
@@ -2302,19 +2301,18 @@ try {
 }
 {% endprettify %}
 
-To partially handle an exception,
-while allowing it to propagate,
-use the `rethrow` keyword.
+如果想将捕获的异常再次抛出，
+请使用 `rethrow` 关键字。
 
 <?code-excerpt "misc/test/language_tour/exceptions_test.dart (rethrow)" replace="/rethrow;/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
 void misbehave() {
   try {
     dynamic foo = true;
-    print(foo++); // Runtime error
+    print(foo++); // 运行时错误
   } catch (e) {
     print('misbehave() partially handled ${e.runtimeType}.');
-    [!rethrow;!] // Allow callers to see the exception.
+    [!rethrow;!] // 允许调用者看到异常
   }
 }
 
@@ -2330,9 +2328,8 @@ void main() {
 
 ### Finally
 
-To ensure that some code runs whether or not an exception is thrown, use
-a `finally` clause. If no `catch` clause matches the exception, the
-exception is propagated after the `finally` clause runs:
+为了确保不管是否有异常抛出都会执行某些代码，可以将这些代码放在 `finally` 子句中。
+如果没有 `catch` 子句捕获异常，异常会在执行完 `finally` 子句后抛出：
 
 <?code-excerpt "misc/lib/language_tour/exceptions.dart (finally)"?>
 ```dart
@@ -2344,7 +2341,7 @@ try {
 }
 ```
 
-The `finally` clause runs after any matching `catch` clauses:
+如果有 `catch` 子句捕获了异常，`finally` 子句将在捕获异常的 `catch` 子句之后执行：
 
 <?code-excerpt "misc/lib/language_tour/exceptions.dart (try-catch-finally)"?>
 ```dart
@@ -2357,9 +2354,9 @@ try {
 }
 ```
 
-Learn more by reading the
-[Exceptions](/guides/libraries/library-tour#exceptions)
-section of the library tour.
+阅读库概览中的
+[异常](/guides/libraries/library-tour#exceptions)
+章节获取更多信息。
 
 ## Classes
 

@@ -508,7 +508,7 @@ try {
 }
 ```
 
-Within an `async` function, you can write [try-catch clauses](/guides/language/language-tour#catch)
+Within an `async` function, you can write [try-catch clauses](/guides/language/language-tour#捕获异常)
 the same way you would in synchronous code.
 
 ### Example: async and await with try-catch
