@@ -171,7 +171,7 @@ environment:
 [dart2_fix]: https://github.com/dart-lang/dart2_fix
 [angular-examples repos]: https://github.com/angular-examples
 [apiref]: {{site.dart_api}}/dev
-[assert statements]: /guides/language/language-tour#assert
+[assert statements]: /guides/language/language-tour#断言
 [build_runner web]: /tools/build_runner
 [compile-time errors]: /guides/language/sound-problems#static-errors-and-warnings
 [creating library packages]: /guides/libraries/create-library-packages

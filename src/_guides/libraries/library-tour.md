@@ -1635,7 +1635,7 @@ To learn more about the Dart language, see the
 
 [language tour]: /guides/language/language-tour
 [docs.flutter]: {{site.flutter_api}}
-[Assert]: /guides/language/language-tour#assert
+[Assert]: /guides/language/language-tour#断言
 [ArgumentError]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/ArgumentError-class.html
 [Comparable]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/Comparable-class.html
 [dart:core]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/dart-core-library.html

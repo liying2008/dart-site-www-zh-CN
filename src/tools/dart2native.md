@@ -137,6 +137,6 @@ The `dart2native` command replaces `dart2aot` and
 has a superset of the `dart2aot` functionality.
 
 
-[assert statements]: /guides/language/language-tour#assert
+[assert statements]: /guides/language/language-tour#断言
 [`dartaotruntime` command]: /tools/dartaotruntime
 [static analysis]: /guides/language/analysis-options

@@ -150,11 +150,11 @@ main() {
 
 [abstract]: #abstract-classes
 [as]: #类型判断运算符
-[assert]: #assert
+[assert]: #断言
 [async]: #asynchrony-support
 [await]: #asynchrony-support
-[break]: #break-and-continue
-[case]: #switch-and-case
+[break]: #break-和-continue
+[case]: #switch-和-case
 [catch]: #catch
 [class]: #instance-variables
 [const]: #final-和-const
@@ -162,11 +162,11 @@ main() {
   [TODO: Make sure that points to a place that talks about const constructors,
   as well as const literals and variables.]
 {% endcomment %}
-[continue]: #break-and-continue
+[continue]: #break-和-continue
 [covariant]: /guides/language/sound-problems#the-covariant-keyword
-[default]: #switch-and-case
+[default]: #switch-和-case
 [deferred]: #lazily-loading-a-library
-[do]: #while-and-do-while
+[do]: #while-和-do-while
 [dynamic]: #重要概念
 [else]: #if-和-else
 [enum]: #enumerated-types
@@ -200,7 +200,7 @@ main() {
 [show]: #importing-only-part-of-a-library
 [static]: #class-variables-and-methods
 [super]: #extending-a-class
-[switch]: #switch-and-case
+[switch]: #switch-和-case
 [sync]: #generators
 [this]: #constructors
 [throw]: #throw
@@ -213,7 +213,7 @@ main() {
   TODO: Add coverage of void to the language tour.
 {% endcomment %}
 [with]: #adding-features-to-a-class-mixins
-[while]: #while-and-do-while
+[while]: #while-和-do-while
 [yield]: #generators
 
 应避免将这些关键字用作标识符。
@@ -290,7 +290,7 @@ assert(lineCount == null);
 {{site.alert.note}}
   生产环境代码将忽略 `assert()` 调用。
   在开发环境中，如果 _condition_ 为 false，则 <code>assert(<em>condition</em>)</code> 将会抛出一个异常。
-  更多信息，请参考 [断言](#assert)。
+  更多信息，请参考 [断言](#断言)。
 {{site.alert.end}}
 
 ### Final 和 Const
@@ -2004,9 +2004,9 @@ for (var x in collection) {
 ```
 
 
-### While and do-while
+### While 和 Do-While
 
-A `while` loop evaluates the condition before the loop:
+`while` 循环会在循环之前判断条件：
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (while)"?>
 ```dart
@@ -2015,7 +2015,7 @@ while (!isDone()) {
 }
 ```
 
-A `do`-`while` loop evaluates the condition *after* the loop:
+`do`-`while` 循环会先执行一遍循环，*再* 判断条件：
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (do-while)"?>
 ```dart
@@ -2025,9 +2025,9 @@ do {
 ```
 
 
-### Break and continue
+### Break 和 Continue
 
-Use `break` to stop looping:
+使用 `break` 可以终止循环：
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (while-break)"?>
 ```dart
@@ -2037,7 +2037,7 @@ while (true) {
 }
 ```
 
-Use `continue` to skip to the next loop iteration:
+使用 `continue` 可以跳过本次循环，直接进入下一次循环：
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (for-continue)"?>
 ```dart
@@ -2050,8 +2050,8 @@ for (int i = 0; i < candidates.length; i++) {
 }
 ```
 
-You might write that example differently if you’re using an
-[Iterable][] such as a list or set:
+如果您使用的是像 list 或 set 这样的 [Iterable][] 对象的话，
+上面的例子可以写成下面这种形式：
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (where)"?>
 ```dart
@@ -2061,24 +2061,22 @@ candidates
 ```
 
 
-### Switch and case
+### Switch 和 Case
 
-Switch statements in Dart compare integer, string, or compile-time
-constants using `==`. The compared objects must all be instances of the
-same class (and not of any of its subtypes), and the class must not
-override `==`.
-[Enumerated types](#enumerated-types) work well in `switch` statements.
+Dart 中的 switch 语句使用 `==` 来比较整数、字符串或编译期常量。
+被比较的对象必须是同一个类的实例（还不能是其子类型），
+并且这个类没有重写 `==` 运算符。 
+[枚举类型](#enumerated-types) 非常适合在 `switch` 语句中使用。
 
 {{site.alert.note}}
-  Switch statements in Dart are intended for limited circumstances,
-  such as in interpreters or scanners.
+  Dart 中的 switch 语句仅在有限的情况下使用，
+  例如用在解释器或扫描器中。
 {{site.alert.end}}
 
-Each non-empty `case` clause ends with a `break` statement, as a rule.
-Other valid ways to end a non-empty `case` clause are a `continue`,
-`throw`, or `return` statement.
+通常，每一个非空的 `case` 子句都以 `break` 语句结尾。
+`continue` 、`throw` 或 `return` 语句也可以结束非空的 `case` 子句。
 
-Use a `default` clause to execute code when no `case` clause matches:
+当没有 `case` 子句匹配时，可以使用 `default` 子句来匹配这种情况：
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (switch)"?>
 ```dart
@@ -2104,8 +2102,8 @@ switch (command) {
 }
 ```
 
-The following example omits the `break` statement in a `case` clause,
-thus generating an error:
+下面的例子省略了 `case` 子句中的 `break` 语句，
+所以会产生错误：
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (switch-break-omitted)" plaster="none"?>
 ```dart
@@ -2113,7 +2111,7 @@ var command = 'OPEN';
 switch (command) {
   case 'OPEN':
     executeOpen();
-    // ERROR: Missing break
+    // 错误: 缺失 break
 
   case 'CLOSED':
     executeClosed();
@@ -2121,8 +2119,8 @@ switch (command) {
 }
 ```
 
-However, Dart does support empty `case` clauses, allowing a form of
-fall-through:
+但是，Dart 支持空的 `case` 子句，
+允许其以 fall-through 的形式执行：
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (switch-empty-case)"?>
 ```dart
@@ -2136,8 +2134,7 @@ switch (command) {
 }
 ```
 
-If you really want fall-through, you can use a `continue` statement and
-a label:
+如果您确实需要 fall-through，可以使用 `continue` 语句和 label：
 
 <?code-excerpt "misc/lib/language_tour/control_flow.dart (switch-continue)"?>
 ```dart
@@ -2156,32 +2153,31 @@ switch (command) {
 }
 ```
 
-A `case` clause can have local variables, which are visible only inside
-the scope of that clause.
+`case` 子句可以有局部变量，
+这些局部变量仅在该子句范围内可见。
 
 
-### Assert
+### 断言
 
-During development, use an assert statement
-— <code>assert(<em>condition</em>, <em>optionalMessage</em>)</code>; —
-to disrupt normal execution if a boolean
-condition is false. You can find examples of assert statements
-throughout this tour. Here are some more:
+在开发过程中，可以使用断言语句
+— <code>assert(<em>条件</em>, <em>可选信息</em>)</code>; —
+来中断当条件为 false 时程序的执行。
+您可以在本文中找到大量使用 assert 语句的例子。下面是一些示例：
 
 <?code-excerpt "misc/test/language_tour/control_flow_test.dart (assert)"?>
 ```dart
-// Make sure the variable has a non-null value.
+// 确保变量不为 null
 assert(text != null);
 
-// Make sure the value is less than 100.
+// 确保值小于 100
 assert(number < 100);
 
-// Make sure this is an https URL.
+// 确保字符串以 https 开头
 assert(urlString.startsWith('https'));
 ```
 
-To attach a message to an assertion,
-add a string as the second argument to `assert`.
+如果要给断言附加一个信息，
+请添加字符串作为 `assert` 的第二个参数。
 
 <?code-excerpt "misc/test/language_tour/control_flow_test.dart (assert-with-message)"?>
 ```dart
@@ -2189,23 +2185,19 @@ assert(urlString.startsWith('https'),
     'URL ($urlString) should start with "https".');
 ```
 
-The first argument to `assert` can be any expression that
-resolves to a boolean value. If the expression’s value
-is true, the assertion succeeds and execution
-continues. If it's false, the assertion fails and an exception (an
-[AssertionError][]) is thrown.
+`assert` 的第一个参数可以是值为布尔值的任何表达式。
+如果表达式的值为 true，则断言成功，程序继续执行。
+如果表达式的值为 false，则断言失败，程序抛出 [AssertionError][] 异常。
 
-When exactly do assertions work?
-That depends on the tools and framework you're using:
+断言什么时候起作用？
+这取决于您使用的工具和框架：
 
-* Flutter enables assertions in [debug mode.][Flutter debug mode]
-* Development-only tools such as [dartdevc][]
-  typically enable assertions by default.
-* Some tools, such as [dart][] and [dart2js,][dart2js]
-  support assertions through a command-line flag: `--enable-asserts`.
+* Flutter 在 [调试模式][Flutter debug mode] 下启用断言。
+* 一些仅用于开发的工具，例如 [dartdevc][]，默认启用断言。
+* 其他一些工具，例如 [dart][] 和 [dart2js][dart2js]，通过添加命令行参数 `--enable-asserts` 启用断言。
 
-In production code, assertions are ignored, and
-the arguments to `assert` aren't evaluated.
+在生产环境代码中，断言将被忽略，
+传入 `assert` 中的条件表达式也不会执行。
 
 
 ## Exceptions
@@ -3243,7 +3235,7 @@ List<Color> colors = Color.values;
 assert(colors[2] == Color.blue);
 ```
 
-You can use enums in [switch statements](#switch-and-case), and
+You can use enums in [switch statements](#switch-和-case), and
 you'll get a warning if you don't handle all of the enum's values:
 
 <?code-excerpt "misc/lib/language_tour/classes/enum.dart (switch)"?>

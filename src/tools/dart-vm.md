@@ -28,7 +28,7 @@ Common command-line options for dart include:
 
 `--enable-asserts`
 : Enables `assert` statements. When asserts are enabled, an
-  [assert statement](/guides/language/language-tour#assert)
+  [assert statement](/guides/language/language-tour#断言)
   checks a boolean condition, raising an exception if the condition is false.
 
 `--packages=<path>`
