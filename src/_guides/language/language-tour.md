@@ -189,7 +189,7 @@ main() {
 [is]: #类型判断运算符
 [library]: #libraries-and-visibility
 [mixin]: #adding-features-to-a-class-mixins
-[new]: #using-constructors
+[new]: #使用构造器
 [null]: #默认值
 [on]: #捕获异常
 [operator]: #overridable-operators
@@ -378,7 +378,7 @@ const map = {if (i is int) i: "int"}; // Use is and collection if.
 const set = {if (list is List<int>) ...list}; // ...and a spread.
 ```
 更多关于使用 `const` 创建常量值的信息，请参考
-[Lists](#lists)、[Maps](#maps) 和 [Classes](#classes)。
+[Lists](#lists)、[Maps](#maps) 和 [Classes](#类)。
 
 
 ## 内置类型
@@ -879,7 +879,7 @@ nobleGases[18] = 'argon';
 {{site.alert.note}}
   这里之所以使用 `Map()` 而不是 `new Map()` 来构造 map 对象，
   是因为从 Dart 2 开始，`new` 关键字是可选的。
-  详细信息，请参考 [构造器的使用](#using-constructors) 。
+  详细信息，请参考 [构造器的使用](#使用构造器) 。
 {{site.alert.end}}
 
 向已有的 map 中添加键值对的操作和 JavaScript 的类似：
@@ -1918,7 +1918,7 @@ sb.write('foo')
 {:.table .table-striped}
 
 更多有关 `.`、 `?.` 和 `..` 运算符的信息，请参考
-[类](#classes)。
+[类](#类)。
 
 
 ## 流程控制语句
@@ -2358,26 +2358,21 @@ try {
 [异常](/guides/libraries/library-tour#exceptions)
 章节获取更多信息。
 
-## Classes
+## 类
 
-Dart is an object-oriented language with classes and mixin-based
-inheritance. Every object is an instance of a class, and all classes
-descend from [Object.][Object]
-*Mixin-based inheritance* means that although every class (except for
-Object) has exactly one superclass, a class body can be reused in
-multiple class hierarchies.
-[Extension methods](#extension-methods) are a way to
-add functionality to a class without changing the class or creating a subclass.
+Dart 是一种面向对象的语言，具有类和基于 mixin 的继承。
+每个对象都是一个类的实例，所有的类都是从 [Object][Object] 类派生出来的。
+*基于 mixin 的继承* 意味着，尽管每个类（Object 除外）只有一个父类，
+但一个类主体可以在多个类层次中重用。
+[扩展方法](#extension-methods) 是一种向类添加功能而不改变类或创建子类的方法。
 
 
-### Using class members
+### 使用类成员
 
-Objects have *members* consisting of functions and data (*methods* and
-*instance variables*, respectively). When you call a method, you *invoke*
-it on an object: the method has access to that object’s functions and
-data.
+对象的 *成员* 由函数和数据（分别是 *方法* 和 *实例变量*）组成。
+方法的 *调用* 需要通过对象来完成：该方法可以访问该对象的函数和数据。
 
-Use a dot (`.`) to refer to an instance variable or method:
+使用点 (`.`) 来访问实例变量或方法：
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (object-members)"?>
 ```dart
@@ -2393,8 +2388,7 @@ assert(p.y == 3);
 num distance = p.distanceTo(Point(4, 4));
 ```
 
-Use `?.` instead of `.` to avoid an exception
-when the leftmost operand is null:
+使用 `?.` 代替 `.` 可以避免因为左边表达式为 null 而导致的异常：
 
 {% comment %}
 {{site.dartpad}}/0cb25997742ed5382e4a
@@ -2403,18 +2397,16 @@ https://gist.github.com/0cb25997742ed5382e4a
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (safe-member-access)"?>
 ```dart
-// If p is non-null, set its y value to 4.
+// 如果 p 非空则将其属性 y 的值设为 4
 p?.y = 4;
 ```
 
 
-### Using constructors
+### 使用构造器
 
-You can create an object using a *constructor*.
-Constructor names can be either <code><em>ClassName</em></code> or
-<code><em>ClassName</em>.<em>identifier</em></code>. For example,
-the following code creates `Point` objects using the
-`Point()` and `Point.fromJson()` constructors:
+您可以使用 *构造器* 来创建一个对象。
+构造器的名字可以是 <code><em>类名</em></code>，也可以是 <code><em>类名</em>.<em>标识符</em></code>。
+例如，下面的代码使用 `Point()` 和 `Point.fromJson()` 两个构造器来创建 `Point` 对象：
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (object-creation)" replace="/ as .*?;/;/g"?>
 ```dart
@@ -2422,8 +2414,8 @@ var p1 = Point(2, 2);
 var p2 = Point.fromJson({'x': 1, 'y': 2});
 ```
 
-The following code has the same effect, but
-uses the optional `new` keyword before the constructor name:
+下面的代码具有相同的效果，
+但是在构造器名称前使用了可选的关键字 `new`：
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (object-creation-new)" replace="/ as .*?;/;/g"?>
 ```dart
@@ -2432,66 +2424,64 @@ var p2 = new Point.fromJson({'x': 1, 'y': 2});
 ```
 
 {{site.alert.version-note}}
-  The `new` keyword became optional in Dart 2.
+  从 Dart 2 开始，`new` 关键字是可选的。
 {{site.alert.end}}
 
-Some classes provide [constant constructors](#constant-constructors).
-To create a compile-time constant using a constant constructor,
-put the `const` keyword before the constructor name:
+一些类提供了 [常量构造器](#constant-constructors)。
+若要使用常量构造器创建编译期常量，
+请将 `const` 关键字放在构造器名称之前：
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (const)"?>
 ```dart
 var p = const ImmutablePoint(2, 2);
 ```
 
-Constructing two identical compile-time constants results in a single,
-canonical instance:
+两个使用相同构造器相同参数值构造的编译期常量是同一个对象：
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (identical)"?>
 ```dart
 var a = const ImmutablePoint(1, 1);
 var b = const ImmutablePoint(1, 1);
 
-assert(identical(a, b)); // They are the same instance!
+assert(identical(a, b)); // 它们是同一个实例
 ```
 
-Within a _constant context_, you can omit the `const` before a constructor
-or literal. For example, look at this code, which creates a const map:
+在 _常量上下文_ 中，您可以省略构造器或字面量前面的 `const` 关键字。
+例如下面这段代码，创建了一个常量 map：
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (const-context-withconst)" replace="/pointAndLine1/pointAndLine/g"?>
 ```dart
-// Lots of const keywords here.
+// 这里有太多的 const 关键字
 const pointAndLine = const {
   'point': const [const ImmutablePoint(0, 0)],
   'line': const [const ImmutablePoint(1, 10), const ImmutablePoint(-2, 11)],
 };
 ```
 
-You can omit all but the first use of the `const` keyword:
+根据上下文，您可以只保留第一个 `const` 关键字，其余的全部省略：
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (const-context-noconst)" replace="/pointAndLine2/pointAndLine/g"?>
 ```dart
-// Only one const, which establishes the constant context.
+// 只有一个 const，它建立了常量上下文
 const pointAndLine = {
   'point': [ImmutablePoint(0, 0)],
   'line': [ImmutablePoint(1, 10), ImmutablePoint(-2, 11)],
 };
 ```
 
-If a constant constructor is outside of a constant context
-and is invoked without `const`,
-it creates a **non-constant object**:
+如果常量构造器位于常量上下文之外，
+并且在不使用 `const` 的情况下被调用，那么它将创建一个 **非常量对象** ：
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (nonconst-const-constructor)"?>
 ```dart
-var a = const ImmutablePoint(1, 1); // Creates a constant
-var b = ImmutablePoint(1, 1); // Does NOT create a constant
+var a = const ImmutablePoint(1, 1); // 创建一个常量
+var b = ImmutablePoint(1, 1); // 不会创建一个常量
 
-assert(!identical(a, b)); // NOT the same instance!
+assert(!identical(a, b)); // 它们不是同一个实例
 ```
 
 {{site.alert.version-note}}
-  The `const` keyword became optional within a constant context in Dart 2.
+  只有从 Dart 2 开始，才可以根据常量上下文判断省略 `const` 关键字。
 {{site.alert.end}}
 
 
@@ -2827,7 +2817,7 @@ class ImmutablePoint {
 
 Constant constructors don't always create constants.
 For details, see the section on
-[using constructors](#using-constructors).
+[using constructors](#使用构造器).
 
 
 #### Factory constructors

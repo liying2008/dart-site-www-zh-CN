@@ -190,5 +190,5 @@ environment:
 [sound Dart]: /guides/language/sound-dart
 [testing]: /guides/testing
 [Updating your pub package to Dart 2,]: https://medium.com/@filiph/updating-your-pub-package-to-dart-2-cd8ca343b1be
-[Using constructors]: /guides/language/language-tour#using-constructors
+[Using constructors]: /guides/language/language-tour#使用构造器
 [webdev dart2]: /web/dart-2

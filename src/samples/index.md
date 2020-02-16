@@ -214,7 +214,7 @@ var voyager3 = Spacecraft.unlaunched('Voyager III');
 voyager3.describe();
 {% endprettify %}
 
-[Read more](/guides/language/language-tour#classes) about classes in Dart,
+[Read more](/guides/language/language-tour#类) about classes in Dart,
 including initializer lists, optional `new` and `const`, redirecting constructors,
 `factory` constructors, getters, setters, and much more.
 
