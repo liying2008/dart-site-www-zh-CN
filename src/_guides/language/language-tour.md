@@ -747,7 +747,7 @@ List 类中有许多用于操作 List 的便捷方法，请查阅
 ### Sets
 
 Dart 中的 Set 是唯一元素（即集合中的元素不可重复）的无序集合。
-Dart 支持 set 字面量和 [Set][] 类型。
+Dart 支持 set 字面量和 [Set][Set class] 类型。
 
 {{site.alert.version-note}}
   尽管 Set _类型_ 一直是 Dart 中的核心部分，
@@ -4330,7 +4330,7 @@ To learn more about Dart's core libraries, see
 [Object]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/Object-class.html
 [ObjectVsDynamic]: /guides/language/effective-dart/design#do-annotate-with-object-instead-of-dynamic-to-indicate-any-object-is-allowed
 [runes]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/Runes-class.html
-[Set]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/Set-class.html
+[Set class]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/Set-class.html
 [StackTrace]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/StackTrace-class.html
 [Stream]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-async/Stream-class.html
 [String]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/String-class.html
