@@ -53,7 +53,7 @@ main() {
     如 `String`, `List`, and `bool`。
 
 `42`
-:   数字字面量。 数字字面量是一种编译期常量。
+:   数字字面量。 数字字面量是一种编译时常量。
 
 `print()`
 :   显示输出的一种便捷方法。
@@ -297,7 +297,7 @@ assert(lineCount == null);
 
 如果您不打算更改一个变量，可以使用 `final` 或 `const` 来修饰它，
 这两个关键字可以代替 `var` 或者加在一个具体的类型前。
-一个 final 变量只可以被赋值一次； 一个 const 变量是一个编译期常量。
+一个 final 变量只可以被赋值一次； 一个 const 变量是一个编译时常量。
 （const 变量同时也是 final 的。）顶层的 final 变量或者类的 final 变量在其第一次使用的时候被初始化。
 
 {{site.alert.note}}
@@ -323,7 +323,7 @@ final String nickname = 'Bobby';
 name = 'Alice'; // 错误：final 变量只能被赋值一次
 ```
 
-使用 `const` 修饰的变量为 **编译期常量**。
+使用 `const` 修饰的变量为 **编译时常量**。
 如果使用 const 修饰类中的变量，则必须加上 `static` 关键字，即 `static const`。
 声明 const 变量，须将其值设置为编译期常数，例如数字或字符串字面量、const 变量或对常数进行算术运算的结果：
 
@@ -371,7 +371,7 @@ baz = [42]; // 错误: 常量不能被赋值
 
 <?code-excerpt "misc/lib/language_tour/variables.dart (const-dart-25)"?>
 ```dart
-// 从 Dart 2.5 开始，以下都是合法的编译期常量
+// 从 Dart 2.5 开始，以下都是合法的编译时常量
 const Object i = 3; // Where i is a const Object with an int value...
 const list = [i as int]; // Use a typecast.
 const map = {if (i is int) i: "int"}; // Use is and collection if.
@@ -498,8 +498,8 @@ assert((3 >> 1) == 1); // 0011 >> 1 == 0001
 assert((3 | 4) == 7); // 0011 | 0100 == 0111
 ```
 
-数字字面量是编译期常量。
-很多算术表达式只要其操作数是常量，则表达式结果也是编译期常量。
+数字字面量是编译时常量。
+很多算术表达式只要其操作数是常量，则表达式结果也是编译时常量。
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (const-num)"?>
 ```dart
@@ -580,8 +580,8 @@ var s = r'In a raw string, not even \n gets special treatment.';
 
 查看 [Runes and grapheme clusters](#characters) 可以获取更多有关如何在字符串中表示 Unicode 字符的信息。
 
-字符串字面量是一个编译期常量，
-只要是编译期常量都可以作为字符串字面量的插值表达式。
+字符串字面量是一个编译时常量，
+只要是编译时常量都可以作为字符串字面量的插值表达式。
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (string-literals)"?>
 ```dart
@@ -607,7 +607,7 @@ const validConstString = '$aConstNum $aConstBool $aConstString';
 ### Booleans
 
 Dart 使用 `bool` 关键字表示布尔类型，
-布尔类型只有两个对象 `true` 和 `false`，两者都是编译期常量。
+布尔类型只有两个对象 `true` 和 `false`，两者都是编译时常量。
 
 Dart 的类型安全性意味着您不可以使用类似
 <code>if (<em>nonbooleanValue</em>)</code> 或
@@ -667,7 +667,7 @@ list[1] = 1;
 assert(list[1] == 1);
 ```
 
-如果要创建一个编译期常量的 list，只需要在 list 字面量前加上 `const` 关键字：
+如果要创建一个编译时常量的 list，只需要在 list 字面量前加上 `const` 关键字：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (const-list)"?>
 ```dart
@@ -804,7 +804,7 @@ elements.addAll(halogens);
 assert(elements.length == 5);
 ```
 
-如果想创建一个编译期常量的 set，
+如果想创建一个编译时常量的 set，
 可以在 set 字面量前添加 `const` 关键字：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (const-set)"?>
@@ -915,7 +915,7 @@ gifts['fourth'] = 'calling birds';
 assert(gifts.length == 2);
 ```
 
-如果想创建一个编译期常量的 map，
+如果想创建一个编译时常量的 map，
 只需要在 map 字面量前添加 `const` 关键字：
 
 <?code-excerpt "misc/lib/language_tour/built_in_types.dart (const-map)"?>
@@ -1023,7 +1023,7 @@ int handleError(String source) {
 ```
 {% endcomment %}
 
-symbol 字面量是编译期常量。
+symbol 字面量是编译时常量。
 
 
 ## 函数
@@ -1153,7 +1153,7 @@ assert(say('Bob', 'Howdy', 'smoke signal') ==
 #### 默认参数值
 
 可以使用 `=` 为函数的可选参数（命名参数、位置参数）设置默认值。
-默认值必须是编译期常量。
+默认值必须是编译时常量。
 如果不设置默认值，那么默认值就是 `null` 。
 
 下面是一个为命名参数设置默认值的例子：
@@ -2063,7 +2063,7 @@ candidates
 
 ### Switch 和 Case
 
-Dart 中的 switch 语句使用 `==` 来比较整数、字符串或编译期常量。
+Dart 中的 switch 语句使用 `==` 来比较整数、字符串或编译时常量。
 被比较的对象必须是同一个类的实例（还不能是其子类型），
 并且这个类没有重写 `==` 运算符。 
 [枚举类型](#enumerated-types) 非常适合在 `switch` 语句中使用。
@@ -2428,7 +2428,7 @@ var p2 = new Point.fromJson({'x': 1, 'y': 2});
 {{site.alert.end}}
 
 一些类提供了 [常量构造器](#constant-constructors)。
-若要使用常量构造器创建编译期常量，
+若要使用常量构造器创建编译时常量，
 请将 `const` 关键字放在构造器名称之前：
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (const)"?>
@@ -2436,7 +2436,7 @@ var p2 = new Point.fromJson({'x': 1, 'y': 2});
 var p = const ImmutablePoint(2, 2);
 ```
 
-两个使用相同构造器相同参数值构造的编译期常量是同一个对象：
+两个使用相同构造器相同参数值构造的编译时常量是同一个对象：
 
 <?code-excerpt "misc/test/language_tour/classes_test.dart (identical)"?>
 ```dart
@@ -2790,7 +2790,7 @@ class Point {
 #### 常量构造器
 
 如果您的类生成的对象都是不会变的，
-那么可以在生成这些对象时就将其变为编译期常量。
+那么可以在生成这些对象时就将其变为编译时常量。
 您可以在类的构造器前加上 `const` 关键字并确保所有实例变量均为 `final` 来实现该功能。
 
 <?code-excerpt "misc/lib/language_tour/classes/immutable_point.dart"?>
