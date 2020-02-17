@@ -2634,7 +2634,6 @@ class Point {
 {% comment %}
 https://gist.github.com/Sfshaza/e57aa06401e6618d4eb8
 {{site.dartpad}}/e57aa06401e6618d4eb8
-{% endcomment %}
 
 <?code-excerpt "misc/lib/language_tour/classes/employee.dart" plaster="none"?>
 ```dart
@@ -2667,6 +2666,7 @@ void main() {
   (emp as Person).firstName = 'Bob';
 }
 ```
+{% endcomment %}
 
 <iframe
 src="{{site.dartpad-embed-inline}}?id=e57aa06401e6618d4eb8&split=90"
@@ -2737,7 +2737,6 @@ https://github.com/dart-lang/sdk/blob/master/docs/language/informal/assert-in-in
 {% comment %}
 https://gist.github.com/Sfshaza/7a9764702c0608711e08
 {{site.dartpad}}/a9764702c0608711e08
-{% endcomment %}
 
 <?code-excerpt "misc/lib/language_tour/classes/point_with_distance_field.dart"?>
 ```dart
@@ -2759,6 +2758,7 @@ void main() {
   print(p.distanceFromOrigin);
 }
 ```
+{% endcomment %}
 
 <iframe
 src="{{site.dartpad-embed-inline}}?id=7a9764702c0608711e08&split=90"
@@ -2854,15 +2854,14 @@ logger.log('Button clicked');
 ```
 
 
-### Methods
+### 方法
 
-Methods are functions that provide behavior for an object.
+方法是为对象提供行为的函数。
 
-#### Instance methods
+#### 实例方法
 
-Instance methods on objects can access instance variables and `this`.
-The `distanceTo()` method in the following sample is an example of an
-instance method:
+对象的实例方法可以访问实例变量和 `this`。
+下面的 `distanceTo()` 方法就是一个实例方法的例子：
 
 <?code-excerpt "misc/lib/language_tour/classes/point.dart (class-with-distanceTo)" plaster="none"?>
 ```dart
@@ -2881,13 +2880,12 @@ class Point {
 }
 ```
 
-#### Getters and setters
+#### Getter 和 Setter
 
-Getters and setters are special methods that provide read and write
-access to an object’s properties. Recall that each instance variable has
-an implicit getter, plus a setter if appropriate. You can create
-additional properties by implementing getters and setters, using the
-`get` and `set` keywords:
+Getter 和 Setter 是一对用来读写对象属性的特殊方法，
+上面说过实例对象的每一个属性都有一个隐式的 Getter 方法，
+如果为非 final 属性的话还会有一个 Setter 方法，
+您可以通过使用 `get` 和 `set` 关键字实现 Getter 和 Setter 来创建其他属性：
 
 <?code-excerpt "misc/lib/language_tour/classes/rectangle.dart"?>
 ```dart
@@ -2896,7 +2894,7 @@ class Rectangle {
 
   Rectangle(this.left, this.top, this.width, this.height);
 
-  // Define two calculated properties: right and bottom.
+  // 定义两个计算产生的属性： right 和 bottom
   num get right => left + width;
   set right(num value) => left = value - width;
   num get bottom => top + height;
@@ -2911,35 +2909,35 @@ void main() {
 }
 ```
 
-With getters and setters, you can start with instance variables, later
-wrapping them with methods, all without changing client code.
+使用 Getter 和 Setter 的好处是，您可以先使用实例变量，
+之后再将它们封装成方法且不需要改动任何客户端代码，
+即先定义后更改且不影响原有逻辑。
 
 {{site.alert.note}}
-  Operators such as increment (++) work in the expected way, whether or
-  not a getter is explicitly defined. To avoid any unexpected side
-  effects, the operator calls the getter exactly once, saving its value
-  in a temporary variable.
+  无论 Getter 是否显式定义，诸如自增 (++) 这样的操作符都以预期的方式工作。
+  为了避免任何意外的副作用，操作符只调用 Getter 一次，
+  然后将其值保存在一个临时变量中。
 {{site.alert.end}}
 
-#### Abstract methods
+#### 抽象方法
 
-Instance, getter, and setter methods can be abstract, defining an
-interface but leaving its implementation up to other classes.
-Abstract methods can only exist in [abstract classes](#abstract-classes).
+实例方法、Getter 方法以及 Setter 方法都可以是抽象的，
+可以定义接口，但将其实现留给其他类。
+抽象方法只能存在于 [抽象类](#abstract-classes) 中。
 
-To make a method abstract, use a semicolon (;) instead of a method body:
+直接使用分号 (;) 替代方法体即可声明一个抽象方法：
 
 <?code-excerpt "misc/lib/language_tour/classes/doer.dart"?>
 ```dart
 abstract class Doer {
-  // Define instance variables and methods...
+  // 定义实例变量和方法等
 
-  void doSomething(); // Define an abstract method.
+  void doSomething(); // 定义抽象方法
 }
 
 class EffectiveDoer extends Doer {
   void doSomething() {
-    // Provide an implementation, so the method is not abstract here...
+    // 提供一个实现，因此此处方法不再是抽象的
   }
 }
 ```
