@@ -232,7 +232,7 @@ class Orbiter extends Spacecraft {
 }
 {% endprettify %}
 
-[Read more](/guides/language/language-tour#extending-a-class) about extending classes, the optional `@override` annotation, and more.
+[Read more](/guides/language/language-tour#类的扩展) about extending classes, the optional `@override` annotation, and more.
 
 
 ## Mixins

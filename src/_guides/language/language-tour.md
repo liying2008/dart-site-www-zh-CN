@@ -171,7 +171,7 @@ main() {
 [else]: #if-和-else
 [enum]: #enumerated-types
 [export]: /guides/libraries/create-library-packages
-[extends]: #extending-a-class
+[extends]: #类的扩展
 [external]: https://stackoverflow.com/questions/24929659/what-does-external-mean-in-dart
 [factory]: #factory-constructors
 [false]: #booleans
@@ -199,7 +199,7 @@ main() {
 [set]: #getters-and-setters
 [show]: #importing-only-part-of-a-library
 [static]: #class-variables-and-methods
-[super]: #extending-a-class
+[super]: #类的扩展
 [switch]: #switch-和-case
 [sync]: #generators
 [this]: #构造器
@@ -3012,10 +3012,10 @@ class Point implements Comparable, Location {...}
 ```
 
 
-### Extending a class
+### 类的扩展
 
-Use `extends` to create a subclass, and `super` to refer to the
-superclass:
+使用 `extends` 创建子类，
+使用 `super` 引用父类：
 
 <?code-excerpt "misc/lib/language_tour/classes/extends.dart" replace="/extends|super/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
@@ -3041,11 +3041,10 @@ class SmartTelevision [!extends!] Television {
 
 
 
-#### Overriding members
+#### 重写类成员
 
-Subclasses can override instance methods, getters, and setters.
-You can use the `@override` annotation to indicate that you are
-intentionally overriding a member:
+子类可以重写父类的实例方法、Getter 以及 Setter 方法。
+您可以使用 `@override` 注解来表示您重写了一个成员：
 
 <?code-excerpt "misc/lib/language_tour/metadata/television.dart (override)" replace="/@override/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
@@ -3056,16 +3055,15 @@ class SmartTelevision extends Television {
 }
 {% endprettify %}
 
-To narrow the type of a method parameter or instance variable in code that is
-[type safe](/guides/language/sound-dart),
-you can use the [`covariant` keyword](/guides/language/sound-problems#the-covariant-keyword).
+要在 [类型安全](/guides/language/sound-dart) 的代码中缩小方法参数或实例变量的类型，
+可以使用 [`covariant` 关键字](/guides/language/sound-problems#the-covariant-keyword) 。
 
 
-#### Overridable operators
+#### 重写运算符
 
-You can override the operators shown in the following table.
-For example, if you define a
-Vector class, you might define a `+` method to add two vectors.
+您可以重写下表中列出的运算符。
+例如，如果您定义一个 Vector 类，
+您可以定义一个 `+` 方法用来使两个 Vector 相加。
 
 `<`  | `+`  | `|`  | `[]`
 `>`  | `/`  | `^`  | `[]=`
@@ -3075,11 +3073,11 @@ Vector class, you might define a `+` method to add two vectors.
 {:.table}
 
 {{site.alert.note}}
-  You may have noticed that `!=` is not an overridable operator. The expression
-  `e1 != e2` is just syntactic sugar for `!(e1 == e2)`.
+  您可能已经注意到 `!=` 不是可重写的运算符。
+  表达式 `e1 != e2` 只是 `!(e1 == e2)` 的语法糖。
 {{site.alert.end}}
 
-Here’s an example of a class that overrides the `+` and `-` operators:
+下面是一个重写 `+` 和 `-` 运算符的例子：
 
 <?code-excerpt "misc/lib/language_tour/classes/vector.dart"?>
 ```dart
@@ -3091,7 +3089,7 @@ class Vector {
   Vector operator +(Vector v) => Vector(x + v.x, y + v.y);
   Vector operator -(Vector v) => Vector(x - v.x, y - v.y);
 
-  // Operator == and hashCode not shown. For details, see note below.
+  // 运算符 == 和 hashCode 的实现未在这里展示，详情请查看下方说明。
   // ···
 }
 
@@ -3104,24 +3102,24 @@ void main() {
 }
 ```
 
-If you override `==`, you should also override Object's `hashCode` getter.
-For an example of overriding `==` and `hashCode`, see
-[Implementing map keys](/guides/libraries/library-tour#implementing-map-keys).
+如果您重写 `==` 操作符，必须也同时重写对象的 `hashCode` 的 Getter 方法。
+你可以查阅 [实现映射键](/guides/libraries/library-tour#implementing-map-keys) 
+获取更多关于重写 `==` 和 `hashCode` 的例子。
 
-For more information on overriding, in general, see
-[Extending a class](#extending-a-class).
+更多关于重写的信息，请查阅
+[类的扩展](#类的扩展)。
 
 
 #### noSuchMethod()
 
-To detect or react whenever code attempts to use a non-existent method or
-instance variable, you can override `noSuchMethod()`:
+如果调用了对象上不存在的方法或实例变量将会触发 `noSuchMethod()` 方法，
+您可以重写 `noSuchMethod()` 方法来追踪和记录这一行为：
 
 <?code-excerpt "misc/lib/language_tour/classes/no_such_method.dart" replace="/noSuchMethod(?!,)/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
 class A {
-  // Unless you override noSuchMethod, using a
-  // non-existent member results in a NoSuchMethodError.
+  // 除非你重写 noSuchMethod，
+  // 否则调用一个不存在的成员会导致 NoSuchMethodError。
   @override
   void [!noSuchMethod!](Invocation invocation) {
     print('You tried to use a non-existent member: ' +
@@ -3130,18 +3128,17 @@ class A {
 }
 {% endprettify %}
 
-You **can't invoke** an unimplemented method unless
-**one** of the following is true:
+除非满足以下条件之 **一**，
+否则您 **不能调用** 未实现的方法：
 
-* The receiver has the static type `dynamic`.
+* 接收方是静态的 `dynamic` 类型。
 
-* The receiver has a static type that
-defines the unimplemented method (abstract is OK),
-and the dynamic type of the receiver has an implemention of `noSuchMethod()`
-that's different from the one in class `Object`.
+* 接收方具有静态类型，定义了未实现的方法（抽象亦可），
+并且接收方的动态类型实现了 `noSuchMethod()` 方法
+且具体的实现与 `Object` 中的不同。
 
-For more information, see the informal
-[noSuchMethod forwarding specification.](https://github.com/dart-lang/sdk/blob/master/docs/language/informal/nosuchmethod-forwarding.md)
+更多相关信息，请参考
+[noSuchMethod 转发规范](https://github.com/dart-lang/sdk/blob/master/docs/language/informal/nosuchmethod-forwarding.md) 。
 
 
 ### Extension methods
@@ -4110,7 +4107,7 @@ constant constructor.
 
 Two annotations are available to all Dart code: `@deprecated` and
 `@override`. For examples of using `@override`,
-see [Extending a class](#extending-a-class).
+see [Extending a class](#类的扩展).
 Here’s an example of using the `@deprecated`
 annotation:
 
