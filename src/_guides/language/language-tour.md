@@ -188,7 +188,7 @@ main() {
 [interface]: https://stackoverflow.com/questions/28595501/was-the-interface-keyword-removed-from-dart
 [is]: #类型判断运算符
 [library]: #libraries-and-visibility
-[mixin]: #adding-features-to-a-class-mixins
+[mixin]: #使用-mixin-为类添加功能
 [new]: #使用构造器
 [null]: #默认值
 [on]: #捕获异常
@@ -198,7 +198,7 @@ main() {
 [return]: #函数
 [set]: #getters-and-setters
 [show]: #importing-only-part-of-a-library
-[static]: #class-variables-and-methods
+[static]: #类变量和方法
 [super]: #类的扩展
 [switch]: #switch-和-case
 [sync]: #generators
@@ -212,7 +212,7 @@ main() {
 {% comment %}
   TODO: Add coverage of void to the language tour.
 {% endcomment %}
-[with]: #adding-features-to-a-class-mixins
+[with]: #使用-mixin-为类添加功能
 [while]: #while-和-do-while
 [yield]: #generators
 
@@ -3225,13 +3225,12 @@ switch (aColor) {
 更多信息，请参考 [Dart 语言规范][Dart language specification] 。
 
 
-### Adding features to a class: mixins
+### 使用 Mixin 为类添加功能
 
-Mixins are a way of reusing a class's code in multiple class
-hierarchies.
+混入（mixin）是一种在多个类层次结构中重用类代码的方法。
 
-To _use_ a mixin, use the `with` keyword followed by one or more mixin
-names. The following example shows two classes that use mixins:
+若要 _使用_ mixin，请使用 `with` 关键字，后跟一个或多个 mixin 名称。
+下面的示例展示了两个使用 mixin 的类：
 
 <?code-excerpt "misc/lib/language_tour/classes/orchestra.dart (Musician and Maestro)" replace="/(with.*) \{/[!$1!] {/g"?>
 {% prettify dart tag=pre+code %}
@@ -3248,11 +3247,10 @@ class Maestro extends Person
 }
 {% endprettify %}
 
-To _implement_ a mixin, create a class that extends Object and
-declares no constructors.
-Unless you want your mixin to be usable as a regular class,
-use the `mixin` keyword instead of `class`.
-For example:
+要 _实现_ mixin，请创建一个继承自 Object 且不声明构造器的类。
+除非您希望您的 mixin 可用作常规类，
+否则请使用 `mixin` 关键字而不是 `class`。
+例如：
 
 <?code-excerpt "misc/lib/language_tour/classes/orchestra.dart (Musical)"?>
 ```dart
@@ -3273,9 +3271,9 @@ mixin Musical {
 }
 ```
 
-To specify that only certain types can use the mixin — for example,
-so your mixin can invoke a method that it doesn't define —
-use `on` to specify the required superclass:
+要指定仅某些类型可以使用 mixin
+（例如，您的 mixin 可以调用它未定义的方法），
+请使用 `on` 来指定所需的父类：
 
 <?code-excerpt "misc/lib/language_tour/classes/orchestra.dart (mixin-on)"?>
 ```dart
@@ -3285,23 +3283,23 @@ mixin MusicalPerformer on Musician {
 ```
 
 {{site.alert.version-note}}
-  Support for the `mixin` keyword was introduced in Dart 2.1. Code in earlier
-  releases usually used `abstract class` instead. For more information on 2.1
-  mixin changes, see the [Dart SDK changelog][] and [2.1 mixin specification.][]
+  在 Dart 2.1 中引入了对 `mixin` 关键字的支持。
+  早期版本中的代码通常使用 `abstract class` 代替。
+  更多有关 mixin 在 2.1 中的变更信息，请查阅
+  [Dart SDK 更新日志][] 和 [2.1 mixin 规范][] 。
 {{site.alert.end}}
 
-[Dart SDK changelog]: https://github.com/dart-lang/sdk/blob/master/CHANGELOG.md
-[2.1 mixin specification.]: https://github.com/dart-lang/language/blob/master/accepted/2.1/super-mixins/feature-specification.md#dart-2-mixin-declarations
+[Dart SDK 更新日志]: https://github.com/dart-lang/sdk/blob/master/CHANGELOG.md
+[2.1 mixin 规范]: https://github.com/dart-lang/language/blob/master/accepted/2.1/super-mixins/feature-specification.md#dart-2-mixin-declarations
 
 
-### Class variables and methods
+### 类变量和方法
 
-Use the `static` keyword to implement class-wide variables and methods.
+使用 `static` 关键字可以实现类变量和类方法。
 
-#### Static variables
+#### 静态变量
 
-Static variables (class variables) are useful for class-wide state and
-constants:
+静态变量（类变量）对于类范围的状态和常量非常有用：
 
 <?code-excerpt "misc/lib/language_tour/classes/misc.dart (static-field)"?>
 ```dart
@@ -3315,18 +3313,18 @@ void main() {
 }
 ```
 
-Static variables aren’t initialized until they’re used.
+静态变量在其首次被使用的时候才被初始化。
 
 {{site.alert.note}}
-  This page follows the [style guide
-  recommendation](/guides/language/effective-dart/style#identifiers)
-  of preferring `lowerCamelCase` for constant names.
+  本文代码遵守
+  [风格推荐指南](/guides/language/effective-dart/style#identifiers)
+  中的命名规则，使用 `小驼峰式 (lowerCamelCase)` 来命名常量。
 {{site.alert.end}}
 
-#### Static methods
+#### 静态方法
 
-Static methods (class methods) do not operate on an instance, and thus
-do not have access to `this`. For example:
+静态方法（类方法）不能被一个类的实例访问，
+因此，静态方法内也不能使用 `this`。例如：
 
 <?code-excerpt "misc/lib/language_tour/classes/point_with_distance_method.dart"?>
 ```dart
@@ -3353,12 +3351,12 @@ void main() {
 ```
 
 {{site.alert.note}}
-  Consider using top-level functions, instead of static methods, for
-  common or widely used utilities and functionality.
+  对于常见或广泛使用的工具函数，
+  请考虑使用顶层函数而非静态方法。
 {{site.alert.end}}
 
-You can use static methods as compile-time constants. For example, you
-can pass a static method as a parameter to a constant constructor.
+可以使用静态方法作为编译时常量。
+例如，可以将静态方法作为参数传递给常量构造器。
 
 
 ## Generics

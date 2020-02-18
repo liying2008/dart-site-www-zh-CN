@@ -260,7 +260,7 @@ class PilotedCraft extends Spacecraft [!with!] Piloted {
 
 `PilotedCraft` now has the `astronauts` field as well as the `describeCrew()` method.
 
-[Read more](/guides/language/language-tour#adding-features-to-a-class-mixins) about mixins.
+[Read more](/guides/language/language-tour#使用-mixin-为类添加功能) about mixins.
 
 
 ## Interfaces and abstract classes
