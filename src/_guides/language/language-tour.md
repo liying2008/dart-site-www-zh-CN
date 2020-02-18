@@ -169,7 +169,7 @@ main() {
 [do]: #while-和-do-while
 [dynamic]: #重要概念
 [else]: #if-和-else
-[enum]: #enumerated-types
+[enum]: #枚举类型
 [export]: /guides/libraries/create-library-packages
 [extends]: #类的扩展
 [external]: https://stackoverflow.com/questions/24929659/what-does-external-mean-in-dart
@@ -2066,7 +2066,7 @@ candidates
 Dart 中的 switch 语句使用 `==` 来比较整数、字符串或编译时常量。
 被比较的对象必须是同一个类的实例（还不能是其子类型），
 并且这个类没有重写 `==` 运算符。 
-[枚举类型](#enumerated-types) 非常适合在 `switch` 语句中使用。
+[枚举类型](#枚举类型) 非常适合在 `switch` 语句中使用。
 
 {{site.alert.note}}
   Dart 中的 switch 语句仅在有限的情况下使用，
@@ -2364,7 +2364,7 @@ Dart 是一种面向对象的语言，具有类和基于 mixin 的继承。
 每个对象都是一个类的实例，所有的类都是从 [Object][Object] 类派生出来的。
 *基于 mixin 的继承* 意味着，尽管每个类（Object 除外）只有一个父类，
 但一个类主体可以在多个类层次中重用。
-[扩展方法](#extension-methods) 是一种向类添加功能而不改变类或创建子类的方法。
+[扩展方法](#扩展方法) 是一种向类添加功能而不改变类或创建子类的方法。
 
 
 ### 使用类成员
@@ -3141,16 +3141,15 @@ class A {
 [noSuchMethod 转发规范](https://github.com/dart-lang/sdk/blob/master/docs/language/informal/nosuchmethod-forwarding.md) 。
 
 
-### Extension methods
+### 扩展方法
 
-Extension methods, introduced in Dart 2.7,
-are a way to add functionality to existing libraries.
-You might use extension methods without even knowing it.
-For example, when you use code completion in an IDE,
-it suggests extension methods alongside regular methods.
+在 Dart 2.7 中引入的扩展方法是一种向现有库添加功能的方法。
+您可能在不知道的情况下使用扩展方法。
+例如，当您在 IDE 中使用代码补全时，
+它会建议使用扩展方法和常规方法。
 
-Here's an example of using an extension method on `String`
-named `parseInt()` that's defined in `string_apis.dart`:
+这是在 `string_apis.dart` 中定义的在 `String` 上使用的
+名为 `parseInt()` 的扩展方法的示例：
 
 ```dart
 import 'string_apis.dart';
@@ -3159,30 +3158,29 @@ print('42'.padLeft(5)); // Use a String method.
 print('42'.parseInt()); // Use an extension method.
 ```
 
-For details of using and implementing extension methods, see the
-[extension methods page][].
+关于使用和实现扩展方法的更详细内容，请查看
+[扩展方法页面][extension methods page]。
 
 <a id="enums"></a>
-### Enumerated types
+### 枚举类型
 
-Enumerated types, often called _enumerations_ or _enums_,
-are a special kind of class used to represent
-a fixed number of constant values.
+枚举类型，通常称为 _枚举_，
+是一种特殊的类，
+用于表示固定数量的常量值。
 
 
-#### Using enums
+#### 使用枚举
 
-Declare an enumerated type using the `enum` keyword:
+使用 `enum` 关键字声明一个枚举类型：
 
 <?code-excerpt "misc/lib/language_tour/classes/enum.dart (enum)"?>
 ```dart
 enum Color { red, green, blue }
 ```
 
-Each value in an enum has an `index` getter,
-which returns the zero-based position of the value in the enum declaration.
-For example, the first value has index 0,
-and the second value has index 1.
+每一个枚举值都有一个名为 `index` 成员变量的 Getter 方法，
+该方法将会返回以 0 为基准索引的位置值。
+例如，第一个枚举值的索引是 0 ，第二个枚举值的索引是 1。
 
 <?code-excerpt "misc/lib/language_tour/classes/enum.dart (index)"?>
 ```dart
@@ -3191,8 +3189,8 @@ assert(Color.green.index == 1);
 assert(Color.blue.index == 2);
 ```
 
-To get a list of all of the values in the enum,
-use the enum's `values` constant.
+要获得枚举中所有值的列表，
+请使用枚举的 `values` 常量。
 
 <?code-excerpt "misc/lib/language_tour/classes/enum.dart (values)"?>
 ```dart
@@ -3200,8 +3198,8 @@ List<Color> colors = Color.values;
 assert(colors[2] == Color.blue);
 ```
 
-You can use enums in [switch statements](#switch-和-case), and
-you'll get a warning if you don't handle all of the enum's values:
+您可以在 [switch 语句](#switch-和-case) 中使用枚举，
+如果您没有处理所有枚举值，则会收到警告：
 
 <?code-excerpt "misc/lib/language_tour/classes/enum.dart (switch)"?>
 ```dart
@@ -3214,17 +3212,17 @@ switch (aColor) {
   case Color.green:
     print('Green as grass!');
     break;
-  default: // Without this, you see a WARNING.
+  default: // 没有这一行语句，您将会看到一个 警告
     print(aColor); // 'Color.blue'
 }
 ```
 
-Enumerated types have the following limits:
+枚举类型有以下限制：
 
-* You can't subclass, mix in, or implement an enum.
-* You can't explicitly instantiate an enum.
+* 您不能子类化、混入（mixin）或实现枚举。
+* 您不能显式实例化枚举。
 
-For more information, see the [Dart language specification][].
+更多信息，请参考 [Dart 语言规范][Dart language specification] 。
 
 
 ### Adding features to a class: mixins
