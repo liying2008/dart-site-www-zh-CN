@@ -274,7 +274,7 @@ class MockSpaceship implements Spacecraft {
 }
 {% endprettify %}
 
-[Read more](/guides/language/language-tour#implicit-interfaces) about implicit interfaces.
+[Read more](/guides/language/language-tour#隐式接口) about implicit interfaces.
 
 You can create an abstract class to be extended (or implemented) by a concrete class. Abstract classes can contain abstract methods (with empty bodies).
 
@@ -293,7 +293,7 @@ You can create an abstract class to be extended (or implemented) by a concrete c
 
 Any class extending `Describable` has the `describeWithEmphasis()` method, which calls the extender's implementation of `describe()`.
 
-[Read more](/guides/language/language-tour#abstract-classes) about abstract classes and methods.
+[Read more](/guides/language/language-tour#抽象类) about abstract classes and methods.
 
 
 ## Async

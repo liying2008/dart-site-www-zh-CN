@@ -148,7 +148,7 @@ main() {
 | [do][]                | [if][]                | [set][]{{bii}}        | [yield][]{{lrw}}  |
 {:.table .table-striped .nowrap}
 
-[abstract]: #abstract-classes
+[abstract]: #抽象类
 [as]: #类型判断运算符
 [assert]: #断言
 [async]: #asynchrony-support
@@ -182,7 +182,7 @@ main() {
 [get]: #getters-and-setters
 [hide]: #importing-only-part-of-a-library
 [if]: #if-和-else
-[implements]: #implicit-interfaces
+[implements]: #隐式接口
 [import]: #using-libraries
 [in]: #for-循环
 [interface]: https://stackoverflow.com/questions/28595501/was-the-interface-keyword-removed-from-dart
@@ -2922,8 +2922,8 @@ void main() {
 #### 抽象方法
 
 实例方法、Getter 方法以及 Setter 方法都可以是抽象的，
-可以定义接口，但将其实现留给其他类。
-抽象方法只能存在于 [抽象类](#abstract-classes) 中。
+可以用于定义接口方法，但将其实现留给其他类。
+抽象方法只能存在于 [抽象类](#抽象类) 中。
 
 直接使用分号 (;) 替代方法体即可声明一个抽象方法：
 
@@ -2943,17 +2943,15 @@ class EffectiveDoer extends Doer {
 ```
 
 
-### Abstract classes
+### 抽象类
 
-Use the `abstract` modifier to define an *abstract class*—a class that
-can’t be instantiated. Abstract classes are useful for defining
-interfaces, often with some implementation. If you want your abstract
-class to appear to be instantiable, define a [factory
-constructor](#factory-constructors).
+使用 `abstract` 修饰符可以定义一个 *抽象类*（不能被实例化的类）。
+抽象类对于定义接口方法是非常有用的。
+如果您想让您的抽象类看起来可以被实例化，
+请定义一个 [工厂构造器](#factory-constructors)。
 
-Abstract classes often have [abstract methods](#abstract-methods).
-Here’s an example of declaring an abstract class that has an abstract
-method:
+抽象类常常会包含 [抽象方法](#abstract-methods)。
+下面是一个含有一个抽象方法的抽象类的例子：
 
 <?code-excerpt "misc/lib/language_tour/classes/misc.dart (abstract)"?>
 ```dart
@@ -2967,32 +2965,31 @@ abstract class AbstractContainer {
 ```
 
 
-### Implicit interfaces
+### 隐式接口
 
-Every class implicitly defines an interface containing all the instance
-members of the class and of any interfaces it implements. If you want to
-create a class A that supports class B’s API without inheriting B’s
-implementation, class A should implement the B interface.
+每一个类都隐式地定义了一个接口，
+这个接口包含所有这个类的实例成员以及这个类所实现的其它接口。
+如果想要创建一个 A 类支持调用 B 类的 API 且不想继承 B 类，
+则可以实现 B 类的接口。
 
-A class implements one or more interfaces by declaring them in an
-`implements` clause and then providing the APIs required by the
-interfaces. For example:
+类通过在 `implements` 子句中声明一个或多个接口，
+然后提供接口所需的 API 来实现一个或多个接口。例如：
 
 <?code-excerpt "misc/lib/language_tour/classes/impostor.dart"?>
 ```dart
-// A person. The implicit interface contains greet().
+// Person 类提供的隐式接口包含 greet() 方法
 class Person {
-  // In the interface, but visible only in this library.
+  // 在接口中，但是只在库内可见
   final _name;
 
-  // Not in the interface, since this is a constructor.
+  // 不在接口中，因为它是一个构造器
   Person(this._name);
 
-  // In the interface.
+  // 在接口中
   String greet(String who) => 'Hello, $who. I am $_name.';
 }
 
-// An implementation of the Person interface.
+// Person 接口的一个实现
 class Impostor implements Person {
   get _name => '';
 
@@ -3007,8 +3004,7 @@ void main() {
 }
 ```
 
-Here’s an example of specifying that a class implements multiple
-interfaces:
+下面是一个类实现多个接口的示例：
 
 <?code-excerpt "misc/lib/language_tour/classes/misc.dart (point_interfaces)"?>
 ```dart
