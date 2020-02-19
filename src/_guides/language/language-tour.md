@@ -97,7 +97,7 @@ main() {
     或者 `List<dynamic>` （由任何类型的对象组成的 list）。
 
 -   Dart 支持顶层函数 （例如 `main()`），也支持定义依附于类或对象的函数
-    （*静态方法* 和 *实例方法*）。你也可以在一个函数中定义一个函数
+    （*静态方法* 和 *实例方法*）。您也可以在一个函数中定义一个函数
     （*嵌套函数* 或 *局部函数*）。
 
 -   类似地，Dart 支持顶层 *变量*， 也支持依附于类或对象的变量
@@ -107,7 +107,7 @@ main() {
 -   与 Java 不同， Dart 没有 `public`、`protected` 和 `private` 这些访问修饰符。
     如果一个标识符以下划线 (\_) 开头，那它在库内就是私有的。
     更多信息，请参考
-    [库和可见性](#libraries-and-visibility)。
+    [库和可见性](#库和可见性)。
 
 -   *标识符* 可以以字母或下划线 (\_) 开头，后跟字母、下划线和数字的任意组合。
 
@@ -183,11 +183,11 @@ main() {
 [hide]: #importing-only-part-of-a-library
 [if]: #if-和-else
 [implements]: #隐式接口
-[import]: #using-libraries
+[import]: #使用库
 [in]: #for-循环
 [interface]: https://stackoverflow.com/questions/28595501/was-the-interface-keyword-removed-from-dart
 [is]: #类型判断运算符
-[library]: #libraries-and-visibility
+[library]: #库和可见性
 [mixin]: #使用-mixin-为类添加功能
 [new]: #使用构造器
 [null]: #默认值
@@ -335,7 +335,7 @@ const double atm = 1.01325 * bar; // Standard atmosphere
 
 `const` 关键字不止可以用来声明常量，
 还可以用来创建常量 _值_ 。
-你也可以将构造器声明为 const 的，
+您也可以将构造器声明为 const 的，
 这种类型的构造器 _创建_ 的对象是不可改变的。
 
 <?code-excerpt "misc/lib/language_tour/variables.dart (const-vs-final)"?>
@@ -406,7 +406,7 @@ Those can't be initialized using literals, but they do have special support.
 由于 Dart 中每个变量都引用一个对象（一个 *类* 的实例），
 您通常也可以使用 *构造器* 来初始化变量。
 一些内置的类型有它们自己的构造器。
-例如你可以使用 `Map()` 来创建一个 map 对象。
+例如您可以使用 `Map()` 来创建一个 map 对象。
 
 
 ### Numbers
@@ -975,7 +975,7 @@ print('The end of the string: ${hi.substring(hi.length - 1)}');
 print('The last character: ${hi.characters.last}\n');
 ```
 
-输出的内容取决于你的环境，看上去会像这样：
+输出的内容取决于您的环境，看上去会像这样：
 
 ```terminal
 $ dart bin/main.dart
@@ -1031,7 +1031,7 @@ symbol 字面量是编译时常量。
 Dart 是真正的面向对象的语言，因此函数也是对象，
 并且具有类型 [Function.][Function API reference]
 这意味着函数可以赋值给变量，或者作为参数传递给其他函数。
-你也可以像调用函数一样调用 Dart 类的实例。
+您也可以像调用函数一样调用 Dart 类的实例。
 详情请参阅 [可调用的类](#callable-classes)。
 
 下面是一个实现函数的例子：
@@ -1923,7 +1923,7 @@ sb.write('foo')
 
 ## 流程控制语句
 
-你可以使用下面的语句来控制 Dart 代码的执行流程：
+您可以使用下面的语句来控制 Dart 代码的执行流程：
 
 -   `if` 和 `else`
 -   `for` 循环
@@ -3103,7 +3103,7 @@ void main() {
 ```
 
 如果您重写 `==` 操作符，必须也同时重写对象的 `hashCode` 的 Getter 方法。
-你可以查阅 [实现映射键](/guides/libraries/library-tour#implementing-map-keys) 
+您可以查阅 [实现映射键](/guides/libraries/library-tour#implementing-map-keys) 
 获取更多关于重写 `==` 和 `hashCode` 的例子。
 
 更多关于重写的信息，请查阅
@@ -3118,7 +3118,7 @@ void main() {
 <?code-excerpt "misc/lib/language_tour/classes/no_such_method.dart" replace="/noSuchMethod(?!,)/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
 class A {
-  // 除非你重写 noSuchMethod，
+  // 除非您重写 noSuchMethod，
   // 否则调用一个不存在的成员会导致 NoSuchMethodError。
   @override
   void [!noSuchMethod!](Invocation invocation) {
@@ -3558,36 +3558,31 @@ var foo = [!Foo<Object>!]();
 [使用泛型方法](https://github.com/dart-lang/sdk/blob/master/pkg/dev_compiler/doc/GENERIC_METHODS.md) 。
 
 
-## Libraries and visibility
+## 库和可见性
 
-The `import` and `library` directives can help you create a
-modular and shareable code base. Libraries not only provide APIs, but
-are a unit of privacy: identifiers that start with an underscore (\_)
-are visible only inside the library. *Every Dart app is a library*, even
-if it doesn’t use a `library` directive.
+`import` 和 `library` 关键字可以帮助您创建一个模块化和可共享的代码库。
+代码库不仅只提供 API 而且还起到了封装的作用：以下划线 (\_) 开头的成员仅在代码库中可见。
+*每个 Dart 程序都是一个库* ，即便没有使用关键字 `library` 指定。
 
-Libraries can be distributed using [packages](/guides/packages).
+Dart 的库可以使用 [包](/guides/packages) 工具来发布和部署。
 
 
-### Using libraries
+### 使用库
 
-Use `import` to specify how a namespace from one library is used in the
-scope of another library.
+使用 `import` 指定如何在另一个库的范围内使用来自某一个库的命名空间。
 
-For example, Dart web apps generally use the [dart:html][]
-library, which they can import like this:
+例如，Dart Web 应用程序通常使用 [dart:html][] 库，
+可以像这样导入：
 
 <?code-excerpt "misc/test/language_tour/browser_test.dart (dart-html-import)"?>
 ```dart
 import 'dart:html';
 ```
 
-The only required argument to `import` is a URI specifying the
-library.
-For built-in libraries, the URI has the special `dart:` scheme.
-For other libraries, you can use a file system path or the `package:`
-scheme. The `package:` scheme specifies libraries provided by a package
-manager such as the pub tool. For example:
+`import` 所需的惟一参数是指定库的 URI。
+对于内置库，URI 具有特殊的 `dart:` 体系（scheme）。
+对于其他库，可以使用文件系统路径或 `package:` 体系。
+`package:` 体系指定包管理器（如 pub 工具）提供的库。例如：
 
 <?code-excerpt "misc/test/language_tour/browser_test.dart (package-import)"?>
 ```dart
@@ -3595,75 +3590,72 @@ import 'package:test/test.dart';
 ```
 
 {{site.alert.note}}
-  *URI* stands for uniform resource identifier.
-  *URLs* (uniform resource locators) are a common kind of URI.
+  *URI* 代表统一资源标识符。
+  *URLs* （统一资源定位符）是一种常见的 URI。
 {{site.alert.end}}
 
 
-#### Specifying a library prefix
+#### 指定库前缀
 
-If you import two libraries that have conflicting identifiers, then you
-can specify a prefix for one or both libraries. For example, if library1
-and library2 both have an Element class, then you might have code like
-this:
+如果导入的两个库有冲突的标识符，
+则可以为其中一个或两个库指定前缀。
+例如，如果 library1 和 library2 都有一个 Element 类，
+那么您的代码可以像下面这样写：
 
 <?code-excerpt "misc/lib/language_tour/libraries/import_as.dart" replace="/(lib\d)\.dart/package:$1\/$&/g"?>
 ```dart
 import 'package:lib1/lib1.dart';
 import 'package:lib2/lib2.dart' as lib2;
 
-// Uses Element from lib1.
+// 使用 lib1 中的 Element
 Element element1 = Element();
 
-// Uses Element from lib2.
+// 使用 lib2 中的 Element
 lib2.Element element2 = lib2.Element();
 ```
 
-#### Importing only part of a library
+#### 仅导入库的一部分
 
-If you want to use only part of a library, you can selectively import
-the library. For example:
+如果只想使用库的一部分，
+可以有选择地导入库。例如：
 
 <?code-excerpt "misc/lib/language_tour/libraries/show_hide.dart" replace="/(lib\d)\.dart/package:$1\/$&/g"?>
 ```dart
-// Import only foo.
+// 只导入 foo （Import only foo.）
 import 'package:lib1/lib1.dart' show foo;
 
-// Import all names EXCEPT foo.
+// 导入 foo 之外的所有（Import all names EXCEPT foo.）
 import 'package:lib2/lib2.dart' hide foo;
 ```
 
 <a id="deferred-loading"></a>
-#### Lazily loading a library
+#### 延迟加载库
 
-_Deferred loading_ (also called _lazy loading_)
-allows a web app to load a library on demand,
-if and when the library is needed.
-Here are some cases when you might use deferred loading:
+_延迟加载_ （也称为 _懒加载_）允许 web 应用程序在需要库时按需加载库。
+以下是一些可能使用延迟加载的情况：
 
-* To reduce a web app's initial startup time.
-* To perform A/B testing—trying out
-  alternative implementations of an algorithm, for example.
-* To load rarely used functionality, such as optional screens and dialogs.
+* 为了减少 web 应用程序的初始启动时间。
+* 执行 A/B 测试——例如，尝试算法的替代实现。
+* 加载很少会使用到的功能，比如可选的屏幕和对话框。
 
 {{site.alert.warn}}
-  **Only dart2js supports deferred loading.**
-  Flutter, the Dart VM, and dartdevc don't support deferred loading.
-  For more information, see
-  [issue #33118](https://github.com/dart-lang/sdk/issues/33118) and
-  [issue #27776.](https://github.com/dart-lang/sdk/issues/27776)
+  **只有 dart2js 支持延迟加载。**
+  Flutter、 Dart VM 和 dartdevc 不支持延迟加载。
+  更多信息，请参考
+  [issue #33118](https://github.com/dart-lang/sdk/issues/33118) 和
+  [issue #27776](https://github.com/dart-lang/sdk/issues/27776) 。
 {{site.alert.end}}
 
-To lazily load a library, you must first
-import it using `deferred as`.
+要延迟加载库，
+首先必须使用 `deferred as` 导入它。
 
 <?code-excerpt "misc/lib/language_tour/libraries/greeter.dart (import)" replace="/hello\.dart/package:greetings\/$&/g"?>
 ```dart
 import 'package:greetings/hello.dart' deferred as hello;
 ```
 
-When you need the library, invoke
-`loadLibrary()` using the library's identifier.
+当需要使用到这个库时，
+使用库的标识符调用 `loadLibrary()` 加载库。
 
 <?code-excerpt "misc/lib/language_tour/libraries/greeter.dart (loadLibrary)"?>
 ```dart
@@ -3673,38 +3665,32 @@ Future greet() async {
 }
 ```
 
-In the preceding code,
-the `await` keyword pauses execution until the library is loaded.
-For more information about `async` and `await`,
-see [asynchrony support](#asynchrony-support).
+在前面的代码中，使用 `await` 关键字暂停代码执行直到库加载完成。
+更多关于 `async` 和 `await` 的信息请参考
+[异步支持](#asynchrony-support)。
 
-You can invoke `loadLibrary()` multiple times on a library without problems.
-The library is loaded only once.
+您可以在一个库上多次调用 `loadLibrary()`，没有问题。
+库只加载一次。
 
-Keep in mind the following when you use deferred loading:
+使用延迟加载时，请注意以下几点：
 
-* A deferred library's constants aren't constants in the importing file.
-  Remember, these constants don't exist until the deferred library is loaded.
-* You can't use types from a deferred library in the importing file.
-  Instead, consider moving interface types to a library imported by
-  both the deferred library and the importing file.
-* Dart implicitly inserts `loadLibrary()` into the namespace that you define
-  using <code>deferred as <em>namespace</em></code>.
-  The `loadLibrary()` function returns a [Future](/guides/libraries/library-tour#future).
+* 延迟加载的代码库中的常量需要在代码库被加载的时候才会导入，未加载时是不会导入的。
+* 导入文件的时候无法使用延迟加载库中的类型。
+  如果您需要使用该类型，则考虑把接口类型转移到另一个库中然后让两个库都分别导入这个接口库。
+* Dart 会隐式地将 `loadLibrary()` 方法导入到使用了 <code>deferred as <em>命名空间</em></code> 的命名空间中。
+  `loadLibrary()` 函数返回的是一个 [Future](/guides/libraries/library-tour#future)。
 
 
-### Implementing libraries
+### 实现库
 
-See
-[Create Library Packages](/guides/libraries/create-library-packages)
-for advice on how to implement a library package, including:
+有关如何实现库包的建议，请参阅 
+[创建库包](/guides/libraries/create-library-packages)，包括：
 
-* How to organize library source code.
-* How to use the `export` directive.
-* When to use the `part` directive.
-* When to use the `library` directive.
-* How to use conditional imports and exports to implement
-  a library that supports multiple platforms.
+* 如何组织库源代码。
+* 如何使用 `export` 指令。
+* 何时使用 `part` 指令。
+* 何时使用 `library` 指令。
+* 如何使用条件导入和导出来实现支持多个平台的库。
 
 
 <a id="asynchrony"></a>

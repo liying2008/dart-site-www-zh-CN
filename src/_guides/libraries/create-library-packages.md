@@ -317,7 +317,7 @@ follow these steps:
 
 Use the following resources to learn more about library packages:
 
-* [Libraries and visibility](/guides/language/language-tour#libraries-and-visibility)
+* [Libraries and visibility](/guides/language/language-tour#库和可见性)
   in the [language tour](/guides/language/language-tour) covers
   using library files.
 * The [package](/guides/packages) documentation is useful, particularly the
