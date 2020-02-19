@@ -740,7 +740,7 @@ assert(listOfStrings[1] == '#1');
 [spread proposal]: https://github.com/dart-lang/language/blob/master/accepted/2.3/spread-collections/feature-specification.md
 
 List 类中有许多用于操作 List 的便捷方法，请查阅
-[Generics](#generics) 和
+[Generics](#泛型) 和
 [Collections](/guides/libraries/library-tour#collections) 获取更多信息。
 
 
@@ -826,7 +826,7 @@ final constantSet = const {
 [list 集合操作符](#collection-operators) 。
 
 查看
-[Generics](#generics) 和
+[Generics](#泛型) 和
 [Sets](/guides/libraries/library-tour#sets) 获取更多关于 set 的信息。
 
 ### Maps
@@ -936,7 +936,7 @@ final constantMap = const {
 [control flow collections proposal][collections proposal] 。
 
 查阅
-[Generics](#generics) 和
+[Generics](#泛型) 和
 [Maps](/guides/libraries/library-tour#maps) 获取有关 map 的更多信息。
 
 <a id="characters"></a>
@@ -3359,30 +3359,28 @@ void main() {
 例如，可以将静态方法作为参数传递给常量构造器。
 
 
-## Generics
+## 泛型
 
-If you look at the API documentation for the basic array type,
-[List,][List] you’ll see that the
-type is actually `List<E>`. The \<...\> notation marks List as a
-*generic* (or *parameterized*) type—a type that has formal type
-parameters. [By convention][], most type variables have single-letter names,
-such as E, T, S, K, and V.
+如果您查看基本数组类型 [List][List] 的 API 文档，
+您会发现该类型实际上是 `List<E>`。
+\<...\> 标记表示 List 是一个 *泛型*（或 *参数化类型*）。
+[按照惯例][By convention]，大多数类型变量都有单字母的名称，比如 E、T、S、K 和 V。
 
 [By convention]: /guides/language/effective-dart/design#do-follow-existing-mnemonic-conventions-when-naming-type-parameters
 
 
-### Why use generics?
+### 为什么使用泛型？
 
-Generics are often required for type safety, but they have more benefits
-than just allowing your code to run:
+为了类型安全，通常需要使用泛型，
+但是泛型带来的好处不仅仅是允许代码运行：
 
-* Properly specifying generic types results in better generated code.
-* You can use generics to reduce code duplication.
+* 正确指定泛型类型可以生成更好的代码。
+* 您可以使用泛型来减少代码重复。
 
-If you intend for a list to contain only strings, you can
-declare it as `List<String>` (read that as “list of string”). That way
-you, your fellow programmers, and your tools can detect that assigning a non-string to
-the list is probably a mistake. Here’s an example:
+比如您想声明一个只能包含 String 类型的 list，
+您可以将该 list 声明为 `List<String>`（读作 “String类型的list”），
+这样的话，就可以很容易避免因为向该 list 放入非 String 类型的变量而导致的诸多问题，
+同时编译器以及其他编程人员都可以很容易地发现并定位问题：
 
 {:.fails-sa}
 <?code-excerpt "misc/lib/language_tour/generics/misc.dart (why-generics)"?>
@@ -3392,11 +3390,10 @@ names.addAll(['Seth', 'Kathy', 'Lars']);
 names.add(42); // Error
 ```
 
-Another reason for using generics is to reduce code duplication.
-Generics let you share a single interface and implementation between
-many types, while still taking advantage of static
-analysis. For example, say you create an interface for
-caching an object:
+使用泛型的另一个原因是减少代码重复。
+泛型使您可以在多种类型之间共享单个接口和实现，
+同时仍可以利用静态分析。
+例如，假设您创建一个用于缓存对象的接口：
 
 <?code-excerpt "misc/lib/language_tour/generics/cache.dart (ObjectCache)"?>
 ```dart
@@ -3406,8 +3403,8 @@ abstract class ObjectCache {
 }
 ```
 
-You discover that you want a string-specific version of this interface,
-so you create another interface:
+您发现您想要一个只适用于 String 类型的版本，
+因此您创建了另一个接口：
 
 <?code-excerpt "misc/lib/language_tour/generics/cache.dart (StringCache)"?>
 ```dart
@@ -3417,11 +3414,10 @@ abstract class StringCache {
 }
 ```
 
-Later, you decide you want a number-specific version of this
-interface... You get the idea.
+然后，您又想要一个只适用于 number 类型的版本……
 
-Generic types can save you the trouble of creating all these interfaces.
-Instead, you can create a single interface that takes a type parameter:
+泛型类型可以省去创建所有这些接口的麻烦。
+您可以创建一个带有类型参数的接口：
 
 <?code-excerpt "misc/lib/language_tour/generics/cache.dart (Cache)"?>
 ```dart
@@ -3431,17 +3427,17 @@ abstract class Cache<T> {
 }
 ```
 
-In this code, T is the stand-in type. It’s a placeholder that you can
-think of as a type that a developer will define later.
+在这个代码中，T 是替代类型。
+您可以将其视为一个占位符，它的类型将由开发人员稍后定义。
 
 
-### Using collection literals
+### 使用集合字面量
 
-List, set, and map literals can be parameterized. Parameterized literals are
-just like the literals you’ve already seen, except that you add
-<code>&lt;<em>type</em>></code> (for lists and sets) or
-<code>&lt;<em>keyType</em>, <em>valueType</em>></code> (for maps)
-before the opening bracket. Here is an example of using typed literals:
+list、set 和 map 字面量可以被参数化。
+参数化的字面量与您已经看到的字面量一样，
+只不过是在左括号之前添加了 <code>&lt;<em>type</em>></code>（用于 list 和 set）
+或 <code>&lt;<em>keyType</em>, <em>valueType</em>></code>（用于 map）。
+下面是使用类型字面量的示例：
 
 <?code-excerpt "misc/lib/language_tour/generics/misc.dart (collection-literals)"?>
 ```dart
@@ -3455,10 +3451,10 @@ var pages = <String, String>{
 ```
 
 
-### Using parameterized types with constructors
+### 使用参数化类型的构造器
 
-To specify one or more types when using a constructor, put the types in
-angle brackets (`<...>`) just after the class name. For example:
+要在使用构造器时指定一种或多种类型，
+请将类型放在类名之后的尖括号（`<...>`）中。例如：
 
 <?code-excerpt "misc/test/language_tour/generics_test.dart (constructor-1)"?>
 ```dart
@@ -3467,8 +3463,7 @@ var nameSet = Set<String>.from(names);
 
 {% comment %}[PENDING: update this sample; it ]{% endcomment %}
 
-The following code creates a map that has integer keys and values of
-type View:
+下面的代码创建了一个具有 int 类型的键和 View 类型的值的 map：
 
 <?code-excerpt "misc/test/language_tour/generics_test.dart (constructor-2)"?>
 ```dart
