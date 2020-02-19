@@ -3471,11 +3471,11 @@ var views = Map<int, View>();
 ```
 
 
-### Generic collections and the types they contain
+### 泛型集合及其包含的类型
 
-Dart generic types are *reified*, which means that they carry their type
-information around at runtime. For example, you can test the type of a
-collection:
+Dart 的泛型类型是 *具体化的（reified）*，
+这意味着即便在运行时也会保留类型信息，
+例如，您可以检测集合的类型：
 
 <?code-excerpt "misc/test/language_tour/generics_test.dart (generic-collections)"?>
 ```dart
@@ -3485,17 +3485,16 @@ print(names is List<String>); // true
 ```
 
 {{site.alert.note}}
-  In contrast, generics in Java use *erasure*, which means that generic
-  type parameters are removed at runtime. In Java, you can test whether
-  an object is a List, but you can’t test whether it’s a `List<String>`.
+  相反，Java 中的泛型使用了 *擦除（erasure）*，
+  这意味着泛型类型参数在运行时被删除。
+  在 Java 中，您可以检测对象是否为 List，但不能检测对象是否为 `List<String>`。
 {{site.alert.end}}
 
 
-### Restricting the parameterized type
+### 限制参数化类型
 
-When implementing a generic type,
-you might want to limit the types of its parameters.
-You can do this using `extends`.
+有时使用泛型的时候可能会想限制泛型的类型范围，
+这时候可以使用 `extends` 关键字：
 
 <?code-excerpt "misc/lib/language_tour/generics/base_class.dart" replace="/extends SomeBaseClass(?=. \{)/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
@@ -3507,7 +3506,7 @@ class Foo<T [!extends SomeBaseClass!]> {
 class Extender extends SomeBaseClass {...}
 {% endprettify %}
 
-It's OK to use `SomeBaseClass` or any of its subclasses as generic argument:
+这时候就可以将 `SomeBaseClass` 或其子类用作泛型参数：
 
 <?code-excerpt "misc/test/language_tour/generics_test.dart (SomeBaseClass-ok)" replace="/Foo.\w+./[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
@@ -3515,15 +3514,15 @@ var someBaseClassFoo = [!Foo<SomeBaseClass>!]();
 var extenderFoo = [!Foo<Extender>!]();
 {% endprettify %}
 
-It's also OK to specify no generic argument:
+也可以不指定泛型参数：
 
 <?code-excerpt "misc/test/language_tour/generics_test.dart (no-generic-arg-ok)" replace="/expect\((.*?).toString\(\), .(.*?).\);/print($1); \/\/ $2/g"?>
 ```dart
 var foo = Foo();
-print(foo); // Instance of 'Foo<SomeBaseClass>'
+print(foo); // foo 是 'Foo<SomeBaseClass>' 的实例
 ```
 
-Specifying any non-`SomeBaseClass` type results in an error:
+指定任何非 `SomeBaseClass` 类型都会导致错误：
 
 {:.fails-sa}
 <?code-excerpt "misc/lib/language_tour/generics/misc.dart (Foo-Object-error)" replace="/Foo.\w+./[!$&!]/g"?>
@@ -3532,10 +3531,10 @@ var foo = [!Foo<Object>!]();
 {% endprettify %}
 
 
-### Using generic methods
+### 使用泛型方法
 
-Initially, Dart's generic support was limited to classes.
-A newer syntax, called _generic methods_, allows type arguments on methods and functions:
+起初 Dart 只支持在类上使用泛型，
+现在较新的语法也支持在方法和函数上使用泛型，称之为 _泛型方法_ ：
 
 <!-- {{site.dartpad}}/a02c53b001977efa4d803109900f21bb -->
 <!-- https://gist.github.com/a02c53b001977efa4d803109900f21bb -->
@@ -3549,15 +3548,14 @@ A newer syntax, called _generic methods_, allows type arguments on methods and f
 }
 {% endprettify %}
 
-Here the generic type parameter on `first` (`<T>`)
-allows you to use the type argument `T` in several places:
+方法 `first` (`<T>`) 的泛型 `T` 可以在如下地方使用：
 
-* In the function's return type (`T`).
-* In the type of an argument (`List<T>`).
-* In the type of a local variable (`T tmp`).
+* 函数的返回值类型 (`T`)。
+* 参数的类型 (`List<T>`)。
+* 局部变量的类型 (`T tmp`)。
 
-For more information about generics, see
-[Using Generic Methods.](https://github.com/dart-lang/sdk/blob/master/pkg/dev_compiler/doc/GENERIC_METHODS.md)
+有关泛型的更详细信息，请参考
+[使用泛型方法](https://github.com/dart-lang/sdk/blob/master/pkg/dev_compiler/doc/GENERIC_METHODS.md) 。
 
 
 ## Libraries and visibility

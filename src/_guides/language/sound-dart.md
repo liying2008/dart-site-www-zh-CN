@@ -341,7 +341,7 @@ y = 4.0;
 ### Type argument inference
 
 Type arguments to constructor calls and
-[generic method](/guides/language/language-tour#using-generic-methods) invocations are
+[generic method](/guides/language/language-tour#使用泛型方法) invocations are
 inferred based on a combination of downward information from the context
 of occurrence, and upward information from the arguments to the constructor
 or generic method. If inference is not doing what you want or expect,
