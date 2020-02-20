@@ -3779,36 +3779,34 @@ Future main() [!async!] {
 
 
 <a id="async"></a>
-### Declaring async functions
+### 声明异步函数
 
-An `async` function is a function whose body is marked with
-the `async` modifier.
+定义 *异步函数* 只需在普通函数上加上 `async` 修饰符即可。
 
-Adding the `async` keyword to a function makes it return a Future.
-For example, consider this synchronous function,
-which returns a String:
+向函数中添加 `async` 关键字将使函数返回一个 Future 对象。
+例如，下面这个同步函数，它返回一个字符串：
 
 <?code-excerpt "misc/lib/language_tour/async.dart (sync-lookUpVersion)"?>
 ```dart
 String lookUpVersion() => '1.0.0';
 ```
 
-If you change it to be an `async` function—for example,
-because a future implementation will be time consuming—the
-returned value is a Future:
+如果您将它更改为异步函数（比如，因为将来的实现将非常耗时），
+那么返回值就是一个 Future 对象：
 
 <?code-excerpt "misc/lib/language_tour/async.dart (async-lookUpVersion)"?>
 ```dart
 Future<String> lookUpVersion() async => '1.0.0';
 ```
 
-Note that the function's body doesn't need to use the Future API.
-Dart creates the Future object if necessary.
-If your function doesn't return a useful value,
-make its return type `Future<void>`.
+请注意，函数体不需要使用 Future API 。
+Dart 会在必要时创建 Future 对象。
+如果您的函数未返回有用的值，
+请将其返回类型设置为 `Future<void>` 。
 
-For an interactive introduction to using futures, `async`, and `await`,
-see the [asynchronous programming codelab](/codelabs/async-await).
+有关使用 futures、`async` 和 `await` 的交互式介绍，
+请参阅
+[异步编程 codelab](/codelabs/async-await) 。
 
 {% comment %}
 TODO: Where else should we cover generalized void?
@@ -3816,48 +3814,44 @@ TODO: Where else should we cover generalized void?
 
 
 <a id="await-for"></a>
-### Handling Streams
+### 处理 Stream
 
-When you need to get values from a Stream,
-you have two options:
+如果想从 Stream 中获取值，
+可以有两种选择：
 
-* Use `async` and an _asynchronous for loop_ (`await for`).
-* Use the Stream API, as described
-  [in the library tour](/guides/libraries/library-tour#stream).
+* 使用 `async` 和 _异步 for 循环_ (`await for`)。
+* 使用 Stream API，如
+  [库概览](/guides/libraries/library-tour#stream) 中所述。
 
 {{site.alert.note}}
-  Before using `await for`, be sure that it makes the code clearer and that you
-  really do want to wait for all of the stream's results. For example, you
-  usually should **not** use `await for` for UI event listeners, because UI
-  frameworks send endless streams of events.
+  在使用 `await for` 之前，请确保其可以令代码逻辑更加清晰
+  并且是真的需要等待所有的结果执行完毕。
+  例如，通常 **不应该** 在 UI 事件监听器上使用 `await for` 关键字，
+  因为 UI 框架发出的事件流是无穷尽的。
 {{site.alert.end}}
 
-An asynchronous for loop has the following form:
+使用 `await for` 定义异步 for 循环看起来是这样的：
 
 <?code-excerpt "misc/lib/language_tour/async.dart (await-for)"?>
 ```dart
 await for (varOrType identifier in expression) {
-  // Executes each time the stream emits a value.
+  // 每当 stream 发出一个值时会执行
 }
 ```
 
-The value of <code><em>expression</em></code> must have type Stream.
-Execution proceeds as follows:
+上面 <code><em>expression</em></code> 的值必须具有 Stream 类型。
+执行过程如下：
 
-1. Wait until the stream emits a value.
-2. Execute the body of the for loop,
-   with the variable set to that emitted value.
-3. Repeat 1 and 2 until the stream is closed.
+1. 等待直到 Stream 返回一个数据。
+2. 使用 Stream 返回的数据执行 for 循环体。
+3. 重复 1、2 过程直到 Stream 数据返回完毕（流关闭）。
 
-To stop listening to the stream,
-you can use a `break` or `return` statement,
-which breaks out of the for loop
-and unsubscribes from the stream.
+使用 `break` 或 `return` 语句可以停止接收 Stream 数据，
+这样就跳出了循环并取消订阅 Stream。
 
-**If you get a compile-time error when implementing an asynchronous for loop,
-make sure the `await for` is in an `async` function.**
-For example, to use an asynchronous for loop in your app's `main()` function,
-the body of `main()` must be marked as `async`:
+**如果在使用异步 for 循环时出现编译时错误，请确保 `await for` 是在 `async` 函数中。**
+例如，如果想在程序的 `main()` 函数中使用异步 for 循环，
+那么 `main()` 函数必须标记为 `async`：
 
 <?code-excerpt "misc/lib/language_tour/async.dart (number_thinker)" replace="/async|await for/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
@@ -3870,9 +3864,8 @@ Future main() [!async!] {
 }
 {% endprettify %}
 
-For more information about asynchronous programming, in general, see the
-[dart:async](/guides/libraries/library-tour#dartasync---asynchronous-programming)
-section of the library tour.
+有关异步编程的更多信息，请参阅库概览的
+[dart:async](/guides/libraries/library-tour#dartasync---asynchronous-programming) 部分。
 
 
 <a id="generator"></a>
