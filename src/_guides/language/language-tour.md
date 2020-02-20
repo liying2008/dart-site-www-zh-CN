@@ -16,8 +16,9 @@ short-title: Language tour
 
 {{site.alert.note}}
   您可以使用 DartPad 来体验大部分 Dart 语言的特性
-  ([learn more](/tools/dartpad))。
-  **<a href="{{ site.dartpad }}" target="_blank">Open DartPad</a>**
+  ([了解更多](/tools/dartpad))。
+  **<a href="{{site.dartpad}}" target="_blank" rel="noopener">Open
+  DartPad.</a>**
 
   此页面使用嵌入式 DartPads 显示一些示例。
   {% include dartpads-embedded-troubleshooting.md %}
