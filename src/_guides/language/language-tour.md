@@ -4053,18 +4053,15 @@ void main() {
 }
 ```
 
-## Metadata
+## 元数据
 
-Use metadata to give additional information about your code. A metadata
-annotation begins with the character `@`, followed by either a reference
-to a compile-time constant (such as `deprecated`) or a call to a
-constant constructor.
+使用元数据可以为代码增加一些额外的信息。
+元数据注解以 `@` 开头，其后紧跟一个编译时常量（例如 `deprecated`）
+或者调用一个常量构造器。
 
-Two annotations are available to all Dart code: `@deprecated` and
-`@override`. For examples of using `@override`,
-see [Extending a class](#类的扩展).
-Here’s an example of using the `@deprecated`
-annotation:
+Dart 中有两个注解是所有代码都可以使用的：`@deprecated` 和 `@override`。
+有关使用 `@override` 的示例请查看 [类的扩展](#类的扩展)。
+下面是使用 `@deprecated` 的示例：
 
 <?code-excerpt "misc/lib/language_tour/metadata/television.dart (deprecated)" replace="/@deprecated/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
@@ -4080,8 +4077,8 @@ class Television {
 }
 {% endprettify %}
 
-You can define your own metadata annotations. Here’s an example of
-defining a @todo annotation that takes two arguments:
+您可以定义自己的元数据注解。
+下面是一个定义带有两个参数的 @todo 注解的例子：
 
 <?code-excerpt "misc/lib/language_tour/metadata/todo.dart"?>
 ```dart
@@ -4095,7 +4092,7 @@ class Todo {
 }
 ```
 
-And here’s an example of using that @todo annotation:
+下面是一个使用 @todo 注解的例子：
 
 <?code-excerpt "misc/lib/language_tour/metadata/misc.dart"?>
 ```dart
@@ -4107,10 +4104,9 @@ void doSomething() {
 }
 ```
 
-Metadata can appear before a library, class, typedef, type parameter,
-constructor, factory, function, field, parameter, or variable
-declaration and before an import or export directive. You can
-retrieve metadata at runtime using reflection.
+元数据可以出现在库、类、类型定义、类型参数、构造器、工厂、函数、字段、参数或变量声明之前，
+也可以出现在导入或导出指令之前。
+您可以在运行时使用反射获取元数据。
 
 
 ## Comments
