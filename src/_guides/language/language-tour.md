@@ -2204,7 +2204,7 @@ assert(urlString.startsWith('https'),
 
 Dart 代码可以抛出和捕获异常。
 异常是表示发生了意外的错误。
-如果异常没有被捕获，抛出异常的 [隔离区](#isolates) 将被挂起，
+如果异常没有被捕获，抛出异常的 [隔离区](#隔离区) 将被挂起，
 隔离区及其程序将被终止。
 
 与 Java 不同的是，Dart 的所有异常都是非必检异常。
@@ -3951,24 +3951,24 @@ src="{{site.dartpad-embed-inline}}?id=405379bacf30335f3aed"
 </iframe>
 
 
-## Isolates
+## 隔离区
 
-Most computers, even on mobile platforms, have multi-core CPUs.
-To take advantage of all those cores, developers traditionally use
-shared-memory threads running concurrently. However, shared-state
-concurrency is error prone and can lead to complicated code.
+大多数计算机，甚至在移动平台上，都有多核 CPU。
+为了利用所有这些核心，开发人员通常使用并发运行的共享内存线程。
+然而，共享状态并发很容易出错，并可能导致复杂的代码。
 
-Instead of threads, all Dart code runs inside of *isolates*. Each
-isolate has its own memory heap, ensuring that no isolate’s state is
-accessible from any other isolate.
+为了解决多线程带来的并发问题，
+Dart 使用 *隔离区（isolates）* 替代线程，
+所有的 Dart 代码均运行在隔离区中。
+每一个隔离区有它自己的堆内存以确保其状态不被其它隔离区访问。
 
-For more information, see the following:
-* [Dart asynchronous programming: Isolates and event loops][isolates article]
-* [dart:isolate API reference,][dart:isolate]
-  including [Isolate.spawn()][] and
+要想获取更多信息，请查阅以下资料：
+* [Dart 异步编程: 隔离区和事件循环][isolates article]
+* [dart:isolate API 参考][dart:isolate]，其中
+  包括 [Isolate.spawn()][] 和
   [TransferableTypedData][]
-* [Background parsing][background json] cookbook on the Flutter site
-* [Isolate sample app][]
+* Flutter 网站上的 [后台解析][background json] cookbook
+* [Isolate 示例应用程序][Isolate sample app]
 
 [isolates article]: https://medium.com/dartlang/dart-asynchronous-programming-isolates-and-event-loops-bffc3e296a6a
 [Isolate.spawn()]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-isolate/Isolate/spawn.html
