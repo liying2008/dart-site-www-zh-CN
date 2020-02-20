@@ -4197,15 +4197,16 @@ class Llama {
 [Dart 文档注释指南](/guides/language/effective-dart/documentation) 。
 
 
-## Summary
+## 总结
 
-This page summarized the commonly used features in the Dart language.
-More features are being implemented, but we expect that they won’t break
-existing code. For more information, see the [Dart language specification][] and
-[Effective Dart](/guides/language/effective-dart).
+本页总结了 Dart 语言中常用的特性。
+更多的特性正在被实现，但是我们期望它们不会破坏现有的代码。
+有关更多信息，请查看 [Dart语言规范][Dart language specification] 和
+[Effective Dart](/guides/language/effective-dart) 。
 
-To learn more about Dart's core libraries, see
-[A Tour of the Dart Libraries](/guides/libraries/library-tour).
+要了解关于 Dart 核心库的更多信息，
+请查阅
+[库概览](/guides/libraries/library-tour) 。
 
 [AssertionError]: {{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-core/AssertionError-class.html
 [`Characters`]: {{site.pub-api}}/characters/latest/characters/Characters-class.html
