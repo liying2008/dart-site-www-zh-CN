@@ -206,7 +206,7 @@ main() {
 [throw]: #抛出异常
 [true]: #booleans
 [try]: #捕获异常
-[typedef]: #typedefs
+[typedef]: #类型定义
 [var]: #变量
 [void]: https://medium.com/dartlang/dart-2-legacy-of-the-void-e7afb5f44df0
 {% comment %}
@@ -3977,14 +3977,14 @@ Dart 使用 *隔离区（isolates）* 替代线程，
 [Isolate sample app]: https://github.com/flutter/samples/tree/master/isolate_example
 
 
-## Typedefs
+## 类型定义
 
-In Dart, functions are objects, just like strings and numbers are
-objects. A *typedef*, or *function-type alias*, gives a function type a
-name that you can use when declaring fields and return types. A typedef
-retains type information when a function type is assigned to a variable.
+在 Dart 中，函数是对象，就像字符串和数字是对象一样。
+*typedef* ，也叫 *函数类型别名*，为函数类型提供了一个名称，
+您可以在声明字段和返回值类型时使用该名称。
+当将函数类型分配给变量时，typedef 保留类型信息。
 
-Consider the following code, which doesn't use a typedef:
+比如下面的代码没有使用类型定义：
 
 <?code-excerpt "misc/lib/language_tour/typedefs/sorted_collection_1.dart"?>
 ```dart
@@ -4008,11 +4008,11 @@ void main() {
 }
 ```
 
-Type information is lost when assigning `f` to `compare`. The type of
-`f` is `(Object, ``Object)` → `int` (where → means returns), yet the
-type of `compare` is Function. If we change the code to use explicit
-names and retain type information, both developers and tools can use
-that information.
+上述代码中，当将参数 `f` 赋值给 `compare` 时，函数的类型信息丢失了。
+这里 `f` 的类型为 `(Object, ``Object)` → `int`（→ 代表返回），
+然而 `compare` 的类型是 Function。
+如果我们更改代码以使用显式名称并保留类型信息，
+那么开发人员和工具都可以使用这些信息。
 
 <?code-excerpt "misc/lib/language_tour/typedefs/sorted_collection_2.dart"?>
 ```dart
@@ -4035,12 +4035,12 @@ void main() {
 ```
 
 {{site.alert.note}}
-  Currently, typedefs are restricted to function types. We expect this to
-  change.
+  目前类型定义只能用在函数类型上。
+  但是将来可能会有变化。
 {{site.alert.end}}
 
-Because typedefs are simply aliases, they offer a way to check the type
-of any function. For example:
+因为类型定义只是别名，
+所以它们提供了一种检查任何函数类型的方法。例如：
 
 <?code-excerpt "misc/lib/language_tour/typedefs/misc.dart (compare)"?>
 ```dart
