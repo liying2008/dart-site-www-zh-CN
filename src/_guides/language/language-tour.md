@@ -1032,7 +1032,7 @@ Dart 是真正的面向对象的语言，因此函数也是对象，
 并且具有类型 [Function.][Function API reference]
 这意味着函数可以赋值给变量，或者作为参数传递给其他函数。
 您也可以像调用函数一样调用 Dart 类的实例。
-详情请参阅 [可调用的类](#callable-classes)。
+详情请参阅 [可调用的类](#可调用的类)。
 
 下面是一个实现函数的例子：
 
@@ -3916,14 +3916,15 @@ Iterable<int> naturalsDownFrom(int n) sync* {
 ```
 
 
-## Callable classes
+## 可调用的类
 
-To allow an instance of your Dart class to be called like a function,
-implement the `call()` method.
+若要允许像调用函数一样调用 Dart 类的实例，
+请实现 `call()` 方法。
 
-In the following example, the `WannabeFunction` class defines a call() function
-that takes three strings and concatenates them, separating each with a space,
-and appending an exclamation. Click **Run** to execute the code.
+在下面的示例中，`WannabeFunction` 类定义了一个 `call()` 函数，
+该函数接受三个字符串并将它们连接起来，
+每个字符串之间用空格隔开，并附加一个感叹号。
+点击 **Run** 执行代码。
 
 {% comment %}
 https://gist.github.com/405379bacf30335f3aed
