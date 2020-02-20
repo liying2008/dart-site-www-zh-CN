@@ -358,7 +358,7 @@ Stream<String> report(Spacecraft craft, Iterable<String> objects) async* {
 }
 {% endprettify %}
 
-[Read more](/guides/language/language-tour#asynchrony-support) about
+[Read more](/guides/language/language-tour#异步支持) about
 asynchrony support, including `async` functions, `Future`, `Stream`,
 and the asynchronous loop (`await for`).
 

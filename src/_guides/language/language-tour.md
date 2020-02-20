@@ -120,7 +120,7 @@ main() {
 
 -   Dart 工具可以报告两种类型的问题： _警告_ 和 _错误_ 。
     警告仅表示您的代码可能无法工作，但并不会阻止程序运行。
-    错误分为 编译期错误 和 运行期错误。编译期错误会直接导致程序无法执行，
+    错误分为 编译时错误 和 运行时错误。编译时错误会直接导致程序无法执行，
     运行期错误会在代码执行时抛出[异常](#异常)。
 
 
@@ -151,8 +151,8 @@ main() {
 [abstract]: #抽象类
 [as]: #类型判断运算符
 [assert]: #断言
-[async]: #asynchrony-support
-[await]: #asynchrony-support
+[async]: #异步支持
+[await]: #异步支持
 [break]: #break-和-continue
 [case]: #switch-和-case
 [catch]: #捕获异常
@@ -229,7 +229,7 @@ main() {
   但它们不能用作类或类型名，也不能用作导入前缀。
 
 * 带有上标 **3** 的单词是较新的、有限的保留单词，
-  它们与 Dart 1.0 版本之后添加的 [异步支持](#asynchrony-support)有关。
+  它们与 Dart 1.0 版本之后添加的 [异步支持](#异步支持)有关。
   您不能在任何标有 `async`、 `async*` 或 `sync*` 的函数体中使用 `await` 或 `yield` 作为标识符。
 
 表格中的所有其他单词均为 **保留字**，不能用作标识符。
@@ -325,7 +325,7 @@ name = 'Alice'; // 错误：final 变量只能被赋值一次
 
 使用 `const` 修饰的变量为 **编译时常量**。
 如果使用 const 修饰类中的变量，则必须加上 `static` 关键字，即 `static const`。
-声明 const 变量，须将其值设置为编译期常数，例如数字或字符串字面量、const 变量或对常数进行算术运算的结果：
+声明 const 变量，须将其值设置为编译时常数，例如数字或字符串字面量、const 变量或对常数进行算术运算的结果：
 
 <?code-excerpt "misc/lib/language_tour/variables.dart (const)"?>
 ```dart
@@ -3667,7 +3667,7 @@ Future greet() async {
 
 在前面的代码中，使用 `await` 关键字暂停代码执行直到库加载完成。
 更多关于 `async` 和 `await` 的信息请参考
-[异步支持](#asynchrony-support)。
+[异步支持](#异步支持)。
 
 您可以在一个库上多次调用 `loadLibrary()`，没有问题。
 库只加载一次。
@@ -3694,43 +3694,35 @@ Future greet() async {
 
 
 <a id="asynchrony"></a>
-## Asynchrony support
+## 异步支持
 
-Dart libraries are full of functions that
-return [Future][] or [Stream][] objects.
-These functions are _asynchronous_:
-they return after setting up
-a possibly time-consuming operation
-(such as I/O),
-without waiting for that operation to complete.
+Dart 代码库中有大量返回 [Future][] 或 [Stream][] 对象的函数。
+这些函数都是 _异步_ 的，它们会在耗时操作（比如 I/O）执行完毕前直接返回
+而不会等待耗时操作执行完毕。
 
-The `async` and `await` keywords support asynchronous programming,
-letting you write asynchronous code that
-looks similar to synchronous code.
+`async` 和 `await` 关键字支持异步编程，
+允许您编写类似于同步代码的异步代码。
 
 
 <a id="await"></a>
-### Handling Futures
+### 处理 Future
 
-When you need the result of a completed Future,
-you have two options:
+可以通过下面两种方式，
+获得 Future 执行完成的结果：
 
-* Use `async` and `await`.
-* Use the Future API, as described
-  [in the library tour](/guides/libraries/library-tour#future).
+* 使用 `async` 和 `await` 。
+* 使用 Future API，如
+  [库概览](/guides/libraries/library-tour#future) 中所述。
 
-Code that uses `async` and `await` is asynchronous,
-but it looks a lot like synchronous code.
-For example, here's some code that uses `await`
-to wait for the result of an asynchronous function:
+使用 `async` 和 `await` 的代码是异步的，但是看起来很像同步代码。
+例如，下面的代码使用 `await` 等待异步函数的执行结果：
 
 <?code-excerpt "misc/lib/language_tour/async.dart (await-lookUpVersion)"?>
 ```dart
 await lookUpVersion();
 ```
 
-To use `await`, code must be in an `async` function—a
-function marked as `async`:
+要使用 `await` ，代码必须位于 `async` 函数中（有 `async` 标记的函数）：
 
 <?code-excerpt "misc/lib/language_tour/async.dart (checkVersion)" replace="/async|await/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}
@@ -3741,28 +3733,25 @@ Future checkVersion() [!async!] {
 {% endprettify %}
 
 {{site.alert.note}}
-  Although an `async` function might perform time-consuming operations, it
-  doesn't wait for those operations. Instead, the `async` function executes only
-  until it encounters its first `await` expression
-  ([details][synchronous-async-start]). Then it returns a Future object,
-  resuming execution only after the `await` expression completes.
+  尽管 `async` 函数可能执行耗时操作，
+  但是它并不会等待这些耗时操作完成。
+  `async` 函数执行时会在其遇到第一个 `await` 表达式（[详情][synchronous-async-start]）的时候返回一个 Future 对象，
+  然后等待 `await` 表达式执行完毕后继续执行。
 {{site.alert.end}}
 
-Use `try`, `catch`, and `finally` to handle errors and cleanup in code that uses
-`await`:
+使用 `try` 、`catch` 以及 `finally` 来处理使用 `await` 导致的异常：
 
 <?code-excerpt "misc/lib/language_tour/async.dart (try-catch)"?>
 ```dart
 try {
   version = await lookUpVersion();
 } catch (e) {
-  // React to inability to look up the version
+  // 对无法查找版本做出反应
 }
 ```
 
-You can use `await` multiple times in an `async` function.
-For example, the following code waits three times
-for the results of functions:
+您可以在异步函数中多次使用 `await`。
+例如，下面的代码等待三次函数结果：
 
 <?code-excerpt "misc/lib/language_tour/async.dart (repeated-await)"?>
 ```dart
@@ -3771,17 +3760,14 @@ var exitCode = await runExecutable(entrypoint, args);
 await flushThenExit(exitCode);
 ```
 
-In <code>await <em>expression</em></code>,
-the value of <code><em>expression</em></code> is usually a Future;
-if it isn't, then the value is automatically wrapped in a Future.
-This Future object indicates a promise to return an object.
-The value of <code>await <em>expression</em></code> is that returned object.
-The await expression makes execution pause until that object is available.
+<code>await <em>表达式</em></code>的返回值通常是一个 Future 对象；
+如果不是的话也会自动将其包裹在一个 Future 对象里。
+Future 对象代表一个“承诺”，
+<code>await <em>表达式</em></code>会阻塞直到需要的对象返回。
 
-**If you get a compile-time error when using `await`,
-make sure `await` is in an `async` function.**
-For example, to use `await` in your app's `main()` function,
-the body of `main()` must be marked as `async`:
+**如果在使用 `await` 时出现编译时错误，请确保 `await` 是在 `async` 函数中。**
+例如，如果想在程序的 `main()` 函数中使用 `await`，
+那么 `main()` 函数必须标记为 `async`：
 
 <?code-excerpt "misc/lib/language_tour/async.dart (main)" replace="/async|await/[!$&!]/g"?>
 {% prettify dart tag=pre+code %}

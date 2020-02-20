@@ -5,7 +5,7 @@ description: Everything you wanted to know about handling errors and exceptions 
 
 In Dart SDK version 1.9,
 the Dart language added
-[asynchrony support](/guides/language/language-tour#asynchrony-support),
+[asynchrony support](/guides/language/language-tour#异步支持),
 making asynchronous Dart code much easier to read and write.
 However, some code — especially older code — might still use
 [Future methods]({{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}/dart-async/Future-class.html)
