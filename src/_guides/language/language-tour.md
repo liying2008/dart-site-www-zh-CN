@@ -46,7 +46,7 @@ main() {
 <code>// <em>这是一个注释。</em> </code>
 :   单行注释。
     Dart 也支持多行注释和文档注释。
-    详细内容请参考 [Comments](#comments)。
+    详细内容请参考 [Comments](#注释)。
 
 `int`
 :   类型。一些其他的 [内置类型](#内置类型)
@@ -4109,16 +4109,15 @@ void doSomething() {
 您可以在运行时使用反射获取元数据。
 
 
-## Comments
+## 注释
 
-Dart supports single-line comments, multi-line comments, and
-documentation comments.
+Dart 支持单行注释、多行注释和文档注释。
 
 
-### Single-line comments
+### 单行注释
 
-A single-line comment begins with `//`. Everything between `//` and the
-end of line is ignored by the Dart compiler.
+单行注释以 `//` 开头。
+Dart 编译器会忽略 `//` 和行尾之间的所有内容。
 
 <?code-excerpt "misc/lib/language_tour/comments.dart (single-line-comments)"?>
 ```dart
@@ -4129,12 +4128,11 @@ void main() {
 ```
 
 
-### Multi-line comments
+### 多行注释
 
-A multi-line comment begins with `/*` and ends with `*/`. Everything
-between `/*` and `*/` is ignored by the Dart compiler (unless the
-comment is a documentation comment; see the next section). Multi-line
-comments can nest.
+多行注释以 `/*` 开头，以 `*/` 结尾。
+Dart 编译器将忽略 `/*` 和 `*/` 之间的所有内容（不会忽略文档注释，请参阅下一节）。
+多行注释可以嵌套。
 
 <?code-excerpt "misc/lib/language_tour/comments.dart (multi-line-comments)"?>
 ```dart
@@ -4151,20 +4149,18 @@ void main() {
 ```
 
 
-### Documentation comments
+### 文档注释
 
-Documentation comments are multi-line or single-line comments that begin
-with `///` or `/**`. Using `///` on consecutive lines has the same
-effect as a multi-line doc comment.
+文档注释可以是多行注释，也可以是单行注释，
+需要以 `///` 或者 `/**` 开始。
+在连续行上使用 `///` 与多行文档注释具有相同的效果。
 
-Inside a documentation comment, the Dart compiler ignores all text
-unless it is enclosed in brackets. Using brackets, you can refer to
-classes, methods, fields, top-level variables, functions, and
-parameters. The names in brackets are resolved in the lexical scope of
-the documented program element.
+在文档注释中，Dart 编译器会忽略所有文本，除非它被括在方括号中。
+使用方括号，您可以引用类、方法、字段、顶级变量、函数和参数。
+方括号中的名称在文档化的程序元素的词法范围内解析。
 
-Here is an example of documentation comments with references to other
-classes and arguments:
+下面是一个文档注释示例，
+其中引用了其他类和参数：
 
 <?code-excerpt "misc/lib/language_tour/comments.dart (doc-comments)"?>
 ```dart
@@ -4190,15 +4186,15 @@ class Llama {
 }
 ```
 
-In the generated documentation, `[Food]` becomes a link to the API docs
-for the Food class.
+在生成的文档中，`[Food]` 会成为一个链接，
+指向 Food 类的 API 文档。
 
-To parse Dart code and generate HTML documentation, you can use the SDK’s
-[documentation generation tool.](https://github.com/dart-lang/dartdoc#dartdoc)
-For an example of generated documentation, see the [Dart API
-documentation.]({{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}) For advice on how to structure
-your comments, see
-[Guidelines for Dart Doc Comments.](/guides/language/effective-dart/documentation)
+解析 Dart 代码并生成 HTML 文档，可以使用 SDK 中的
+[文档生成工具](https://github.com/dart-lang/dartdoc#dartdoc) 。
+关于生成的文档的示例，请参考 
+[Dart API 文档]({{site.dart_api}}/{{site.data.pkg-vers.SDK.channel}}) 。
+有关如何编写注释的建议，请参考
+[Dart 文档注释指南](/guides/language/effective-dart/documentation) 。
 
 
 ## Summary

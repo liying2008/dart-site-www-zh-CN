@@ -136,7 +136,7 @@ Dart comments usually start with `//`.
 /* Comments like these are also supported. */
 {% endprettify %}
 
-[Read more](/guides/language/language-tour#comments) about comments in Dart,
+[Read more](/guides/language/language-tour#注释) about comments in Dart,
 including how the documentation tooling works.
 
 

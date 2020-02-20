@@ -38,7 +38,7 @@ For information on command-line options, use the `--help` flag:
 $ dartdoc --help
 ```
 
-[documentation comments]: /guides/language/language-tour#documentation-comments
+[documentation comments]: /guides/language/language-tour#文档注释
 [effective doc]: /guides/language/effective-dart/documentation
 [dartdoc package.]: {{site.pub-pkg}}/dartdoc
 
