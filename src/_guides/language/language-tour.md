@@ -201,7 +201,7 @@ main() {
 [static]: #类变量和方法
 [super]: #类的扩展
 [switch]: #switch-和-case
-[sync]: #generators
+[sync]: #生成器
 [this]: #构造器
 [throw]: #抛出异常
 [true]: #booleans
@@ -214,7 +214,7 @@ main() {
 {% endcomment %}
 [with]: #使用-mixin-为类添加功能
 [while]: #while-和-do-while
-[yield]: #generators
+[yield]: #生成器
 
 应避免将这些关键字用作标识符。
 但是，如有必要，标有上标的关键字某些情况下可以用作标识符：
@@ -3869,18 +3869,18 @@ Future main() [!async!] {
 
 
 <a id="generator"></a>
-## Generators
+## 生成器
 
-When you need to lazily produce a sequence of values,
-consider using a _generator function_.
-Dart has built-in support for two kinds of generator functions:
+当您需要延迟地生成一连串的值时，
+可以考虑使用 _生成器函数_ 。
+Dart 内置支持两种类型的生成器函数：
 
-* **Synchronous** generator: Returns an **[Iterable]** object.
-* **Asynchronous** generator: Returns a **[Stream]** object.
+* **同步** 生成器：返回一个 **[Iterable]** 对象。
+* **异步** 生成器：返回一个 **[Stream]** 对象。
 
-To implement a **synchronous** generator function,
-mark the function body as `sync*`,
-and use `yield` statements to deliver values:
+要实现 **同步** 生成器函数，
+请将函数体标记为 `sync*`，
+并使用 `yield` 语句交付值：
 
 <?code-excerpt "misc/test/language_tour/async_test.dart (sync-generator)"?>
 ```dart
@@ -3890,9 +3890,9 @@ Iterable<int> naturalsTo(int n) sync* {
 }
 ```
 
-To implement an **asynchronous** generator function,
-mark the function body as `async*`,
-and use `yield` statements to deliver values:
+要实现 **异步** 生成器函数，
+请将函数体标记为 `async*`，
+并使用 `yield` 语句交付值：
 
 <?code-excerpt "misc/test/language_tour/async_test.dart (async-generator)"?>
 ```dart
@@ -3902,8 +3902,8 @@ Stream<int> asynchronousNaturalsTo(int n) async* {
 }
 ```
 
-If your generator is recursive,
-you can improve its performance by using `yield*`:
+如果生成器是递归的，
+则可以使用 `yield*` 来提高其性能：
 
 <?code-excerpt "misc/test/language_tour/async_test.dart (recursive-generator)"?>
 ```dart
