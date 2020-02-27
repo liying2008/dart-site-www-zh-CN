@@ -1,12 +1,11 @@
 ---
-title: Extension methods
+title: 扩展方法
 description: Learn how to add to existing APIs.
 ---
-Extension methods, introduced in Dart 2.7,
-are a way to add functionality to existing libraries.
-You might use extension methods without even knowing it.
-For example, when you use code completion in an IDE,
-it suggests extension methods alongside regular methods.
+在 Dart 2.7 中引入的扩展方法是一种向现有库添加功能的方法。
+您可能在不知道的情况下使用扩展方法。
+例如，当您在 IDE 中使用代码补全时，
+它会建议使用扩展方法和常规方法。
 
 <iframe width="560" height="315"
   src="https://www.youtube.com/embed/D3j0OSfT9ZI"
@@ -14,45 +13,44 @@ it suggests extension methods alongside regular methods.
   allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen>
 </iframe>
-<em>If you like to learn by watching videos,
-here's a good overview of extension methods.</em>
+<em>如果您喜欢通过看视频来学习，
+这里有一个扩展方法的概览。</em>
 
 
-## Overview
+## 概览
 
-When you're using someone else's API or
-when you implement a library that's widely used,
-it's often impractical or impossible to change the API.
-But you might still want to add some functionality.
+当您使用别人的 API 或实现一个广泛使用的库时，
+更改 API 通常是不切实际或不可能的。
+但是您可能仍然想向一个已有库中添加新功能。
 
-For example, consider the following code that parses a string into an integer:
+例如，下面是一个将字符串解析为整数的代码：
 
 ```dart
 int.parse('42')
 ```
 
-It might be nice — shorter and easier to use with tools — to
-have that functionality be on `String` instead:
+如果将这一功能加在 `String` 上可能会更好
+（代码更短，更易于使用）：
 
 ```dart
 '42'.parseInt()
 ```
 
-To enable that code,
-you can import a library that contains an extension of the `String` class:
+如果想让上面的代码生效，
+需要导入一个包含 `String` 类扩展的库：
 
 <?code-excerpt "extension_methods/lib/string_extensions/usage_simple_extension.dart (basic)" replace="/  print/print/g"?>
 ```dart
 import 'string_apis.dart';
 // ···
-print('42'.parseInt()); // Use an extension method.
+print('42'.parseInt()); // 使用扩展方法。
 ```
 
-Extensions can define not just methods,
-but also other members such as getter, setters, and operators.
-Also, extensions have names, which can be helpful if an API conflict arises.
-Here's how you might implement the extension method `parseInt()`,
-using an extension (named `NumberParsing`) that operates on strings:
+扩展不仅可以定义方法，还可以定义其他成员，
+例如 Getter、Setter 和 运算符。
+另外，扩展有名字，如果出现 API 冲突，这将很有帮助。
+您可以通过使用 对字符串进行操作 的扩展（名为 `NumberParsing` ）
+来实现扩展方法 `parseInt()` ：
 
 <?code-excerpt "extension_methods/lib/string_extensions/string_apis.dart (parseInt)"?>
 ```dart
@@ -65,34 +63,34 @@ extension NumberParsing on String {
 ```
 <div class="prettify-filename">lib/string_apis.dart</div>
 
-The next section describes how to _use_ extension methods.
-After that are sections about _implementing_ extension methods.
+下一节将介绍如何 _使用_ 扩展方法。
+再之后是介绍如何 _实现_ 扩展方法。
 
 
-## Using extension methods
+## 使用扩展方法
 
-Like all Dart code, extension methods are in libraries.
-You've already seen how to use an extension method —
-just import the library it's in, and use it like an ordinary method:
+与所有 Dart 代码一样，扩展方法也在库中。
+您已经了解了如何使用扩展方法，
+只需导入它所在的库，并像使用普通方法一样使用它：
 
 <?code-excerpt "extension_methods/lib/string_extensions/usage_simple_extension.dart (import-and-use)" replace="/  print/print/g"?>
 ```dart
-// Import a library that contains an extension on String.
+// 导入一个包含 String 扩展的库。
 import 'string_apis.dart';
 // ···
-print('42'.padLeft(5)); // Use a String method.
-print('42'.parseInt()); // Use an extension method.
+print('42'.padLeft(5)); // 使用 String 普通方法。
+print('42'.parseInt()); // 使用 String 扩展方法。
 ```
 
-That's all you usually need to know to use extension methods.
-As you write your code, you might also need to know
-how extension methods depend on static types (as opposed to `dynamic`) and
-how to resolve [API conflicts](#api-conflicts).
+这就是使用扩展方法通常需要知道的全部内容。
+在编写代码时，
+您可能还需要了解扩展方法是如何依赖于静态类型（而不是 `dynamic`）
+以及如何解决 [API 冲突](#API-冲突)。
 
-### Static types and dynamic
+### 静态类型和 dynamic
 
-You can't invoke extension methods on variables of type `dynamic`.
-For example, the following code results in a runtime exception:
+您不能用 `dynamic` 类型的变量调用扩展方法。
+例如，下面的代码会导致运行时异常：
 
 <?code-excerpt "extension_methods/lib/string_extensions/usage_simple_extension.dart (dynamic)" plaster="none" replace="/  \/\/ print/print/g"?>
 ```dart
@@ -100,9 +98,8 @@ dynamic d = '2';
 print(d.parseInt()); // Runtime exception: NoSuchMethodError
 ```
 
-Extension methods _do_ work with Dart's type inference.
-The following code is fine because
-the variable `v` is inferred to have type `String`:
+扩展方法可以与 Dart 的类型推断配合使用。
+以下代码可以运行，因为变量 `v` 被推断为 `String` 类型：
 
 <?code-excerpt "extension_methods/lib/string_extensions/usage_simple_extension.dart (var)"?>
 ```dart
@@ -110,22 +107,21 @@ var v = '2';
 print(v.parseInt()); // Output: 2
 ```
 
-The reason that `dynamic` doesn't work is that
-extension methods are resolved against the static type of the receiver.
-Because extension methods are resolved statically,
-they're as fast as calling a static function.
+`dynamic` 无法使用扩展方法的原因是
+扩展方法是根据接收方的静态类型解析的。
+因为扩展方法是静态解析的，
+所以它们与调用静态函数一样快。
 
-For more information about static types and `dynamic`, see
-[The Dart type system](/guides/language/sound-dart).
+有关静态类型和 `dynamic` 的更多信息，请参考
+[Dart 类型系统](/guides/language/sound-dart) 。
 
-### API conflicts
+### API 冲突
 
-If an extension member conflicts with
-an interface or with another extension member,
-then you have a few options.
+如果一个扩展成员 与 一个接口或另一个扩展成员冲突，
+那么您有几个选择。
 
-One option is changing how you import the conflicting extension,
-using `show` or `hide` to limit the exposed API:
+一种选择是改变导入冲突扩展的方式，
+使用 `show` 或 `hide` 来限制暴露的 API：
 
 <?code-excerpt "extension_methods/lib/string_extensions/usage_import.dart" replace="/  //g"?>
 ```dart
@@ -141,8 +137,8 @@ import 'string_apis_2.dart' hide NumberParsing2;
 print('42'.parseInt());
 ```
 
-Another option is applying the extension explicitly,
-which results in code that looks as if the extension is a wrapper class:
+另一种选择是显式地应用扩展，
+这会导致代码看起来像是一个包装类:
 
 <?code-excerpt "extension_methods/lib/string_extensions/usage_explicit.dart" replace="/  //g"?>
 ```dart
@@ -157,8 +153,8 @@ print(NumberParsing('42').parseInt());
 print(NumberParsing2('42').parseInt());
 ```
 
-If both extensions have the same name,
-then you might need to import using a prefix:
+如果两个扩展同名，
+则可能需要使用前缀导入：
 
 <?code-excerpt "extension_methods/lib/string_extensions/usage_prefix.dart" replace="/  //g"?>
 ```dart
@@ -181,15 +177,14 @@ print(rad.NumberParsing('42').parseInt());
 print('42'.parseNum());
 ```
 
-As the example shows,
-you can invoke extension methods implicitly even if you import using a prefix.
-The only time you need to use the prefix is
-to avoid a name conflict when invoking an extension explicitly.
+如示例所示，
+即使使用前缀导入，也可以隐式调用扩展方法。
+只有在显式地调用扩展且出现名称冲突时才需要使用前缀。
 
 
-## Implementing extension methods
+## 实现扩展方法
 
-Use the following syntax to create an extension:
+使用下面的语法创建扩展：
 
 ```
 extension <extension name> on <type> {
@@ -197,7 +192,7 @@ extension <extension name> on <type> {
 }
 ```
 
-For example, here's how you might implement an extension on the `String` class:
+例如，您可以通过以下方式在 `String` 类上实现一个扩展：
 
 <?code-excerpt "extension_methods/lib/string_extensions/string_apis.dart"?>
 ```dart
@@ -213,19 +208,18 @@ extension NumberParsing on String {
 ```
 <div class="prettify-filename">lib/string_apis.dart</div>
 
-To create a local extension that's visible only in
-the library where it's declared,
-either omit the extension name or give it a name
-that starts with an underscore (`_`).
+要创建一个只在自己库中可见的本地扩展，
+可以省略扩展名称
+或给它一个以下划线 (`_`) 开头的名称。
 
-The members of the extension can be methods, getters, setters, operators.
-Extensions can also have static fields and static helper methods.
+扩展的成员可以是方法、Getter、Setter、运算符。
+扩展也可以有静态字段和静态助手方法。
 
-## Implementing generic extensions
+## 实现泛型扩展
 
-Extensions can have generic type parameters.
-For example, here's some code that extends the built-in `List<T>` type
-with a getter, an operator, and a method:
+扩展可以具有泛型类型参数。
+例如，下面的代码使用 Getter、运算符和方法
+扩展了内置的 `List<T>` 类型：
 
 <?code-excerpt "extension_methods/lib/fancylist.dart"?>
 ```dart
@@ -236,8 +230,7 @@ extension MyFancyList<T> on List<T> {
 }
 ```
 
-The type `T` is bound based on the static type of the list that
-the methods are called on.
+类型 `T` 是基于调用方法的 list 的静态类型来绑定的。
 {% comment %}
 TODO (https://github.com/dart-lang/site-www/issues/2171):
 Add more info about generic extensions. 
@@ -248,9 +241,9 @@ For example, in the following code, `T` is `PENDING` because PENDING:
 [PENDING: Explain why it matters in normal usage.]
 {% endcomment %}
 
-## Resources
+## 资源
 
-For more information about extension methods, see the following:
+有关扩展方法的更多信息，请参见以下内容：
 
 * [Article: Dart Extension Methods Fundamentals][article]
 * [Feature specification][specification]
